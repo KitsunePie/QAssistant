@@ -73,7 +73,7 @@ fun Any.getMethods(): Array<Method> {
  * @param clzName 类名
  * @return 属性数组
  */
-fun getFields(clzName: String): Array<Field>? {
+fun getFields(clzName: String): Array<Field> {
     return loadClass(clzName).declaredFields
 }
 
