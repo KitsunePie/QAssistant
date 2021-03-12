@@ -169,6 +169,7 @@ inline fun <reified T> Any.getObjectOrNull(objName: String): T? {
         f?.isAccessible = true
         f?.get(this) as T
     } catch (e: Exception) {
+        Log.e(e)
         null
     }
 }
@@ -215,14 +216,14 @@ fun Class<*>.newInstance(
     if (args?.size != argTypes?.size) throw NoSuchMethodException("Method args size must equals argTypes size!")
     return try {
         val constructor: Constructor<*> =
-            if (argTypes != null && argTypes.isNotEmpty()) {
+            if (argTypes != null && argTypes.isNotEmpty())
                 this.getDeclaredConstructor(*argTypes)
-            } else {
+            else
                 this.getDeclaredConstructor()
-            }
         args?.let { constructor.newInstance(*it) }
         constructor.newInstance()
     } catch (e: Exception) {
+        Log.e(e)
         null
     }
 }
@@ -250,3 +251,28 @@ val Method.isPrivate: Boolean
  */
 val Method.isFinal: Boolean
     get() = Modifier.isFinal(this.modifiers)
+
+/**
+ * 深拷贝一个对象
+ * @param srcObj 源对象
+ * @param newObj 新对象
+ * @return 成功返回拷贝后的对象 失败返回null
+ */
+fun <T> fieldCpy(srcObj: T, newObj: T): T? {
+    return try {
+        var clz: Class<*> = srcObj!!::class.java
+        var fields: Array<Field>
+        while (Object::class.java != clz) {
+            fields = clz.declaredFields
+            for (f in fields) {
+                f.isAccessible = true
+                f.set(newObj, f.get(srcObj))
+            }
+            clz = clz.superclass
+        }
+        newObj
+    } catch (e: Exception) {
+        Log.e(e)
+        null
+    }
+}
