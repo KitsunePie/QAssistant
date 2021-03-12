@@ -11,7 +11,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage
 class HookInit : IXposedHookLoadPackage {
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
         if (lpparam.packageName == "com.tencent.mobileqq") {
-            Log.i("已找到QQ 开始加载模块")
             mClzLoader = lpparam.classLoader
             init()
         }
@@ -23,29 +22,31 @@ private fun init() {
         if (m.name != "doOnCreate") continue
         m.hookAfter {
             val thisObject = it.thisObject
-
+            //加载QQ的设置物件类
             val cFormSimpleItem = loadClass("com.tencent.mobileqq.widget.FormSimpleItem")
-            val cFormItemRelativeLayout =
-                loadClass("com.tencent.mobileqq.widget.FormItemRelativeLayout")
-
-            val vg = thisObject.getObjectOrNull("a", cFormItemRelativeLayout) as ViewGroup?
-
+            //获取所在的ViewGroup
+            val vg = (thisObject.getObjectOrNull("a", cFormSimpleItem) as View).parent as ViewGroup
+            //创建入口View
             val entry = cFormSimpleItem.newInstance(
                 arrayOf<Any>(thisObject as Context),
                 arrayOf(Context::class.java)
             ) as View
-
+            //设置入口属性
             entry.apply {
                 invokeMethod(
                     "setLeftText",
                     arrayOf("QNotifiedX"),
                     arrayOf(CharSequence::class.java)
                 )
+                invokeMethod(
+                    "setRightText",
+                    arrayOf(BuildConfig.VERSION_NAME),
+                    arrayOf(CharSequence::class.java)
+                )
                 setOnClickListener { }
             }
-
-            vg?.addView(entry, vg.size / 2)
-            Log.i("入口加载成功")
+            //添加入口
+            vg.addView(entry, (vg.size / 2) - 4)
         }
     }
 }

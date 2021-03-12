@@ -86,7 +86,7 @@ fun getFields(clzName: String): Array<Field> {
 fun Class<*>.getMethodByClz(
     methodName: String,
     returnType: Class<*> = Void.TYPE,
-    vararg argTypes: Class<*>?
+    argTypes: Array<out Class<*>> = arrayOf()
 ): Method? {
     if (methodName.isEmpty()) return null
     for (m in this.declaredMethods) {
@@ -111,7 +111,7 @@ fun getMethod(
     clzName: String,
     methodName: String,
     returnType: Class<*> = Void.TYPE,
-    vararg argTypes: Class<*>?
+    argTypes: Array<out Class<*>> = arrayOf()
 ): Method? {
     return loadClass(clzName).getMethodByClz(
         methodName,
@@ -129,7 +129,7 @@ fun getMethod(
 fun Any.getMethodByObject(
     methodName: String,
     returnType: Class<*> = Void.TYPE,
-    vararg argTypes: Class<*>
+    argTypes: Array<out Class<*>> = arrayOf()
 ): Method? {
     return this.javaClass.getMethodByClz(methodName, returnType = returnType, argTypes = argTypes)
 }
@@ -205,17 +205,17 @@ fun Class<*>.getObjectOrNull(targetObj: Any, objName: String): Any? {
 fun Any.invokeMethod(
     methodName: String,
     args: Array<out Any>? = null,
-    argTypes: Array<out Class<*>>? = null,
+    argTypes: Array<out Class<*>> = arrayOf(),
     returnType: Class<*> = Void.TYPE
 ): Any? {
-    if (args?.size != argTypes?.size) throw NoSuchMethodException("Method args size must equals argTypes size!")
+    if (args?.size != argTypes.size) throw NoSuchMethodException("Method args size must equals argTypes size!")
     val m: Method?
     return if (args.isNullOrEmpty()) {
         m = this.getMethodByObject(methodName, returnType)
         m?.isAccessible = true
         m?.invoke(this)
     } else {
-        m = argTypes?.let { this.getMethodByObject(methodName, returnType, *it) }
+        m = argTypes.let { this.getMethodByObject(methodName, returnType, it) }
         m?.isAccessible = true
         m?.invoke(this, *args)
     }
@@ -230,9 +230,9 @@ fun Any.invokeMethod(
  */
 fun Class<*>.newInstance(
     args: Array<out Any>? = null,
-    argTypes: Array<out Class<*>>? = null
+    argTypes: Array<out Class<*>> = arrayOf()
 ): Any? {
-    if (args?.size != argTypes?.size) throw NoSuchMethodException("Method args size must equals argTypes size!")
+    if (args?.size != argTypes.size) throw NoSuchMethodException("Method args size must equals argTypes size!")
     return try {
         val constructor: Constructor<*> =
             if (!argTypes.isNullOrEmpty())
