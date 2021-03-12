@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">QNotifiedX</string>
+    <string name="module_desc">一个完全重构版的QNotified</string>
+</resources>
