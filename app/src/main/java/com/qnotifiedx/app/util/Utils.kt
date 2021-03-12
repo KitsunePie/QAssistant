@@ -192,11 +192,11 @@ fun Any.invokeMethod(
     if (args?.size != argTypes?.size) throw NoSuchMethodException("Method args size must equals argTypes size!")
     val m: Method?
     return if (args == null || args.isEmpty()) {
-        m = getMethod(methodName, returnType)
+        m = this.getMethod(methodName, returnType)
         m?.isAccessible = true
         m?.invoke(this)
     } else {
-        m = argTypes?.let { getMethod(methodName, returnType, *it) }
+        m = argTypes?.let { this.getMethod(methodName, returnType, *it) }
         m?.isAccessible = true
         m?.invoke(this, *args)
     }
