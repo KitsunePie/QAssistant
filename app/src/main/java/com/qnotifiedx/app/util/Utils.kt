@@ -45,10 +45,12 @@ fun Context.showToast(msg: String, length: Int = Toast.LENGTH_SHORT) {
 
 /**
  * 通过模块加载类
+ * @param clzName 类名
+ * @param clzLoader 类加载器 默认使用模块的类加载器
  * @return 被加载的类
  */
-fun loadClass(clzName: String): Class<*> {
-    return mClzLoader.loadClass(clzName)
+fun loadClass(clzName: String, clzLoader: ClassLoader = mClzLoader): Class<*> {
+    return clzLoader.loadClass(clzName)
 }
 
 /**
