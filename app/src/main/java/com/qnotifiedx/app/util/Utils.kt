@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import com.qnotifiedx.app.HookInit
+import com.qnotifiedx.app.hook.normal.GetAppContext
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
 import java.lang.reflect.Method
@@ -21,6 +22,10 @@ val runtimeProcess: Runtime by lazy {
 //模块的类加载器
 val mClzLoader: ClassLoader by lazy {
     HookInit.clzLoader
+}
+
+val appContext: Context by lazy {
+    GetAppContext.application
 }
 
 /**
@@ -89,7 +94,7 @@ fun getFields(clzName: String): Array<Field> {
  * @param returnType 方法返回值
  * @param argTypes 方法形参表类型
  */
-fun Class<*>.getMethodByClz(
+fun Class<*>.getMethodByClass(
     methodName: String,
     isStatic: Boolean = false,
     returnType: Class<*> = Void.TYPE,
@@ -127,7 +132,7 @@ fun getMethod(
     returnType: Class<*> = Void.TYPE,
     argTypes: Array<out Class<*>> = arrayOf()
 ): Method? {
-    return loadClass(clzName).getMethodByClz(
+    return loadClass(clzName).getMethodByClass(
         methodName,
         isStatic = isStatic,
         returnType = returnType,
@@ -146,7 +151,7 @@ fun Any.getMethodByObject(
     returnType: Class<*> = Void.TYPE,
     argTypes: Array<out Class<*>> = arrayOf()
 ): Method? {
-    return this.javaClass.getMethodByClz(
+    return this.javaClass.getMethodByClass(
         methodName,
         isStatic = false,
         returnType = returnType,
@@ -157,13 +162,19 @@ fun Any.getMethodByObject(
 /**
  * 扩展函数 通过类获取单个属性
  * @param fieldName 属性名
+ * @param isStatic 是否静态类型
  * @param fieldType 属性类型
  */
-fun Class<*>.getField(fieldName: String, fieldType: Class<*>? = null): Field? {
+fun Class<*>.getFieldByClass(
+    fieldName: String,
+    isStatic: Boolean = false,
+    fieldType: Class<*>? = null
+): Field? {
     if (fieldName.isEmpty()) return null
     var clz: Class<*> = this
     do {
         for (f in clz.declaredFields) {
+            if (isStatic && !f.isStatic) continue
             if ((fieldType == null || f.type == fieldType) && (f.name == fieldName)) {
                 f.isAccessible = true
                 return f
@@ -175,12 +186,21 @@ fun Class<*>.getField(fieldName: String, fieldType: Class<*>? = null): Field? {
 }
 
 /**
- * 扩展函数 通过对象获取单个属性
- * @param fieldName 属性名
+ * 通过类获取静态属性
+ * @param fieldName 属性名称
  * @param fieldType 属性类型
  */
-fun Any.getField(fieldName: String, fieldType: Class<*>? = null): Field? {
-    return this.javaClass.getField(fieldName, fieldType)
+fun Class<*>.getStaticFiledByClass(fieldName: String, fieldType: Class<*>? = null): Any? {
+    return this.getFieldByClass(fieldName, true, fieldType)?.get(null)
+}
+
+/**
+ * 扩展函数 通过对象获取单个属性
+ * @param fieldName 属性名称
+ * @param fieldType 属性类型
+ */
+fun Any.getFieldByObject(fieldName: String, fieldType: Class<*>? = null): Field? {
+    return this.javaClass.getFieldByClass(fieldName, false, fieldType)
 }
 
 /**
@@ -190,7 +210,7 @@ fun Any.getField(fieldName: String, fieldType: Class<*>? = null): Field? {
  */
 fun Any.getObjectOrNull(name: String, type: Class<*>? = null): Any? {
     return try {
-        val f = this.javaClass.getField(name, type)
+        val f = this.javaClass.getFieldByClass(name, false, type)
         f?.isAccessible = true
         f?.get(this)
     } catch (e: Exception) {
@@ -206,7 +226,7 @@ fun Any.getObjectOrNull(name: String, type: Class<*>? = null): Any? {
  */
 fun Class<*>.getObjectOrNull(targetObj: Any, objName: String): Any? {
     return try {
-        val f = targetObj.getField(objName, this)
+        val f = targetObj.getFieldByObject(objName, this)
         f?.isAccessible = true
         f?.get(targetObj)
     } catch (e: Exception) {
@@ -261,11 +281,11 @@ fun Class<*>.invokeStaticMethod(
     if (args.size != argTypes.size) throw IllegalArgumentException("Method args size must equals argTypes size!")
     val m: Method?
     return if (args.isNullOrEmpty()) {
-        m = this.getMethodByClz(methodName, true, returnType)
+        m = this.getMethodByClass(methodName, true, returnType)
         m?.isAccessible = true
         m?.invoke(null)
     } else {
-        m = argTypes.let { this.getMethodByClz(methodName, true, returnType, it) }
+        m = argTypes.let { this.getMethodByClass(methodName, true, returnType, it) }
         m?.isAccessible = true
         m?.invoke(null, *args)
     }
@@ -313,6 +333,12 @@ val Method.isPublic: Boolean
     get() = Modifier.isPublic(this.modifiers)
 
 /**
+ * 扩展属性 判断方法是否为Public
+ */
+val Method.isProtected: Boolean
+    get() = Modifier.isProtected(this.modifiers)
+
+/**
  * 扩展属性 判断方法是否为Private
  */
 val Method.isPrivate: Boolean
@@ -322,6 +348,36 @@ val Method.isPrivate: Boolean
  * 扩展属性 判断方法是否为Final
  */
 val Method.isFinal: Boolean
+    get() = Modifier.isFinal(this.modifiers)
+
+/**
+ * 扩展属性 判断属性是否为Static
+ */
+val Field.isStatic: Boolean
+    get() = Modifier.isStatic(this.modifiers)
+
+/**
+ * 扩展属性 判断属性是否为Public
+ */
+val Field.isPublic: Boolean
+    get() = Modifier.isPublic(this.modifiers)
+
+/**
+ * 扩展属性 判断属性是否为Protected
+ */
+val Field.isProtected: Boolean
+    get() = Modifier.isProtected(this.modifiers)
+
+/**
+ * 扩展属性 判断属性是否为Private
+ */
+val Field.isPrivate: Boolean
+    get() = Modifier.isPrivate(this.modifiers)
+
+/**
+ * 扩展属性 判断属性是否为Final
+ */
+val Field.isFinal: Boolean
     get() = Modifier.isFinal(this.modifiers)
 
 /**
