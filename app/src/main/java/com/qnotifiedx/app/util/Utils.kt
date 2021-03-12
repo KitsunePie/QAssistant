@@ -85,11 +85,13 @@ fun getFields(clzName: String): Array<Field> {
 /**
  * 扩展函数 通过类获取单个方法
  * @param methodName 方法名
+ * @param isStatic 是否为静态方法
  * @param returnType 方法返回值
  * @param argTypes 方法形参表类型
  */
 fun Class<*>.getMethodByClz(
     methodName: String,
+    isStatic: Boolean = false,
     returnType: Class<*> = Void.TYPE,
     argTypes: Array<out Class<*>> = arrayOf()
 ): Method? {
@@ -97,6 +99,7 @@ fun Class<*>.getMethodByClz(
     var clz = this
     do {
         for (m in clz.declaredMethods) {
+            if (isStatic && !m.isStatic) continue
             if (m.name != methodName) continue
             if (m.returnType != returnType) continue
             for (type in m.parameterTypes.withIndex()) {
@@ -112,18 +115,21 @@ fun Class<*>.getMethodByClz(
 /**
  * 获取单个方法
  * @param clzName 类名
+ * @param isStatic 是否为静态方法
  * @param methodName 方法名
  * @param returnType 方法返回值
  * @param argTypes 方法形参表类型
  */
 fun getMethod(
     clzName: String,
+    isStatic: Boolean = false,
     methodName: String,
     returnType: Class<*> = Void.TYPE,
     argTypes: Array<out Class<*>> = arrayOf()
 ): Method? {
     return loadClass(clzName).getMethodByClz(
         methodName,
+        isStatic = isStatic,
         returnType = returnType,
         argTypes = argTypes
     )
@@ -140,7 +146,12 @@ fun Any.getMethodByObject(
     returnType: Class<*> = Void.TYPE,
     argTypes: Array<out Class<*>> = arrayOf()
 ): Method? {
-    return this.javaClass.getMethodByClz(methodName, returnType = returnType, argTypes = argTypes)
+    return this.javaClass.getMethodByClz(
+        methodName,
+        isStatic = false,
+        returnType = returnType,
+        argTypes = argTypes
+    )
 }
 
 /**
@@ -209,17 +220,17 @@ fun Class<*>.getObjectOrNull(targetObj: Any, objName: String): Any? {
  * @param methodName 方法名
  * @param args 参数表 可空
  * @param argTypes 参数类型 可空
- * @param returnType 返回值类型
+ * @param returnType 返回值类型 默认为void
  * @return 函数调用后的返回值
- * @throws NoSuchMethodException 当args的长度与argTypes的长度不符时抛出
+ * @throws IllegalArgumentException 当args的长度与argTypes的长度不符时抛出
  */
 fun Any.invokeMethod(
     methodName: String,
-    args: Array<out Any>? = null,
+    args: Array<out Any> = arrayOf(),
     argTypes: Array<out Class<*>> = arrayOf(),
     returnType: Class<*> = Void.TYPE
 ): Any? {
-    if (args?.size != argTypes.size) throw NoSuchMethodException("Method args size must equals argTypes size!")
+    if (args.size != argTypes.size) throw IllegalArgumentException("Method args size must equals argTypes size!")
     val m: Method?
     return if (args.isNullOrEmpty()) {
         m = this.getMethodByObject(methodName, returnType)
@@ -233,17 +244,45 @@ fun Any.invokeMethod(
 }
 
 /**
+ * 扩展函数 调用类的静态方法
+ * @param methodName 方法名
+ * @param args 参数表 可空
+ * @param argTypes 参数类型 可空
+ * @param returnType 返回值类型 默认为void
+ * @return 函数调用后的返回值
+ * @throws IllegalArgumentException 当args的长度与argTypes的长度不符时抛出
+ */
+fun Class<*>.invokeStaticMethod(
+    methodName: String,
+    args: Array<out Any> = arrayOf(),
+    argTypes: Array<out Class<*>> = arrayOf(),
+    returnType: Class<*> = Void.TYPE
+): Any? {
+    if (args.size != argTypes.size) throw IllegalArgumentException("Method args size must equals argTypes size!")
+    val m: Method?
+    return if (args.isNullOrEmpty()) {
+        m = this.getMethodByClz(methodName, true, returnType)
+        m?.isAccessible = true
+        m?.invoke(null)
+    } else {
+        m = argTypes.let { this.getMethodByClz(methodName, true, returnType, it) }
+        m?.isAccessible = true
+        m?.invoke(null, *args)
+    }
+}
+
+/**
  * 扩展函数 创建新的实例化对象
  * @param args 构造函数的参数表
  * @param argTypes 构造函数的参数类型
  * @return 成功时返回实例化的对象 失败时返回null
- * @throws NoSuchMethodException 当args的长度与argTypes的长度不符时抛出
+ * @throws IllegalArgumentException 当args的长度与argTypes的长度不符时抛出
  */
 fun Class<*>.newInstance(
-    args: Array<out Any>? = null,
+    args: Array<out Any> = arrayOf(),
     argTypes: Array<out Class<*>> = arrayOf()
 ): Any? {
-    if (args?.size != argTypes.size) throw NoSuchMethodException("Method args size must equals argTypes size!")
+    if (args.size != argTypes.size) throw IllegalArgumentException("Method args size must equals argTypes size!")
     return try {
         val constructor: Constructor<*> =
             if (!argTypes.isNullOrEmpty())
