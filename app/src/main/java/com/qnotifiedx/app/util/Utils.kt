@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import com.qnotifiedx.app.HookInit
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
 import java.lang.reflect.Method
@@ -18,7 +19,9 @@ val runtimeProcess: Runtime by lazy {
 }
 
 //模块的类加载器
-lateinit var mClzLoader: ClassLoader
+val mClzLoader: ClassLoader by lazy {
+    HookInit.clzLoader
+}
 
 /**
  * 将函数放到主线程执行 如UI更新、显示Toast等
