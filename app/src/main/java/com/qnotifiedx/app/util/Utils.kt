@@ -4,8 +4,10 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import java.lang.reflect.Constructor
 import java.lang.reflect.Field
 import java.lang.reflect.Method
+import java.lang.reflect.Modifier
 
 val mainHandler: Handler by lazy {
     Handler(Looper.getMainLooper())
@@ -17,7 +19,6 @@ val runtimeProcess: Runtime by lazy {
 
 //模块的类加载器
 lateinit var mClzLoader: ClassLoader
-
 
 /**
  * 将函数放到主线程执行 如UI更新、显示Toast等
@@ -60,12 +61,11 @@ fun getMethods(clzName: String): Array<Method> {
 }
 
 /**
- * 获取类的所有方法
- * @param clazz 目标类
+ * 获取实例化对象的所有方法
  * @return 方法数组
  */
-fun getMethods(clazz: Class<*>): Array<Method> {
-    return clazz.declaredMethods
+fun Any.getMethods(): Array<Method> {
+    return this::class.java.declaredMethods
 }
 
 /**
@@ -78,29 +78,18 @@ fun getFields(clzName: String): Array<Field>? {
 }
 
 /**
- * 获取类的所有属性
- * @param clazz 目标类
- * @return 属性数组
- */
-fun getFields(clazz: Class<*>): Array<Field>? {
-    return clazz.declaredFields
-}
-
-/**
- * 获取单个方法
- * @param clazz 目标类
+ * 扩展函数 获取单个方法
  * @param methodName 方法名
  * @param returnType 方法返回值
  * @param argTypes 方法形参表类型
  */
-fun getMethod(
-    clazz: Class<*>,
+fun Class<*>.getMethod(
     methodName: String,
     returnType: Class<*> = Void.TYPE,
     vararg argTypes: Class<*>?
 ): Method? {
     if (methodName.isEmpty()) return null
-    for (m in getMethods(clazz)) {
+    for (m in this.declaredMethods) {
         if (m.name != methodName) continue
         if (m.returnType != returnType) continue
         for (type in m.parameterTypes.withIndex()) {
@@ -124,34 +113,31 @@ fun getMethod(
     returnType: Class<*> = Void.TYPE,
     vararg argTypes: Class<*>?
 ): Method? {
-    return getMethod(loadClass(clzName), methodName, returnType, *argTypes)
+    return loadClass(clzName).getMethod(methodName, returnType, *argTypes)
 }
 
 /**
- * 获取单个方法
- * @param obj 实例对象
+ * 扩展函数 获取单个方法
  * @param methodName 方法名
  * @param returnType 方法返回值
  * @param argTypes 方法形参表类型
  */
-fun getMethod(
-    obj: Any,
+fun Any.getMethod(
     methodName: String,
     returnType: Class<*> = Void.TYPE,
     vararg argTypes: Class<*>?
 ): Method? {
-    return getMethod(obj::class.java, methodName, returnType, *argTypes)
+    return this::class.java.getMethod(methodName, returnType, *argTypes)
 }
 
 /**
- * 获取单个属性
- * @param clazz 目标类
+ * 扩展函数 获取单个属性
  * @param fieldName 属性名
  * @param fieldType 属性类型
  */
-fun getField(clazz: Class<*>, fieldName: String, fieldType: Class<*>? = null): Field? {
+fun Class<*>.getField(fieldName: String, fieldType: Class<*>? = null): Field? {
     if (fieldName.isEmpty()) return null
-    var clz: Class<*> = clazz
+    var clz: Class<*> = this
     do {
         for (f in clz.declaredFields) {
             if ((fieldType == null || f.type == fieldType) && (f.name == fieldName)) {
@@ -165,16 +151,102 @@ fun getField(clazz: Class<*>, fieldName: String, fieldType: Class<*>? = null): F
 }
 
 /**
- * 获取实例化对象中的对象
- * @param obj 实例化对象
+ * 扩展函数 获取单个属性
+ * @param fieldName 属性名
+ * @param fieldType 属性类型
+ */
+fun Any.getField(fieldName: String, fieldType: Class<*>? = null): Field? {
+    return this::class.java.getField(fieldName, fieldType)
+}
+
+/**
+ * 扩展函数 获取实例化对象中的对象
  * @param objName 对象名称
  */
-inline fun <reified T> getObjectOrNull(obj: Any, objName: String): T? {
+inline fun <reified T> Any.getObjectOrNull(objName: String): T? {
     return try {
-        val f = getField(obj::class.java, objName, T::class.java)
+        val f = this.getField(objName, T::class.java)
         f?.isAccessible = true
-        f?.get(obj) as T
+        f?.get(this) as T
     } catch (e: Exception) {
         null
     }
 }
+
+/**
+ * 扩展函数 调用对象的方法
+ * @param methodName 方法名
+ * @param args 参数表 可空
+ * @param argTypes 参数类型 可空
+ * @param returnType 返回值类型
+ * @return 函数调用后的返回值
+ * @throws NoSuchMethodException 当args的长度与argTypes的长度不符时抛出
+ */
+fun Any.invokeMethod(
+    methodName: String,
+    args: Array<out Any>? = null,
+    argTypes: Array<out Class<*>>? = null,
+    returnType: Class<*> = Void.TYPE
+): Any? {
+    if (args?.size != argTypes?.size) throw NoSuchMethodException("Method args size must equals argTypes size!")
+    val m: Method?
+    return if (args == null || args.isEmpty()) {
+        m = getMethod(methodName, returnType)
+        m?.isAccessible = true
+        m?.invoke(this)
+    } else {
+        m = argTypes?.let { getMethod(methodName, returnType, *it) }
+        m?.isAccessible = true
+        m?.invoke(this, *args)
+    }
+}
+
+/**
+ * 扩展函数 创建新的实例化对象
+ * @param args 构造函数的参数表
+ * @param argTypes 构造函数的参数类型
+ * @return 成功时返回实例化的对象 失败时返回null
+ * @throws NoSuchMethodException 当args的长度与argTypes的长度不符时抛出
+ */
+fun Class<*>.newInstance(
+    args: Array<out Any>? = null,
+    argTypes: Array<out Class<*>>? = null
+): Any? {
+    if (args?.size != argTypes?.size) throw NoSuchMethodException("Method args size must equals argTypes size!")
+    return try {
+        val constructor: Constructor<*> =
+            if (argTypes != null && argTypes.isNotEmpty()) {
+                this.getDeclaredConstructor(*argTypes)
+            } else {
+                this.getDeclaredConstructor()
+            }
+        args?.let { constructor.newInstance(*it) }
+        constructor.newInstance()
+    } catch (e: Exception) {
+        null
+    }
+}
+
+/**
+ * 扩展属性 判断方法是否为Static
+ */
+val Method.isStatic: Boolean
+    get() = Modifier.isStatic(this.modifiers)
+
+/**
+ * 扩展属性 判断方法是否为Public
+ */
+val Method.isPublic: Boolean
+    get() = Modifier.isPublic(this.modifiers)
+
+/**
+ * 扩展属性 判断方法是否为Private
+ */
+val Method.isPrivate: Boolean
+    get() = Modifier.isPrivate(this.modifiers)
+
+/**
+ * 扩展属性 判断方法是否为Final
+ */
+val Method.isFinal: Boolean
+    get() = Modifier.isFinal(this.modifiers)
