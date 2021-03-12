@@ -93,9 +93,9 @@ fun Class<*>.getMethodByClz(
     returnType: Class<*> = Void.TYPE,
     argTypes: Array<out Class<*>> = arrayOf()
 ): Method? {
+    if (methodName.isEmpty()) return null
     var clz = this
     do {
-        if (methodName.isEmpty()) return null
         for (m in clz.declaredMethods) {
             if (m.name != methodName) continue
             if (m.returnType != returnType) continue
