@@ -1,6 +1,6 @@
 package com.qnotifiedx.app.util
 
-import android.util.Log
+import de.robv.android.xposed.XposedBridge
 
 object Log {
     const val TAG = "QNotifiedX"
@@ -10,7 +10,7 @@ object Log {
      * @param msg 消息
      */
     fun i(msg: String) {
-        Log.i(TAG, msg)
+        XposedBridge.log("$TAG INFO : $msg")
     }
 
     /**
@@ -18,7 +18,7 @@ object Log {
      * @param msg 消息
      */
     fun d(msg: String) {
-        Log.d(TAG, msg)
+        XposedBridge.log("$TAG DEBUG : $msg")
     }
 
     /**
@@ -26,7 +26,7 @@ object Log {
      * @param msg 消息
      */
     fun w(msg: String) {
-        Log.w(TAG, msg)
+        XposedBridge.log("$TAG WARN : $msg")
     }
 
     /**
@@ -36,9 +36,9 @@ object Log {
      */
     fun e(e: Exception, msg: String = "") {
         if (msg.isEmpty())
-            Log.e(TAG, e.toString())
+            XposedBridge.log("$TAG EXCEPTION : $e")
         else
-            Log.e(TAG, "$msg : $e")
+            XposedBridge.log("$TAG EXCEPTION : $msg \n${e}")
     }
 
     /**
@@ -48,20 +48,20 @@ object Log {
      */
     fun e(e: Error, msg: String = "") {
         if (msg.isEmpty())
-            Log.e(TAG, e.toString())
+            XposedBridge.log("$TAG ERROR : $e")
         else
-            Log.e(TAG, "$msg : $e")
+            XposedBridge.log("$TAG ERROR : $msg \n${e}")
     }
 
     /**
-     * 打印日志 等级:Error
+     * 打印日志 等级:Throwable
      * @param thr Throwable
      * @param msg 消息
      */
     fun t(thr: Throwable, msg: String = "") {
         if (msg.isEmpty())
-            Log.e(TAG, thr.toString())
+            XposedBridge.log("$TAG THROW : $thr")
         else
-            Log.e(TAG, "$msg : $thr")
+            XposedBridge.log("$TAG THROW : $msg \n${thr}")
     }
 }

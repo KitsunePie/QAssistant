@@ -83,7 +83,7 @@ fun getFields(clzName: String): Array<Field> {
  * @param returnType 方法返回值
  * @param argTypes 方法形参表类型
  */
-fun Class<*>.getMethod(
+fun Class<*>.getMethodByClz(
     methodName: String,
     returnType: Class<*> = Void.TYPE,
     vararg argTypes: Class<*>?
@@ -113,7 +113,11 @@ fun getMethod(
     returnType: Class<*> = Void.TYPE,
     vararg argTypes: Class<*>?
 ): Method? {
-    return loadClass(clzName).getMethod(methodName, returnType, *argTypes)
+    return loadClass(clzName).getMethodByClz(
+        methodName,
+        returnType = returnType,
+        argTypes = argTypes
+    )
 }
 
 /**
@@ -122,12 +126,12 @@ fun getMethod(
  * @param returnType 方法返回值
  * @param argTypes 方法形参表类型
  */
-fun Any.getMethod(
+fun Any.getMethodByObject(
     methodName: String,
     returnType: Class<*> = Void.TYPE,
-    vararg argTypes: Class<*>?
+    vararg argTypes: Class<*>
 ): Method? {
-    return this::class.java.getMethod(methodName, returnType, *argTypes)
+    return this.javaClass.getMethodByClz(methodName, returnType = returnType, argTypes = argTypes)
 }
 
 /**
@@ -156,18 +160,33 @@ fun Class<*>.getField(fieldName: String, fieldType: Class<*>? = null): Field? {
  * @param fieldType 属性类型
  */
 fun Any.getField(fieldName: String, fieldType: Class<*>? = null): Field? {
-    return this::class.java.getField(fieldName, fieldType)
+    return this.javaClass.getField(fieldName, fieldType)
 }
 
 /**
- * 扩展函数 获取实例化对象中的对象
- * @param objName 对象名称
+ * 扩展函数
  */
-inline fun <reified T> Any.getObjectOrNull(objName: String): T? {
+fun Any.getObjectOrNull(name: String, type: Class<*>? = null): Any? {
     return try {
-        val f = this.getField(objName, T::class.java)
+        val f = this.javaClass.getField(name, type)
         f?.isAccessible = true
-        f?.get(this) as T
+        f?.get(this)
+    } catch (e: Exception) {
+        Log.e(e)
+        null
+    }
+}
+
+/**
+ * 通过Class获取目标实例化对象中的对象
+ * @param targetObj 目标实例化的对象
+ * @param objName 需要获取的对象名
+ */
+fun Class<*>.getObjectOrNull(targetObj: Any, objName: String): Any? {
+    return try {
+        val f = targetObj.getField(objName, this)
+        f?.isAccessible = true
+        f?.get(targetObj)
     } catch (e: Exception) {
         Log.e(e)
         null
@@ -191,12 +210,12 @@ fun Any.invokeMethod(
 ): Any? {
     if (args?.size != argTypes?.size) throw NoSuchMethodException("Method args size must equals argTypes size!")
     val m: Method?
-    return if (args == null || args.isEmpty()) {
-        m = this.getMethod(methodName, returnType)
+    return if (args.isNullOrEmpty()) {
+        m = this.getMethodByObject(methodName, returnType)
         m?.isAccessible = true
         m?.invoke(this)
     } else {
-        m = argTypes?.let { this.getMethod(methodName, returnType, *it) }
+        m = argTypes?.let { this.getMethodByObject(methodName, returnType, *it) }
         m?.isAccessible = true
         m?.invoke(this, *args)
     }
@@ -216,12 +235,15 @@ fun Class<*>.newInstance(
     if (args?.size != argTypes?.size) throw NoSuchMethodException("Method args size must equals argTypes size!")
     return try {
         val constructor: Constructor<*> =
-            if (argTypes != null && argTypes.isNotEmpty())
+            if (!argTypes.isNullOrEmpty())
                 this.getDeclaredConstructor(*argTypes)
             else
                 this.getDeclaredConstructor()
-        args?.let { constructor.newInstance(*it) }
-        constructor.newInstance()
+        if (args.isNullOrEmpty()) {
+            constructor.newInstance()
+        } else {
+            constructor.newInstance(*args)
+        }
     } catch (e: Exception) {
         Log.e(e)
         null

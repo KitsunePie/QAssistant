@@ -20,7 +20,11 @@ fun Method.hookMethod(hookCallback: XC_MethodHook) {
 fun Method.hookBefore(hook: (XC_MethodHook.MethodHookParam) -> Unit) {
     this.hookMethod(object : XC_MethodHook() {
         override fun beforeHookedMethod(param: MethodHookParam?) {
-            hook(param!!)
+            try {
+                hook(param!!)
+            } catch (thr: Throwable) {
+                Log.t(thr)
+            }
         }
     })
 }
@@ -33,7 +37,11 @@ fun Method.hookBefore(hook: (XC_MethodHook.MethodHookParam) -> Unit) {
 fun Method.hookBefore(hook: (XC_MethodHook.MethodHookParam) -> Unit, priority: Int = 0) {
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun beforeHookedMethod(param: MethodHookParam?) {
-            hook(param!!)
+            try {
+                hook(param!!)
+            } catch (thr: Throwable) {
+                Log.t(thr)
+            }
         }
     })
 }
@@ -45,7 +53,11 @@ fun Method.hookBefore(hook: (XC_MethodHook.MethodHookParam) -> Unit, priority: I
 fun Method.hookAfter(hook: (XC_MethodHook.MethodHookParam) -> Unit) {
     this.hookMethod(object : XC_MethodHook() {
         override fun afterHookedMethod(param: MethodHookParam?) {
-            hook(param!!)
+            try {
+                hook(param!!)
+            } catch (thr: Throwable) {
+                Log.t(thr)
+            }
         }
     })
 }
@@ -58,7 +70,11 @@ fun Method.hookAfter(hook: (XC_MethodHook.MethodHookParam) -> Unit) {
 fun Method.hookAfter(hook: (XC_MethodHook.MethodHookParam) -> Unit, priority: Int) {
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun afterHookedMethod(param: MethodHookParam?) {
-            hook(param!!)
+            try {
+                hook(param!!)
+            } catch (thr: Throwable) {
+                Log.t(thr)
+            }
         }
     })
 }
