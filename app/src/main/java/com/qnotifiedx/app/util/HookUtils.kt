@@ -15,22 +15,10 @@ fun Method.hookMethod(hookCallback: XC_MethodHook) {
 
 /**
  * 扩展函数 hook方法执行前
+ * @param priority 优先级 默认为50 即留空
  * @param hook hook具体实现
  */
-fun Method.hookBefore(hook: (XC_MethodHook.MethodHookParam) -> Unit) {
-    this.hookMethod(object : XC_MethodHook() {
-        override fun beforeHookedMethod(param: MethodHookParam?) {
-            hook(param!!)
-        }
-    })
-}
-
-/**
- * 扩展函数 hook方法执行前
- * @param hook hook具体实现
- * @param priority 优先级 默认为0 即留空
- */
-fun Method.hookBefore(hook: (XC_MethodHook.MethodHookParam) -> Unit, priority: Int = 0) {
+fun Method.hookBefore(priority: Int = 50, hook: (XC_MethodHook.MethodHookParam) -> Unit) {
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun beforeHookedMethod(param: MethodHookParam?) {
             hook(param!!)
@@ -40,22 +28,10 @@ fun Method.hookBefore(hook: (XC_MethodHook.MethodHookParam) -> Unit, priority: I
 
 /**
  * 扩展函数 hook方法执行后
+ * @param priority 优先级 默认为50 即留空
  * @param hook hook具体实现
  */
-fun Method.hookAfter(hook: (XC_MethodHook.MethodHookParam) -> Unit) {
-    this.hookMethod(object : XC_MethodHook() {
-        override fun afterHookedMethod(param: MethodHookParam?) {
-            hook(param!!)
-        }
-    })
-}
-
-/**
- * 扩展函数 hook方法执行后
- * @param hook hook具体实现
- * @param priority 优先级 默认为0 即留空
- */
-fun Method.hookAfter(hook: (XC_MethodHook.MethodHookParam) -> Unit, priority: Int) {
+fun Method.hookAfter(priority: Int = 50, hook: (XC_MethodHook.MethodHookParam) -> Unit) {
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun afterHookedMethod(param: MethodHookParam?) {
             hook(param!!)
