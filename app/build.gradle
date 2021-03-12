@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.qnotifiedx.app"
-        minSdkVersion 21
+        minSdkVersion 27
         targetSdkVersion 30
         versionCode 1
         versionName "0.0.1"
