@@ -78,7 +78,7 @@ fun getFields(clzName: String): Array<Field> {
 }
 
 /**
- * 扩展函数 获取单个方法
+ * 扩展函数 通过类获取单个方法
  * @param methodName 方法名
  * @param returnType 方法返回值
  * @param argTypes 方法形参表类型
@@ -88,16 +88,20 @@ fun Class<*>.getMethodByClz(
     returnType: Class<*> = Void.TYPE,
     argTypes: Array<out Class<*>> = arrayOf()
 ): Method? {
-    if (methodName.isEmpty()) return null
-    for (m in this.declaredMethods) {
-        if (m.name != methodName) continue
-        if (m.returnType != returnType) continue
-        for (type in m.parameterTypes.withIndex()) {
-            if (type != argTypes[type.index]) continue
+    var clz = this
+    do {
+        if (methodName.isEmpty()) return null
+        for (m in clz.declaredMethods) {
+            if (m.name != methodName) continue
+            if (m.returnType != returnType) continue
+            for (type in m.parameterTypes.withIndex()) {
+                if (type != argTypes[type.index]) continue
+            }
+            return m
         }
-        return m
-    }
-    return null
+        if (clz.superclass == null) return null
+        clz = clz.superclass
+    } while (true)
 }
 
 /**
@@ -121,7 +125,7 @@ fun getMethod(
 }
 
 /**
- * 扩展函数 获取单个方法
+ * 扩展函数 通过对象获取单个方法
  * @param methodName 方法名
  * @param returnType 方法返回值
  * @param argTypes 方法形参表类型
@@ -135,7 +139,7 @@ fun Any.getMethodByObject(
 }
 
 /**
- * 扩展函数 获取单个属性
+ * 扩展函数 通过类获取单个属性
  * @param fieldName 属性名
  * @param fieldType 属性类型
  */
@@ -155,7 +159,7 @@ fun Class<*>.getField(fieldName: String, fieldType: Class<*>? = null): Field? {
 }
 
 /**
- * 扩展函数 获取单个属性
+ * 扩展函数 通过对象获取单个属性
  * @param fieldName 属性名
  * @param fieldType 属性类型
  */
@@ -164,7 +168,9 @@ fun Any.getField(fieldName: String, fieldType: Class<*>? = null): Field? {
 }
 
 /**
- * 扩展函数
+ * 扩展函数 通过对象 获取对象中的对象
+ * @param name 对象名称
+ * @param type 类型
  */
 fun Any.getObjectOrNull(name: String, type: Class<*>? = null): Any? {
     return try {
