@@ -5,7 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import com.qnotifiedx.app.HookInit
-import com.qnotifiedx.app.hook.normal.GetAppContext
+import com.qnotifiedx.app.hook.base.moduleinit.GetAppContext
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
 import java.lang.reflect.Method
