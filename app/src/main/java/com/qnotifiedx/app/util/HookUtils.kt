@@ -31,10 +31,10 @@ fun Method.hookBefore(hook: (XC_MethodHook.MethodHookParam) -> Unit) {
 
 /**
  * 扩展函数 hook方法执行前
- * @param hook hook具体实现
  * @param priority 优先级
+ * @param hook hook具体实现
  */
-fun Method.hookBefore(hook: (XC_MethodHook.MethodHookParam) -> Unit, priority: Int) {
+fun Method.hookBefore(priority: Int, hook: (XC_MethodHook.MethodHookParam) -> Unit) {
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun beforeHookedMethod(param: MethodHookParam?) {
             try {
@@ -64,10 +64,10 @@ fun Method.hookAfter(hook: (XC_MethodHook.MethodHookParam) -> Unit) {
 
 /**
  * 扩展函数 hook方法执行后
- * @param hook hook具体实现
  * @param priority 优先级
+ * @param hook hook具体实现
  */
-fun Method.hookAfter(hook: (XC_MethodHook.MethodHookParam) -> Unit, priority: Int) {
+fun Method.hookAfter(priority: Int, hook: (XC_MethodHook.MethodHookParam) -> Unit) {
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun afterHookedMethod(param: MethodHookParam?) {
             try {

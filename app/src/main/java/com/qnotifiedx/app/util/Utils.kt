@@ -24,9 +24,9 @@ val mClzLoader: ClassLoader by lazy {
     HookInit.clzLoader
 }
 
-val appContext: Context by lazy {
-    GetAppContext.application
-}
+//宿主全局Context
+val appContext: Context?
+    get() = GetAppContext.application
 
 /**
  * 将函数放到主线程执行 如UI更新、显示Toast等
