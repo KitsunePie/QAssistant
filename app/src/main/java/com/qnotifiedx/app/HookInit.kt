@@ -1,6 +1,5 @@
 package com.qnotifiedx.app
 
-import com.qnotifiedx.app.hook.base.BaseHook
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 
@@ -13,11 +12,7 @@ class HookInit : IXposedHookLoadPackage {
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
         if (lpparam.packageName == "com.tencent.mobileqq") {
             clzLoader = lpparam.classLoader
-            init()
+            HookLoader.init
         }
-    }
-
-    private fun init() {
-        BaseHook.initHooks()
     }
 }
