@@ -4,6 +4,10 @@ import com.qnotifiedx.app.hook.normal.GetAppContext
 import com.qnotifiedx.app.hook.normal.ModuleEntry
 import com.qnotifiedx.app.util.Log
 
+/**
+ * Normal Hooks
+ * 在模块加载完毕后立刻就会执行的Hook将继承于此类
+ */
 abstract class BaseHook {
     protected open var enable = false
     protected var inited = false

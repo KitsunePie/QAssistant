@@ -74,8 +74,10 @@ fun getMethods(clzName: String): Array<Method> {
  * 扩展函数 获取实例化对象的所有方法
  * 注意 请勿对类使用此函数
  * @return 方法数组
+ * @throws IllegalArgumentException 当对象是一个Class时抛出
  */
 fun Any.getMethodsByObject(): Array<Method> {
+    if (this is Class<*>) throw IllegalArgumentException("Do not use it on a class!")
     return this::class.java.declaredMethods
 }
 
@@ -147,12 +149,14 @@ fun getMethod(
  * @param methodName 方法名
  * @param returnType 方法返回值
  * @param argTypes 方法形参表类型
+ * @throws IllegalArgumentException 当对象是一个Class时抛出
  */
 fun Any.getMethodByObject(
     methodName: String,
     returnType: Class<*> = Void.TYPE,
     argTypes: Array<out Class<*>> = arrayOf()
 ): Method? {
+    if (this is Class<*>) throw IllegalArgumentException("Do not use it on a class!")
     return this.javaClass.getMethodByClass(
         methodName,
         isStatic = false,
@@ -201,8 +205,10 @@ fun Class<*>.getStaticFiledByClass(fieldName: String, fieldType: Class<*>? = nul
  * 注意 请勿对类使用此函数
  * @param fieldName 属性名称
  * @param fieldType 属性类型
+ * @throws IllegalArgumentException 当对象是一个Class时抛出
  */
 fun Any.getFieldByObject(fieldName: String, fieldType: Class<*>? = null): Field? {
+    if (this is Class<*>) throw IllegalArgumentException("Do not use it on a class!")
     return this.javaClass.getFieldByClass(fieldName, false, fieldType)
 }
 
@@ -211,8 +217,10 @@ fun Any.getFieldByObject(fieldName: String, fieldType: Class<*>? = null): Field?
  * 注意 请勿对类使用此函数
  * @param name 对象名称
  * @param type 类型
+ * @throws IllegalArgumentException 当对象是一个Class时抛出
  */
 fun Any.getObjectOrNull(name: String, type: Class<*>? = null): Any? {
+    if (this is Class<*>) throw IllegalArgumentException("Do not use it on a class!")
     return try {
         val f = this.javaClass.getFieldByClass(name, false, type)
         f?.isAccessible = true
@@ -248,6 +256,7 @@ fun Class<*>.getObjectOrNull(targetObj: Any, objName: String): Any? {
  * @param returnType 返回值类型 默认为void
  * @return 函数调用后的返回值
  * @throws IllegalArgumentException 当args的长度与argTypes的长度不符时抛出
+ * @throws IllegalArgumentException 当对象是一个Class时抛出
  */
 fun Any.invokeMethod(
     methodName: String,
@@ -255,6 +264,7 @@ fun Any.invokeMethod(
     argTypes: Array<out Class<*>> = arrayOf(),
     returnType: Class<*> = Void.TYPE
 ): Any? {
+    if (this is Class<*>) throw IllegalArgumentException("Do not use it on a class!")
     if (args.size != argTypes.size) throw IllegalArgumentException("Method args size must equals argTypes size!")
     val m: Method?
     return if (args.isEmpty()) {
