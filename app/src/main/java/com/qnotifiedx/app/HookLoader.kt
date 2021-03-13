@@ -2,6 +2,8 @@ package com.qnotifiedx.app
 
 import com.qnotifiedx.app.hook.base.BaseDelayHook
 import com.qnotifiedx.app.hook.base.BaseNormalHook
+import com.qnotifiedx.app.hook.base.moduleinit.GetAppContext
+import com.qnotifiedx.app.hook.base.moduleinit.ModuleEntry
 import com.qnotifiedx.app.util.Log
 
 object HookLoader {
@@ -11,6 +13,8 @@ object HookLoader {
 
     private fun doInit() {
         try {
+            GetAppContext.init()
+            ModuleEntry.init()
             BaseNormalHook.initHooks()
             Log.i("Module first initialization successful.")
             doSecondInit()
