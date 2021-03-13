@@ -122,6 +122,22 @@ fun Any.getMethodByClzOrObj(
 }
 
 /**
+ * 扩展函数 通过类获取单个静态方法
+ * @param methodName 方法名
+ * @param returnType 方法返回值
+ * @param argTypes 方法形参表类型
+ * @throws IllegalArgumentException 当方法名为空时
+ */
+fun Class<*>.getStaticMethodByClz(
+    methodName: String,
+    returnType: Class<*> = Void.TYPE,
+    argTypes: Array<out Class<*>> = arrayOf()
+): Method? {
+    if (methodName.isEmpty()) throw IllegalArgumentException("Method name must not be null or empty!")
+    return this.getMethodByClzOrObj(methodName, true, returnType, argTypes)
+}
+
+/**
  * 获取单个方法
  * @param clzName 类名
  * @param isStatic 是否为静态方法
@@ -147,13 +163,13 @@ fun getMethod(
 }
 
 /**
- * 扩展函数 通过对象或者类获取单个属性
+ * 扩展函数 通过类或者对象获取单个属性
  * @param fieldName 属性名
  * @param isStatic 是否静态类型
  * @param fieldType 属性类型
- * @throws IllegalArgumentException
+ * @throws IllegalArgumentException 当属性名为空时
  */
-fun Any.getField(
+fun Any.getFieldByClzOrObj(
     fieldName: String,
     isStatic: Boolean = false,
     fieldType: Class<*>? = null
@@ -174,12 +190,14 @@ fun Any.getField(
 }
 
 /**
- * 通过类获取静态属性
+ * 扩展函数 通过类获取静态属性
  * @param fieldName 属性名称
  * @param fieldType 属性类型
+ * @throws IllegalArgumentException 当属性名为空时
  */
 fun Class<*>.getStaticFiledByClass(fieldName: String, fieldType: Class<*>? = null): Field? {
-    return this.getField(fieldName, true, fieldType)
+    if (fieldName.isEmpty()) throw IllegalArgumentException("Field name must not be null or empty!")
+    return this.getFieldByClzOrObj(fieldName, true, fieldType)
 }
 
 /**
@@ -187,14 +205,14 @@ fun Class<*>.getStaticFiledByClass(fieldName: String, fieldType: Class<*>? = nul
  * 注意 请勿对类使用此函数
  * @param objName 对象名称
  * @param type 类型
- * @throws IllegalArgumentException 当目标对象名为空时
  * @throws IllegalArgumentException 当对象是一个Class时
+ * @throws IllegalArgumentException 当目标对象名为空时
  */
 fun Any.getObjectOrNull(objName: String, type: Class<*>? = null): Any? {
-    if (objName.isEmpty()) throw IllegalArgumentException("Object name must not be null or empty!")
     if (this is Class<*>) throw IllegalArgumentException("Do not use it on a class!")
+    if (objName.isEmpty()) throw IllegalArgumentException("Object name must not be null or empty!")
     return try {
-        val f = this.javaClass.getField(objName, false, type)
+        val f = this.javaClass.getFieldByClzOrObj(objName, false, type)
         f?.isAccessible = true
         f?.get(this)
     } catch (e: Exception) {
@@ -230,14 +248,14 @@ fun Class<*>.getStaticObjectOrNull(
  * @param objName 需要设置的对象名称
  * @param value 值
  * @param fieldType 对象类型
- * @throws IllegalArgumentException 当名字为空时
  * @throws IllegalArgumentException 当对象是一个类时
+ * @throws IllegalArgumentException 当对象名为空时
  */
 fun Any.putObject(objName: String, value: Any?, fieldType: Class<*>? = null) {
-    if (objName.isEmpty()) throw IllegalArgumentException("Object name must not be null or empty!")
     if (this is Class<*>) throw IllegalArgumentException("Do not use it on a class!")
+    if (objName.isEmpty()) throw IllegalArgumentException("Object name must not be null or empty!")
     try {
-        val f = this.getField(objName, false, fieldType)
+        val f = this.getFieldByClzOrObj(objName, false, fieldType)
         f?.let {
             it.isAccessible = true
             it.set(this, value)
@@ -252,7 +270,7 @@ fun Any.putObject(objName: String, value: Any?, fieldType: Class<*>? = null) {
  * @param objName 需要设置的对象名称
  * @param value 值
  * @param fieldType 对象类型
- * @throws IllegalArgumentException 名字为空时
+ * @throws IllegalArgumentException 当对象名为空时
  */
 fun Class<*>.putStaticObject(objName: String, value: Any?, fieldType: Class<*>? = null) {
     try {

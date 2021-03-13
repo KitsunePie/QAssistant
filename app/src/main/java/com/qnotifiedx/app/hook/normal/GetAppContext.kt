@@ -2,10 +2,7 @@ package com.qnotifiedx.app.hook.normal
 
 import android.app.Application
 import com.qnotifiedx.app.hook.base.BaseNormalHook
-import com.qnotifiedx.app.util.getMethods
-import com.qnotifiedx.app.util.getStaticFiledByClass
-import com.qnotifiedx.app.util.hookAfter
-import com.qnotifiedx.app.util.loadClass
+import com.qnotifiedx.app.util.*
 
 //获取宿主全局ApplicationHook
 object GetAppContext : BaseNormalHook() {
@@ -24,7 +21,7 @@ object GetAppContext : BaseNormalHook() {
                         loadClass("com.tencent.common.app.BaseApplicationImpl")
                     //获取Context
                     val context =
-                        cBaseApplicationImpl.getStaticFiledByClass(
+                        cBaseApplicationImpl.getStaticObjectOrNull(
                             "sApplication",
                             cBaseApplicationImpl
                         ) as Application
