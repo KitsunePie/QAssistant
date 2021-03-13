@@ -71,10 +71,11 @@ fun getMethods(clzName: String): Array<Method> {
 }
 
 /**
- * 获取实例化对象的所有方法
+ * 扩展函数 获取实例化对象的所有方法
+ * 注意 请勿对类使用此函数
  * @return 方法数组
  */
-fun Any.getMethods(): Array<Method> {
+fun Any.getMethodsByObject(): Array<Method> {
     return this::class.java.declaredMethods
 }
 
@@ -142,6 +143,7 @@ fun getMethod(
 
 /**
  * 扩展函数 通过对象获取单个方法
+ * 注意 请勿对类使用此函数
  * @param methodName 方法名
  * @param returnType 方法返回值
  * @param argTypes 方法形参表类型
@@ -196,6 +198,7 @@ fun Class<*>.getStaticFiledByClass(fieldName: String, fieldType: Class<*>? = nul
 
 /**
  * 扩展函数 通过对象获取单个属性
+ * 注意 请勿对类使用此函数
  * @param fieldName 属性名称
  * @param fieldType 属性类型
  */
@@ -205,6 +208,7 @@ fun Any.getFieldByObject(fieldName: String, fieldType: Class<*>? = null): Field?
 
 /**
  * 扩展函数 通过对象 获取对象中的对象
+ * 注意 请勿对类使用此函数
  * @param name 对象名称
  * @param type 类型
  */
@@ -237,6 +241,7 @@ fun Class<*>.getObjectOrNull(targetObj: Any, objName: String): Any? {
 
 /**
  * 扩展函数 调用对象的方法
+ * 注意 请勿对类使用此函数
  * @param methodName 方法名
  * @param args 参数表 可空
  * @param argTypes 参数类型 可空
