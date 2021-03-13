@@ -8,7 +8,9 @@ import com.qnotifiedx.app.BuildConfig
 import com.qnotifiedx.app.hook.base.BaseHook
 import com.qnotifiedx.app.util.*
 
+//模块入口Hook
 object ModuleEntry : BaseHook() {
+    //强制开启
     override var enable: Boolean = true
 
     override fun init() {
