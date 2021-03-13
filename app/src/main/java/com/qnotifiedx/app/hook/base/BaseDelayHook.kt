@@ -21,7 +21,7 @@ abstract class BaseDelayHook {
                 if (!h.inited) {
                     h.inited = true
                     h.init()
-                    Log.i("Inited Delay hook:${h.javaClass.name}")
+                    Log.i("Initialized Delay hook: ${h.javaClass.name}")
                 }
             }
         }

@@ -23,7 +23,7 @@ abstract class BaseNormalHook {
                 if (!h.inited) {
                     h.inited = true
                     h.init()
-                    Log.i("Inited Normal hook:${h.javaClass.name}")
+                    Log.i("Initialized Normal hook: ${h.javaClass.name}")
                 }
             }
         }
