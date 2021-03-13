@@ -56,8 +56,10 @@ fun Context.showToast(msg: String, length: Int = Toast.LENGTH_SHORT) {
  * @param clzName 类名
  * @param clzLoader 类加载器 默认使用模块的类加载器
  * @return 被加载的类
+ * @throws IllegalArgumentException 当类名为空时
  */
 fun loadClass(clzName: String, clzLoader: ClassLoader = mClzLoader): Class<*> {
+    if (clzName.isEmpty()) throw  IllegalArgumentException("Class name must not be null or empty!")
     return clzLoader.loadClass(clzName)
 }
 
@@ -65,8 +67,10 @@ fun loadClass(clzName: String, clzLoader: ClassLoader = mClzLoader): Class<*> {
  * 获取类的所有方法
  * @param clzName 类名
  * @return 方法数组
+ * @throws IllegalArgumentException 当类名为空时
  */
 fun getMethods(clzName: String): Array<Method> {
+    if (clzName.isEmpty()) throw  IllegalArgumentException("Class name must not be null or empty!")
     return loadClass(clzName).declaredMethods
 }
 
@@ -85,8 +89,10 @@ fun Any.getMethodsByObject(): Array<Method> {
  * 获取类的所有属性
  * @param clzName 类名
  * @return 属性数组
+ * @throws IllegalArgumentException 当类名为空时
  */
 fun getFields(clzName: String): Array<Field> {
+    if (clzName.isEmpty()) throw  IllegalArgumentException("Class name must not be null or empty!")
     return loadClass(clzName).declaredFields
 }
 
