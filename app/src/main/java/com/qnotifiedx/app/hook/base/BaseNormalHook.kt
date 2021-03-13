@@ -1,7 +1,5 @@
 package com.qnotifiedx.app.hook.base
 
-import com.qnotifiedx.app.hook.normal.GetAppContext
-import com.qnotifiedx.app.hook.normal.ModuleEntry
 import com.qnotifiedx.app.util.Log
 
 /**
@@ -13,10 +11,7 @@ abstract class BaseNormalHook {
     protected var inited = false
 
     companion object {
-        private val normalHooks = arrayOf(
-            GetAppContext,
-            ModuleEntry,
-        )
+        private val normalHooks = com.qnotifiedx.gen.AnnotatedNormalItemList.getAnnotatedNormalItemClassList().toTypedArray()
 
         fun initHooks() {
             for (h in normalHooks) {

@@ -4,11 +4,13 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.size
+import com.qnotifiedx.annotations.NormalHookEntry
 import com.qnotifiedx.app.BuildConfig
 import com.qnotifiedx.app.hook.base.BaseNormalHook
 import com.qnotifiedx.app.util.*
 
 //模块入口Hook
+@NormalHookEntry
 object ModuleEntry : BaseNormalHook() {
     //强制开启
     override var enable: Boolean = true

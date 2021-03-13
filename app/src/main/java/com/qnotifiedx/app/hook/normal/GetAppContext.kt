@@ -1,10 +1,12 @@
 package com.qnotifiedx.app.hook.normal
 
 import android.app.Application
+import com.qnotifiedx.annotations.NormalHookEntry
 import com.qnotifiedx.app.hook.base.BaseNormalHook
 import com.qnotifiedx.app.util.*
 
 //获取宿主全局ApplicationHook
+@NormalHookEntry
 object GetAppContext : BaseNormalHook() {
     //强制开启
     override var enable: Boolean = true
