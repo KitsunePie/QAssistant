@@ -1,5 +1,6 @@
 package com.qnotifiedx.app.util
 
+import com.qnotifiedx.app.BuildConfig
 import de.robv.android.xposed.XposedBridge
 
 object Log {
@@ -15,10 +16,11 @@ object Log {
 
     /**
      * 打印日志 等级:Debug
+     * 仅在Debug模式下输出
      * @param msg 消息
      */
     fun d(msg: String) {
-        XposedBridge.log("$TAG DEBUG : $msg")
+        if (BuildConfig.DEBUG) XposedBridge.log("$TAG DEBUG : $msg")
     }
 
     /**
