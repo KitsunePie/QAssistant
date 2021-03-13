@@ -9,10 +9,11 @@ import com.qnotifiedx.app.util.loadClass
 
 object GetAppContext : BaseHook() {
     override var enable: Boolean = true
-    lateinit var application: Application
+    var application: Application? = null
         private set
 
     override fun init() {
+        if (application != null) return
         for (m in getMethods("com.tencent.mobileqq.startup.step.LoadDex")) {
             if (m.returnType == Boolean::class.javaPrimitiveType && m.parameterTypes.isEmpty()) {
                 m.hookAfter {

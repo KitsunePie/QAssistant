@@ -39,7 +39,7 @@ object ModuleEntry : BaseHook() {
                         arrayOf(CharSequence::class.java)
                     )
                     setOnClickListener {
-                        appContext.showToast("还没有准备好哦~")
+                        appContext?.showToast("还没有准备好哦~")
                     }
                 }
                 //添加入口
