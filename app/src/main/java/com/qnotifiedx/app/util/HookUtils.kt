@@ -1,6 +1,7 @@
 package com.qnotifiedx.app.util
 
 import de.robv.android.xposed.XC_MethodHook
+import de.robv.android.xposed.XC_MethodReplacement
 import de.robv.android.xposed.XposedBridge
 import java.lang.reflect.Method
 
@@ -79,3 +80,35 @@ fun Method.hookAfter(priority: Int, hook: (XC_MethodHook.MethodHookParam) -> Uni
     })
 }
 
+/**
+ * 扩展函数 替换方法
+ * @param priority 优先级
+ * @param hook hook具体实现
+ */
+fun Method.replaceHook(priority: Int, hook: (XC_MethodHook.MethodHookParam) -> Unit) {
+    this.hookMethod(object : XC_MethodReplacement(priority) {
+        override fun replaceHookedMethod(param: MethodHookParam?): Any {
+            return try {
+                hook(param!!)
+            } catch (thr: Throwable) {
+                Log.t(thr)
+            }
+        }
+    })
+}
+
+/**
+ * 扩展函数 替换方法
+ * @param hook hook具体实现
+ */
+fun Method.replaceHook(hook: (XC_MethodHook.MethodHookParam) -> Unit) {
+    this.hookMethod(object : XC_MethodReplacement() {
+        override fun replaceHookedMethod(param: MethodHookParam?): Any {
+            return try {
+                hook(param!!)
+            } catch (thr: Throwable) {
+                Log.t(thr)
+            }
+        }
+    })
+}
