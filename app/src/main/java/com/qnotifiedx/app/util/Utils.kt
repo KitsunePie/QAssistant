@@ -257,7 +257,7 @@ fun Any.invokeMethod(
 ): Any? {
     if (args.size != argTypes.size) throw IllegalArgumentException("Method args size must equals argTypes size!")
     val m: Method?
-    return if (args.isNullOrEmpty()) {
+    return if (args.isEmpty()) {
         m = this.getMethodByObject(methodName, returnType)
         m?.isAccessible = true
         m?.invoke(this)
@@ -285,7 +285,7 @@ fun Class<*>.invokeStaticMethod(
 ): Any? {
     if (args.size != argTypes.size) throw IllegalArgumentException("Method args size must equals argTypes size!")
     val m: Method?
-    return if (args.isNullOrEmpty()) {
+    return if (args.isEmpty()) {
         m = this.getMethodByClass(methodName, true, returnType)
         m?.isAccessible = true
         m?.invoke(null)
@@ -310,7 +310,7 @@ fun Class<*>.newInstance(
     if (args.size != argTypes.size) throw IllegalArgumentException("Method args size must equals argTypes size!")
     return try {
         val constructor: Constructor<*> =
-            if (!argTypes.isNullOrEmpty())
+            if (argTypes.isNotEmpty())
                 this.getDeclaredConstructor(*argTypes)
             else
                 this.getDeclaredConstructor()
@@ -338,7 +338,7 @@ val Method.isPublic: Boolean
     get() = Modifier.isPublic(this.modifiers)
 
 /**
- * 扩展属性 判断方法是否为Public
+ * 扩展属性 判断方法是否为Protected
  */
 val Method.isProtected: Boolean
     get() = Modifier.isProtected(this.modifiers)
