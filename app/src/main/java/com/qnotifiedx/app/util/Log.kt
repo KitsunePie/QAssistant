@@ -2,7 +2,6 @@ package com.qnotifiedx.app.util
 
 import android.util.Log
 import com.qnotifiedx.app.BuildConfig
-import de.robv.android.xposed.XposedBridge
 
 object Log {
     const val TAG = "QNotifiedX"
