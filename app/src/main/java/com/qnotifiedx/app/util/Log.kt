@@ -1,5 +1,6 @@
 package com.qnotifiedx.app.util
 
+import android.util.Log
 import com.qnotifiedx.app.BuildConfig
 import de.robv.android.xposed.XposedBridge
 
@@ -11,7 +12,7 @@ object Log {
      * @param msg 消息
      */
     fun i(msg: String) {
-        XposedBridge.log("$TAG INFO : $msg")
+        Log.i(TAG, msg)
     }
 
     /**
@@ -20,7 +21,7 @@ object Log {
      * @param msg 消息
      */
     fun d(msg: String) {
-        if (BuildConfig.DEBUG) XposedBridge.log("$TAG DEBUG : $msg")
+        if (BuildConfig.DEBUG) Log.d(TAG, msg)
     }
 
     /**
@@ -28,7 +29,7 @@ object Log {
      * @param msg 消息
      */
     fun w(msg: String) {
-        XposedBridge.log("$TAG WARN : $msg")
+        Log.w(TAG, msg)
     }
 
     /**
@@ -38,9 +39,9 @@ object Log {
      */
     fun e(e: Exception, msg: String = "") {
         if (msg.isEmpty())
-            XposedBridge.log("$TAG EXCEPTION : $e")
+            Log.e(TAG, e.stackTrace.toString())
         else
-            XposedBridge.log("$TAG EXCEPTION : $msg \n${e}")
+            Log.e(TAG, "$msg\n${e.stackTrace}")
     }
 
     /**
@@ -50,20 +51,20 @@ object Log {
      */
     fun e(e: Error, msg: String = "") {
         if (msg.isEmpty())
-            XposedBridge.log("$TAG ERROR : $e")
+            Log.e(TAG, e.stackTrace.toString())
         else
-            XposedBridge.log("$TAG ERROR : $msg \n${e}")
+            Log.e(TAG, "$msg\n${e.stackTrace}")
     }
 
     /**
-     * 打印日志 等级:Throwable
+     * 打印日志 等级:Error
      * @param thr Throwable
      * @param msg 消息
      */
     fun t(thr: Throwable, msg: String = "") {
         if (msg.isEmpty())
-            XposedBridge.log("$TAG THROW : $thr")
+            Log.e(TAG, thr.stackTrace.toString())
         else
-            XposedBridge.log("$TAG THROW : $msg \n${thr}")
+            Log.e(TAG, "$msg\n${thr.stackTrace}")
     }
 }
