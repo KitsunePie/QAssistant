@@ -1,6 +1,6 @@
 package com.qnotifiedx.app
 
-import com.qnotifiedx.app.hook.base.BaseHook
+import com.qnotifiedx.app.hook.base.BaseNormalHook
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 
@@ -18,6 +18,6 @@ class HookInit : IXposedHookLoadPackage {
     }
 
     private fun init() {
-        BaseHook.initHooks()
+        BaseNormalHook.initHooks()
     }
 }
