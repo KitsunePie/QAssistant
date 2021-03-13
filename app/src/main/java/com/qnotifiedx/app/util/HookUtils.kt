@@ -3,6 +3,7 @@ package com.qnotifiedx.app.util
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XC_MethodReplacement
 import de.robv.android.xposed.XposedBridge
+import de.robv.android.xposed.callbacks.XCallback
 import java.lang.reflect.Method
 
 
@@ -16,26 +17,13 @@ fun Method.hookMethod(hookCallback: XC_MethodHook) {
 
 /**
  * 扩展函数 hook方法执行前
+ * @param priority 优先级 默认50
  * @param hook hook具体实现
  */
-fun Method.hookBefore(hook: (XC_MethodHook.MethodHookParam) -> Unit) {
-    this.hookMethod(object : XC_MethodHook() {
-        override fun beforeHookedMethod(param: MethodHookParam?) {
-            try {
-                hook(param!!)
-            } catch (thr: Throwable) {
-                Log.t(thr)
-            }
-        }
-    })
-}
-
-/**
- * 扩展函数 hook方法执行前
- * @param priority 优先级
- * @param hook hook具体实现
- */
-fun Method.hookBefore(priority: Int, hook: (XC_MethodHook.MethodHookParam) -> Unit) {
+fun Method.hookBefore(
+    priority: Int = XCallback.PRIORITY_DEFAULT,
+    hook: (XC_MethodHook.MethodHookParam) -> Unit
+) {
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun beforeHookedMethod(param: MethodHookParam?) {
             try {
@@ -49,26 +37,13 @@ fun Method.hookBefore(priority: Int, hook: (XC_MethodHook.MethodHookParam) -> Un
 
 /**
  * 扩展函数 hook方法执行后
+ * @param priority 优先级 默认50
  * @param hook hook具体实现
  */
-fun Method.hookAfter(hook: (XC_MethodHook.MethodHookParam) -> Unit) {
-    this.hookMethod(object : XC_MethodHook() {
-        override fun afterHookedMethod(param: MethodHookParam?) {
-            try {
-                hook(param!!)
-            } catch (thr: Throwable) {
-                Log.t(thr)
-            }
-        }
-    })
-}
-
-/**
- * 扩展函数 hook方法执行后
- * @param priority 优先级
- * @param hook hook具体实现
- */
-fun Method.hookAfter(priority: Int, hook: (XC_MethodHook.MethodHookParam) -> Unit) {
+fun Method.hookAfter(
+    priority: Int = XCallback.PRIORITY_DEFAULT,
+    hook: (XC_MethodHook.MethodHookParam) -> Unit
+) {
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun afterHookedMethod(param: MethodHookParam?) {
             try {
@@ -82,27 +57,14 @@ fun Method.hookAfter(priority: Int, hook: (XC_MethodHook.MethodHookParam) -> Uni
 
 /**
  * 扩展函数 替换方法
- * @param priority 优先级
+ * @param priority 优先级 默认50
  * @param hook hook具体实现
  */
-fun Method.replaceHook(priority: Int, hook: (XC_MethodHook.MethodHookParam) -> Unit) {
+fun Method.replaceHook(
+    priority: Int = XCallback.PRIORITY_DEFAULT,
+    hook: (XC_MethodHook.MethodHookParam) -> Unit
+) {
     this.hookMethod(object : XC_MethodReplacement(priority) {
-        override fun replaceHookedMethod(param: MethodHookParam?): Any {
-            return try {
-                hook(param!!)
-            } catch (thr: Throwable) {
-                Log.t(thr)
-            }
-        }
-    })
-}
-
-/**
- * 扩展函数 替换方法
- * @param hook hook具体实现
- */
-fun Method.replaceHook(hook: (XC_MethodHook.MethodHookParam) -> Unit) {
-    this.hookMethod(object : XC_MethodReplacement() {
         override fun replaceHookedMethod(param: MethodHookParam?): Any {
             return try {
                 hook(param!!)
