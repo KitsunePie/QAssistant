@@ -18,7 +18,7 @@ abstract class BaseDelayHook {
 
         fun initHooks() {
             for (h in delayHooks) {
-                if (h.enable && !h.inited) {
+                if (!h.inited) {
                     h.inited = true
                     h.init()
                     Log.i("Inited Delay hook:${h.javaClass.name}")

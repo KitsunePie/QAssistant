@@ -20,7 +20,7 @@ abstract class BaseNormalHook {
 
         fun initHooks() {
             for (h in normalHooks) {
-                if (h.enable && !h.inited) {
+                if (!h.inited) {
                     h.inited = true
                     h.init()
                     Log.i("Inited Normal hook:${h.javaClass.name}")

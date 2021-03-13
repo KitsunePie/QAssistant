@@ -13,6 +13,7 @@ object PreventDiyCardLoad : BaseDelayHook() {
             val argTypes = m.parameterTypes
             if (m.name == "a" && argTypes.size == 2 && argTypes[1] == Int::class.java && m.isPublic) {
                 m.hookBefore {
+                    if (!enable) return@hookBefore
                     it.result = null
                 }
             }
