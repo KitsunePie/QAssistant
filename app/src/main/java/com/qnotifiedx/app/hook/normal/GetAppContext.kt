@@ -7,7 +7,9 @@ import com.qnotifiedx.app.util.getStaticFiledByClass
 import com.qnotifiedx.app.util.hookAfter
 import com.qnotifiedx.app.util.loadClass
 
+//获取宿主全局ApplicationHook
 object GetAppContext : BaseHook() {
+    //强制开启
     override var enable: Boolean = true
     var application: Application? = null
         private set
