@@ -1,5 +1,6 @@
 package com.qnotifiedx.app.hook.base
 
+import com.qnotifiedx.app.hook.delay.PreventDiyCardLoad
 import com.qnotifiedx.app.util.Log
 
 /**
@@ -12,7 +13,7 @@ abstract class BaseDelayHook {
 
     companion object {
         private val delayHooks = arrayOf<BaseDelayHook>(
-
+            PreventDiyCardLoad,
         )
 
         fun initHooks() {
