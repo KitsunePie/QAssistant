@@ -57,6 +57,7 @@ fun Context.showToast(msg: String, length: Int = Toast.LENGTH_SHORT) {
  * @param clzLoader 类加载器 默认使用模块的类加载器
  * @return 被加载的类
  * @throws IllegalArgumentException 当类名为空时
+ * @throws ClassNotFoundException 当无法找到类时
  */
 fun loadClass(clzName: String, clzLoader: ClassLoader = mClzLoader): Class<*> {
     if (clzName.isEmpty()) throw  IllegalArgumentException("Class name must not be null or empty!")
