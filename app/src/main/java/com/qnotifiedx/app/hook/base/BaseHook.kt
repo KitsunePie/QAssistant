@@ -1,7 +1,10 @@
 package com.qnotifiedx.app.hook.base
 
+/**
+ * Hook基类
+ */
 abstract class BaseHook {
-    open var enable = false
+    protected open var enable = false
     protected var inited = false
 
     protected abstract fun init()
