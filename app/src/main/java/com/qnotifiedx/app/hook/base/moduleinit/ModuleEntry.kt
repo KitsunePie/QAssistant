@@ -8,7 +8,6 @@ import androidx.core.view.size
 import com.qnotifiedx.app.BuildConfig
 import com.qnotifiedx.app.ui.activity.MainActivity
 import com.qnotifiedx.app.util.*
-import java.lang.Exception
 
 //模块入口Hook
 object ModuleEntry {
@@ -41,12 +40,12 @@ object ModuleEntry {
                         arrayOf(CharSequence::class.java)
                     )
                     setOnClickListener {
-                        appContext?.showToast("还没有准备好哦~")
+                        context?.showToast("还没有准备好哦~")
                     }
                     setOnLongClickListener {
-                        appContext?.showToast("好吧 这是你要看的")
+                        context?.showToast("好吧 这是你要看的")
                         try {
-                            val intent = Intent(appContext, MainActivity::class.java)
+                            val intent = Intent(context, MainActivity::class.java)
                             context.startActivity(intent)
                             true
                         } catch (e: Exception) {

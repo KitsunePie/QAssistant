@@ -555,7 +555,6 @@ class ResInjector {
                     try {
                         val record = msg.obj
                         val fIntent = record::class.java.getFieldByClzOrObj("intent")
-                            .also { it.isAccessible = true }
                         val intent = fIntent.get(record)!! as Intent
                         //获取bundle
                         var bundle: Bundle? = null
@@ -570,7 +569,7 @@ class ResInjector {
                             it.classLoader = appContext!!.classLoader
                             if (intent.hasExtra(ActivityProxyMgr.ACTIVITY_PROXY_INTENT)) {
                                 val rIntent =
-                                    intent.getParcelableArrayExtra(ActivityProxyMgr.ACTIVITY_PROXY_INTENT)
+                                    intent.getParcelableExtra<Intent>(ActivityProxyMgr.ACTIVITY_PROXY_INTENT)
                                 fIntent.set(record, rIntent)
                             }
                         }
@@ -586,7 +585,7 @@ class ResInjector {
                             val mGetCallbacks =
                                 Class.forName("android.app.servertransaction.ClientTransaction")
                                     .getMethodByClzOrObj("getCallbacks")
-                            val cTransItems = mGetCallbacks.invoke(cTrans) as List<*>
+                            val cTransItems = mGetCallbacks.invoke(cTrans) as List<*>?
                             if (!cTransItems.isNullOrEmpty()) {
                                 for (item in cTransItems) {
                                     val clz = item?.javaClass
@@ -607,7 +606,9 @@ class ResInjector {
                                             it.classLoader = appContext!!.classLoader
                                             if (wrapper.hasExtra(ActivityProxyMgr.ACTIVITY_PROXY_INTENT)) {
                                                 val rIntent =
-                                                    wrapper.getParcelableArrayExtra(ActivityProxyMgr.ACTIVITY_PROXY_INTENT)
+                                                    wrapper.getParcelableExtra<Intent>(
+                                                        ActivityProxyMgr.ACTIVITY_PROXY_INTENT
+                                                    )
                                                 fmIntent.set(item, rIntent)
                                             }
                                         }
