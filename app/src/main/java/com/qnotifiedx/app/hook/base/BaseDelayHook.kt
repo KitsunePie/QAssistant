@@ -11,7 +11,9 @@ abstract class BaseDelayHook {
     protected var inited = false
 
     companion object {
-        private val delayHooks = com.qnotifiedx.gen.AnnotatedDelayItemList.getAnnotatedDelayItemClassList().toTypedArray()
+        private val delayHooks =
+            com.qnotifiedx.gen.AnnotatedDelayItemList.getAnnotatedDelayItemClassList()
+                .toTypedArray()
 
         fun initHooks() {
             for (h in delayHooks) {

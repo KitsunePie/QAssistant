@@ -3,7 +3,6 @@ package com.qnotifiedx.app.hook.delay
 import com.qnotifiedx.annotations.DelayHookEntry
 import com.qnotifiedx.app.hook.base.BaseDelayHook
 import com.qnotifiedx.app.util.*
-import java.lang.reflect.Method
 
 //阻止DIY名片加载
 @DelayHookEntry

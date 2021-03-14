@@ -13,7 +13,7 @@ object Info {
     const val MODULE_PACKAGE_NAME = BuildConfig.APPLICATION_ID
     const val MODULE_VERSION_CODE = BuildConfig.VERSION_CODE
     const val MODULE_VERSION_NAME = BuildConfig.VERSION_NAME
-    
+
     val HOST_PACKAGE_NAME: String? = appContext?.packageName
 
     @Suppress("DEPRECATION")

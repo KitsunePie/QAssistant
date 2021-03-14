@@ -11,7 +11,9 @@ abstract class BaseNormalHook {
     protected var inited = false
 
     companion object {
-        private val normalHooks = com.qnotifiedx.gen.AnnotatedNormalItemList.getAnnotatedNormalItemClassList().toTypedArray()
+        private val normalHooks =
+            com.qnotifiedx.gen.AnnotatedNormalItemList.getAnnotatedNormalItemClassList()
+                .toTypedArray()
 
         fun initHooks() {
             for (h in normalHooks) {
