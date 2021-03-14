@@ -1,11 +1,14 @@
 package com.qnotifiedx.app.hook.base.moduleinit
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.size
 import com.qnotifiedx.app.BuildConfig
+import com.qnotifiedx.app.ui.activity.MainActivity
 import com.qnotifiedx.app.util.*
+import java.lang.Exception
 
 //模块入口Hook
 object ModuleEntry {
@@ -39,6 +42,17 @@ object ModuleEntry {
                     )
                     setOnClickListener {
                         appContext?.showToast("还没有准备好哦~")
+                    }
+                    setOnLongClickListener {
+                        appContext?.showToast("好吧 这是你要看的")
+                        try {
+                            val intent = Intent(appContext, MainActivity::class.java)
+                            context.startActivity(intent)
+                            true
+                        } catch (e: Exception) {
+                            Log.e(e)
+                            throw e
+                        }
                     }
                 }
                 //添加入口

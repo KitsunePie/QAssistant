@@ -7,7 +7,7 @@ import com.qnotifiedx.app.BuildConfig
 /**
  * 包含了模块版本号信息以及宿主版本号信息
  * 在执行获取宿主app的hook之前调用会返回null
- * @see com.qnotifiedx.app.hook.base.moduleinit.GetAppContext
+ * @see com.qnotifiedx.app.hook.base.moduleinit.LateinitHook
  */
 object Info {
     const val MODULE_PACKAGE_NAME = BuildConfig.APPLICATION_ID

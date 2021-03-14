@@ -26,6 +26,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    aaptOptions {
+        additionalParameters '--allow-reserved-package-id', '--package-id', '0x64'
+    }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
