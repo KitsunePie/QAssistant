@@ -1,6 +1,5 @@
 package com.qnotifiedx.app.util
 
-import com.qnotifiedx.app.hook.base.BaseHook
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XC_MethodReplacement
 import de.robv.android.xposed.XposedBridge
@@ -22,14 +21,14 @@ fun Method.hookMethod(hookCallback: XC_MethodHook) {
  * @param hook hook具体实现
  */
 fun Method.hookBefore(
-    baseHook: BaseHook,
+//    baseHook: BaseHook,
     priority: Int = XCallback.PRIORITY_DEFAULT,
     hook: (XC_MethodHook.MethodHookParam) -> Unit
 ) {
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun beforeHookedMethod(param: MethodHookParam) {
             try {
-                if (!baseHook.enable) return
+//                if (!baseHook.enable) return
                 hook(param)
             } catch (thr: Throwable) {
                 Log.t(thr)
@@ -44,14 +43,14 @@ fun Method.hookBefore(
  * @param hook hook具体实现
  */
 fun Method.hookAfter(
-    baseHook: BaseHook,
+//    baseHook: BaseHook,
     priority: Int = XCallback.PRIORITY_DEFAULT,
     hook: (XC_MethodHook.MethodHookParam) -> Unit
 ) {
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun afterHookedMethod(param: MethodHookParam) {
             try {
-                if (!baseHook.enable) return
+//                if (!baseHook.enable) return
                 hook(param)
             } catch (thr: Throwable) {
                 Log.t(thr)
@@ -66,14 +65,14 @@ fun Method.hookAfter(
  * @param hook hook具体实现
  */
 fun Method.replaceHook(
-    baseHook: BaseHook,
+//    baseHook: BaseHook,
     priority: Int = XCallback.PRIORITY_DEFAULT,
     hook: (XC_MethodHook.MethodHookParam) -> Unit
 ) {
     this.hookMethod(object : XC_MethodReplacement(priority) {
         override fun replaceHookedMethod(param: MethodHookParam): Any {
             return try {
-                if (!baseHook.enable) return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args)
+//                if (!baseHook.enable) return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args)
                 hook(param)
             } catch (thr: Throwable) {
                 Log.t(thr)

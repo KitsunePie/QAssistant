@@ -11,7 +11,7 @@ object PreventDiyCardLoad : BaseDelayHook() {
         findMethodByCondition("com.tencent.mobileqq.profilecard.vas.VasProfileTemplateController") {
             it.name == "a" && it.parameterTypes.size == 2 && it.parameterTypes[1] == Int::class.java && it.isPublic
         }.also { m ->
-            m.hookBefore(this) {
+            m.hookBefore {
                 if (!enable) return@hookBefore
                 it.result = null
             }
