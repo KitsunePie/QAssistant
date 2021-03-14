@@ -169,8 +169,7 @@ class ResInjector {
                     val cActivityTaskManager = Class.forName("android.app.ActivityTaskManager")
                     Log.d("Load cActivityTaskManager: ${cActivityTaskManager.name}")
                     val fIActivityTaskManagerSingleton =
-                        cActivityTaskManager.getDeclaredField("IActivityTaskManagerSingleton")
-                            .also { it.isAccessible = true }
+                        cActivityTaskManager.getFieldByClzOrObj("IActivityTaskManagerSingleton")
                     Log.d("Get fIActivityTaskManagerSingleton: ${fIActivityTaskManagerSingleton.name}")
                     val singleton = fIActivityTaskManagerSingleton.get(null)
                     Log.d("Get singleton: $singleton")
