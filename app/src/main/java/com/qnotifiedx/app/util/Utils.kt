@@ -43,7 +43,7 @@ fun runOnMainThread(r: Runnable) {
 /**
  * 扩展函数 显示一个Toast
  * @param msg Toast显示的消息
- * @param length Toast显示的长度
+ * @param length Toast显示的时长
  */
 fun Context.showToast(msg: String, length: Int = Toast.LENGTH_SHORT) {
     runOnMainThread {
@@ -79,7 +79,7 @@ fun getMethods(clzName: String): Array<Method> {
  * 扩展函数 获取实例化对象的所有方法
  * 注意 请勿对类使用此函数
  * @return 方法数组
- * @throws IllegalArgumentException 当对象是一个Class时抛出
+ * @throws IllegalArgumentException 当对象是一个Class时
  */
 fun Any.getMethodsByObject(): Array<Method> {
     if (this is Class<*>) throw IllegalArgumentException("Do not use it on a class!")
@@ -168,6 +168,41 @@ fun getMethod(
         argTypes
     )
 }
+
+/**
+ *  通过方法数组 根据条件查找方法
+ *  @param condition 方法的具体条件
+ *  @throws NoSuchMethodException 未找到方法时抛出
+ */
+fun Array<Method>.findMethodByCondition(condition: (Method) -> Boolean): Method {
+    for (m in this) {
+        if (condition(m)) {
+            return m
+        }
+    }
+    throw NoSuchMethodException()
+}
+
+/**
+ * 通过条件查找方法
+ * @param clz 类
+ * @param condition 条件
+ * @throws NoSuchMethodException 未找到方法时抛出
+ */
+fun findMethodByCondition(clz: Class<*>, condition: (Method) -> Boolean): Method {
+    return clz.declaredMethods.findMethodByCondition(condition)
+}
+
+/**
+ * 通过条件查找方法
+ * @param clzName 类名
+ * @param condition 条件
+ * @throws NoSuchMethodException 未找到方法时抛出
+ */
+fun findMethodByCondition(clzName: String, condition: (Method) -> Boolean): Method {
+    return getMethods(clzName).findMethodByCondition(condition)
+}
+
 
 /**
  * 扩展函数 通过类或者对象获取单个属性
@@ -332,7 +367,7 @@ fun Any.invokeMethod(
  * @param argTypes 参数类型 可空
  * @param returnType 返回值类型 默认为void
  * @return 函数调用后的返回值
- * @throws IllegalArgumentException 当args的长度与argTypes的长度不符时抛出
+ * @throws IllegalArgumentException 当args的长度与argTypes的长度不符时
  */
 fun Class<*>.invokeStaticMethod(
     methodName: String,
@@ -358,7 +393,7 @@ fun Class<*>.invokeStaticMethod(
  * @param args 构造函数的参数表
  * @param argTypes 构造函数的参数类型
  * @return 成功时返回实例化的对象 失败时返回null
- * @throws IllegalArgumentException 当args的长度与argTypes的长度不符时抛出
+ * @throws IllegalArgumentException 当args的长度与argTypes的长度不符时
  */
 fun Class<*>.newInstance(
     args: Array<out Any> = arrayOf(),

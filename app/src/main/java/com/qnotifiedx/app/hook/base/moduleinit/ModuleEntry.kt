@@ -11,8 +11,9 @@ import com.qnotifiedx.app.util.*
 object ModuleEntry {
     //强制开启
     fun init() {
-        for (m in getMethods("com.tencent.mobileqq.activity.QQSettingSettingActivity")) {
-            if (m.name != "doOnCreate") continue
+        findMethodByCondition("com.tencent.mobileqq.activity.QQSettingSettingActivity") {
+            it.name == "doOnCreate"
+        }.also { m ->
             m.hookAfter(100) {
                 val thisObject = it.thisObject
                 //加载QQ的设置物件类

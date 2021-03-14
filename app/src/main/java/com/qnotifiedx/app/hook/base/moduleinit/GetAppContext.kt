@@ -10,21 +10,21 @@ object GetAppContext {
         private set
 
     fun init() {
-        for (m in getMethods("com.tencent.mobileqq.startup.step.LoadDex")) {
-            if (m.returnType == Boolean::class.javaPrimitiveType && m.parameterTypes.isEmpty()) {
-                m.hookAfter(100) {
-                    if (application != null) return@hookAfter
-                    //加载QQ的基础Application
-                    val cBaseApplicationImpl =
-                        loadClass("com.tencent.common.app.BaseApplicationImpl")
-                    //获取Context
-                    val context =
-                        cBaseApplicationImpl.getStaticObjectOrNull(
-                            "sApplication",
-                            cBaseApplicationImpl
-                        ) as Application
-                    application = context
-                }
+        findMethodByCondition("com.tencent.mobileqq.startup.step.LoadDex") {
+            it.returnType == Boolean::class.java && it.parameterTypes.isEmpty()
+        }.also { m ->
+            m.hookAfter(100) {
+                if (application != null) return@hookAfter
+                //加载QQ的基础Application
+                val cBaseApplicationImpl =
+                    loadClass("com.tencent.common.app.BaseApplicationImpl")
+                //获取Context
+                val context =
+                    cBaseApplicationImpl.getStaticObjectOrNull(
+                        "sApplication",
+                        cBaseApplicationImpl
+                    ) as Application
+                application = context
             }
         }
     }
