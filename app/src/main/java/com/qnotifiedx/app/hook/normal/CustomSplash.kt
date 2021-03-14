@@ -27,7 +27,7 @@ object CustomSplash : BaseNormalHook() {
                 String::class.java,
                 Int::class.javaPrimitiveType
             )
-        open.hookBefore(this) {
+        open.hookBefore {
 
         }
     }

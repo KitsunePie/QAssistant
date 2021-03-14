@@ -101,7 +101,7 @@ fun getFields(clzName: String): Array<Field> {
  * 扩展函数 通过类或者对象获取单个方法
  * @param methodName 方法名
  * @param isStatic 是否为静态方法
- * @param returnType 方法返回值
+ * @param returnType 方法返回值 填入Any::class.java时忽略返回值类型
  * @param argTypes 方法形参表类型
  * @throws IllegalArgumentException 当方法名为空时
  */
@@ -131,7 +131,7 @@ fun Any.getMethodByClzOrObj(
 /**
  * 扩展函数 通过类获取单个静态方法
  * @param methodName 方法名
- * @param returnType 方法返回值
+ * @param returnType 方法返回值 填入Any::class.java时忽略返回值类型
  * @param argTypes 方法形参表类型
  * @throws IllegalArgumentException 当方法名为空时
  */
@@ -149,7 +149,7 @@ fun Class<*>.getStaticMethodByClz(
  * @param clzName 类名
  * @param isStatic 是否为静态方法
  * @param methodName 方法名
- * @param returnType 方法返回值
+ * @param returnType 方法返回值 填入Any::class.java时忽略返回值类型
  * @param argTypes 方法形参表类型
  * @throws IllegalArgumentException 当方法名为空时
  */
@@ -187,7 +187,7 @@ fun Array<Method>.findMethodByCondition(condition: (Method) -> Boolean): Method 
  * 通过条件查找方法
  * @param clz 类
  * @param condition 条件
- * @throws NoSuchMethodException 未找到方法时抛出
+ * @throws NoSuchMethodException 当未找到方法时
  */
 fun findMethodByCondition(clz: Class<*>, condition: (Method) -> Boolean): Method {
     return clz.declaredMethods.findMethodByCondition(condition)
@@ -197,7 +197,7 @@ fun findMethodByCondition(clz: Class<*>, condition: (Method) -> Boolean): Method
  * 通过条件查找方法
  * @param clzName 类名
  * @param condition 条件
- * @throws NoSuchMethodException 未找到方法时抛出
+ * @throws NoSuchMethodException 当未找到方法时
  */
 fun findMethodByCondition(clzName: String, condition: (Method) -> Boolean): Method {
     return getMethods(clzName).findMethodByCondition(condition)
@@ -285,7 +285,7 @@ fun Class<*>.getStaticObjectOrNull(
 }
 
 /**
- * 扩展函数 通过对象设置属性值
+ * 扩展函数 设置对象中对象的值
  * 注意 请勿对类使用此函数
  * @param objName 需要设置的对象名称
  * @param value 值
@@ -308,7 +308,7 @@ fun Any.putObject(objName: String, value: Any?, fieldType: Class<*>? = null) {
 }
 
 /**
- * 扩展函数 通过类设置静态属性值
+ * 扩展函数 设置类中静态对象值
  * @param objName 需要设置的对象名称
  * @param value 值
  * @param fieldType 对象类型
@@ -333,7 +333,7 @@ fun Class<*>.putStaticObject(objName: String, value: Any?, fieldType: Class<*>? 
  * @param methodName 方法名
  * @param args 参数表 可空
  * @param argTypes 参数类型 可空
- * @param returnType 返回值类型 默认为void
+ * @param returnType 返回值类型 默认为void 填入Any时忽略返回值类型
  * @return 函数调用后的返回值
  * @throws IllegalArgumentException 当方法名为空时
  * @throws IllegalArgumentException 当args的长度与argTypes的长度不符时
@@ -365,7 +365,7 @@ fun Any.invokeMethod(
  * @param methodName 方法名
  * @param args 参数表 可空
  * @param argTypes 参数类型 可空
- * @param returnType 返回值类型 默认为void
+ * @param returnType 返回值类型 默认为void 填入Any::class.java时忽略返回值类型
  * @return 函数调用后的返回值
  * @throws IllegalArgumentException 当args的长度与argTypes的长度不符时
  */
