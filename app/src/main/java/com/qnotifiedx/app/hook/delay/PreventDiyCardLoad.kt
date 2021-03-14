@@ -2,22 +2,18 @@ package com.qnotifiedx.app.hook.delay
 
 import com.qnotifiedx.annotations.DelayHookEntry
 import com.qnotifiedx.app.hook.base.BaseDelayHook
-import com.qnotifiedx.app.util.getMethods
-import com.qnotifiedx.app.util.hookBefore
-import com.qnotifiedx.app.util.isPublic
-import java.lang.reflect.Method
+import com.qnotifiedx.app.util.*
 
 //阻止DIY名片加载
 @DelayHookEntry
 object PreventDiyCardLoad : BaseDelayHook() {
     override fun init() {
-        for (m: Method in getMethods("com.tencent.mobileqq.profilecard.vas.VasProfileTemplateController")) {
-            val argTypes = m.parameterTypes
-            if (m.name == "a" && argTypes.size == 2 && argTypes[1] == Int::class.java && m.isPublic) {
-                m.hookBefore {
-                    if (!enable) return@hookBefore
-                    it.result = null
-                }
+        findMethodByCondition("com.tencent.mobileqq.profilecard.vas.VasProfileTemplateController") {
+            it.name == "a" && it.parameterTypes.size == 2 && it.parameterTypes[1] == Int::class.java && it.isPublic
+        }.also { m ->
+            m.hookBefore {
+                if (!enable) return@hookBefore
+                it.result = null
             }
         }
     }

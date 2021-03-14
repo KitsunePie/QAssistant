@@ -38,9 +38,9 @@ object Log {
      */
     fun e(e: Exception, msg: String = "") {
         if (msg.isEmpty())
-            Log.e(TAG, e.stackTrace.toString())
+            Log.e(TAG, e.stackTraceToString())
         else
-            Log.e(TAG, "$msg\n${e.stackTrace}")
+            Log.e(TAG, "$msg\n${e.stackTraceToString()}")
     }
 
     /**
@@ -50,9 +50,9 @@ object Log {
      */
     fun e(e: Error, msg: String = "") {
         if (msg.isEmpty())
-            Log.e(TAG, e.stackTrace.toString())
+            Log.e(TAG, e.stackTraceToString())
         else
-            Log.e(TAG, "$msg\n${e.stackTrace}")
+            Log.e(TAG, "$msg\n${e.stackTraceToString()}")
     }
 
     /**
@@ -62,8 +62,8 @@ object Log {
      */
     fun t(thr: Throwable, msg: String = "") {
         if (msg.isEmpty())
-            Log.e(TAG, thr.stackTrace.toString())
+            Log.e(TAG, thr.stackTraceToString())
         else
-            Log.e(TAG, "$msg\n${thr.stackTrace}")
+            Log.e(TAG, "$msg\n${thr.stackTraceToString()}")
     }
 }

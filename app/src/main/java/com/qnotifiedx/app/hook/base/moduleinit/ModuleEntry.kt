@@ -1,18 +1,20 @@
 package com.qnotifiedx.app.hook.base.moduleinit
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.size
 import com.qnotifiedx.app.BuildConfig
+import com.qnotifiedx.app.ui.activity.MainActivity
 import com.qnotifiedx.app.util.*
 
 //模块入口Hook
 object ModuleEntry {
-    //强制开启
     fun init() {
-        for (m in getMethods("com.tencent.mobileqq.activity.QQSettingSettingActivity")) {
-            if (m.name != "doOnCreate") continue
+        findMethodByCondition("com.tencent.mobileqq.activity.QQSettingSettingActivity") {
+            it.name == "doOnCreate"
+        }.also { m ->
             m.hookAfter(100) {
                 val thisObject = it.thisObject
                 //加载QQ的设置物件类
@@ -38,7 +40,18 @@ object ModuleEntry {
                         arrayOf(CharSequence::class.java)
                     )
                     setOnClickListener {
-                        appContext?.showToast("还没有准备好哦~")
+                        context?.showToast("还没有准备好哦~")
+                    }
+                    setOnLongClickListener {
+                        context?.showToast("好吧 这是你要看的")
+                        try {
+                            val intent = Intent(context, MainActivity::class.java)
+                            context.startActivity(intent)
+                            true
+                        } catch (e: Exception) {
+                            Log.e(e)
+                            throw e
+                        }
                     }
                 }
                 //添加入口
