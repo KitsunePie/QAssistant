@@ -4,7 +4,6 @@ import android.app.Application
 import com.qnotifiedx.app.util.*
 
 //获取宿主全局ApplicationHook
-
 object GetAppContext {
     var application: Application? = null
         private set

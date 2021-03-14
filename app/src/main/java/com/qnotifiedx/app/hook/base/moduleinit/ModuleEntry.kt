@@ -9,7 +9,6 @@ import com.qnotifiedx.app.util.*
 
 //模块入口Hook
 object ModuleEntry {
-    //强制开启
     fun init() {
         findMethodByCondition("com.tencent.mobileqq.activity.QQSettingSettingActivity") {
             it.name == "doOnCreate"
