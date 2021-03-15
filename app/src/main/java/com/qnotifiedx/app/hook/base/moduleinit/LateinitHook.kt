@@ -29,7 +29,7 @@ object LateinitHook {
                 application = context
                 //资源注入部分
                 ResInjector.initSubActivity()
-                ResInjector.injectRes(appContext!!.resources)
+                ResInjector.injectRes()
                 //延迟Hook部分
                 BaseDelayHook.initHooks()
                 inited = true
