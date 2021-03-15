@@ -663,10 +663,7 @@ class ResInjector {
                 }
             }
             try {
-                args?.let {
-                    return method.invoke(mOrigin, *args)
-                }
-                return method.invoke(mOrigin)
+                return if (args != null) method.invoke(mOrigin, *args) else method.invoke(mOrigin)
             } catch (e: InvocationTargetException) {
                 throw e.targetException
             }
