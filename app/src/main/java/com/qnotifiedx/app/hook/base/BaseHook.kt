@@ -6,6 +6,8 @@ package com.qnotifiedx.app.hook.base
 abstract class BaseHook {
     abstract val name: String
 
+    open val desc: String = ""
+
     protected var inited = false
 
     protected abstract fun init()

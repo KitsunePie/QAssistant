@@ -7,8 +7,9 @@ import com.qnotifiedx.app.util.findMethodByCondition
 import com.qnotifiedx.app.util.hookAfter
 import com.qnotifiedx.app.util.putObject
 
-object RemoveRedDot : BaseDelayHook() {
-    override val name: String = "移除小红点"
+object HideRedDot : BaseDelayHook() {
+    override val name: String = "隐藏小红点"
+    override val desc: String = "隐藏各个界面中的大部分小红点"
 
     private val TRANSPARENT_PNG = byteArrayOf(
         0x89.toByte(), 0x50.toByte(), 0x4E.toByte(), 0x47.toByte(),
