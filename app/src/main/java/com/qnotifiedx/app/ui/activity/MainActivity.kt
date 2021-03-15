@@ -2,7 +2,7 @@ package com.qnotifiedx.app.ui.activity
 
 import android.os.Bundle
 import com.qnotifiedx.app.R
-import com.qnotifiedx.app.ui.activity.base.AppCompatTransferActivity
+import com.qnotifiedx.core.resinjection.transferactivity.AppCompatTransferActivity
 
 class MainActivity : AppCompatTransferActivity() {
 

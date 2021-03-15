@@ -1,4 +1,4 @@
-package com.qnotifiedx.app.ui.activity.base
+package com.qnotifiedx.core.resinjection.transferactivity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
