@@ -3,10 +3,7 @@ package com.qnotifiedx.app.hook.moduleinit
 import android.app.Application
 import com.qnotifiedx.app.hook.base.BaseModuleInit
 import com.qnotifiedx.app.hook.base.BaseNormalHook
-import com.qnotifiedx.app.util.findMethodByCondition
-import com.qnotifiedx.app.util.getStaticObjectOrNull
-import com.qnotifiedx.app.util.hookAfter
-import com.qnotifiedx.app.util.loadClass
+import com.qnotifiedx.app.util.*
 import com.qnotifiedx.core.resinjection.ResInjector
 
 object GetApplication : BaseModuleInit() {
@@ -33,6 +30,7 @@ object GetApplication : BaseModuleInit() {
                 //资源注入部分
                 ResInjector.initSubActivity()
                 ResInjector.injectRes()
+                MMKVInit.init()
                 //延迟Hook部分
                 BaseNormalHook.initHooks()
                 inited = true
