@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.size
 import com.qnotifiedx.app.BuildConfig
 import com.qnotifiedx.app.hook.base.BaseModuleInit
-import com.qnotifiedx.app.ui.activity.MainActivity
+import com.qnotifiedx.app.ui.module.activity.MainActivity
 import com.qnotifiedx.app.util.*
 
 object ModuleEntry : BaseModuleInit() {
