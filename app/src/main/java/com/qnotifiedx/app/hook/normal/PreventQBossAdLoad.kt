@@ -1,12 +1,13 @@
-package com.qnotifiedx.app.hook.delay
+package com.qnotifiedx.app.hook.normal
 
 import android.view.View
-import com.qnotifiedx.annotations.DelayHookEntry
-import com.qnotifiedx.app.hook.base.BaseDelayHook
+import com.qnotifiedx.annotations.NormalHookEntry
+import com.qnotifiedx.app.hook.base.BaseNormalHook
 import com.qnotifiedx.app.util.*
+import com.qnotifiedx.core.processctrl.Process
 
-@DelayHookEntry
-object PreventQBossAdLoad : BaseDelayHook() {
+@NormalHookEntry
+object PreventQBossAdLoad : BaseNormalHook() {
     override val name: String = "阻止主界面横幅广告加载"
 
     override fun init() {

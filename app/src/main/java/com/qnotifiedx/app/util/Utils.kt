@@ -5,7 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import com.qnotifiedx.app.HookInit
-import com.qnotifiedx.app.hook.base.moduleinit.LateinitHook
+import com.qnotifiedx.app.hook.moduleinit.GetApplication
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
 import java.lang.reflect.Method
@@ -26,7 +26,7 @@ val mClzLoader: ClassLoader by lazy {
 
 //宿主全局Context
 val appContext: Context?
-    get() = LateinitHook.application
+    get() = GetApplication.application
 
 /**
  * 将函数放到主线程执行 如UI更新、显示Toast等
@@ -378,19 +378,6 @@ fun Class<*>.putStaticObject(objName: String, value: Any?, fieldType: Class<*>? 
             it.isAccessible = true
             it.set(null, value)
         }
-    } catch (e: Exception) {
-        Log.e(e)
-    }
-}
-
-/**
- * 扩展函数 设置类中静态对象值
- * @param field 静态属性
- * @param value 值
- */
-fun Class<*>.putStaticObject(field: Field, value: Any?) {
-    try {
-        field.set(null, value)
     } catch (e: Exception) {
         Log.e(e)
     }
