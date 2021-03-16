@@ -4,7 +4,6 @@ import android.view.View
 import com.qnotifiedx.annotations.NormalHookEntry
 import com.qnotifiedx.app.hook.base.BaseNormalHook
 import com.qnotifiedx.app.util.*
-import com.qnotifiedx.core.processctrl.Process
 
 @NormalHookEntry
 object PreventQBossAdLoad : BaseNormalHook() {
@@ -14,8 +13,7 @@ object PreventQBossAdLoad : BaseNormalHook() {
         findMethodByCondition(ClassPointer.QbossADImmersionBannerManager.clazz!!) {
             it.returnType == View::class.java && it.parameterTypes.isEmpty() && it.isStatic
         }.also { m ->
-            m.hookBefore {
-                if (!enable) return@hookBefore
+            m.hookBefore(this) {
                 it.result = null
             }
         }

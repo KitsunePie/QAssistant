@@ -19,7 +19,7 @@ object GetApplication : BaseModuleInit() {
         findMethodByCondition("com.tencent.mobileqq.startup.step.LoadDex") {
             it.returnType == Boolean::class.java && it.parameterTypes.isEmpty()
         }.also { m ->
-            m.hookAfter(100) {
+            m.hookAfter(this, 100) {
                 //加载QQ的基础Application
                 val cBaseApplicationImpl =
                     loadClass("com.tencent.common.app.BaseApplicationImpl")

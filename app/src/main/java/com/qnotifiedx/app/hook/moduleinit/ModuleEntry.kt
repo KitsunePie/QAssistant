@@ -9,7 +9,6 @@ import com.qnotifiedx.app.BuildConfig
 import com.qnotifiedx.app.hook.base.BaseModuleInit
 import com.qnotifiedx.app.ui.activity.MainActivity
 import com.qnotifiedx.app.util.*
-import com.qnotifiedx.core.processctrl.Process
 
 object ModuleEntry : BaseModuleInit() {
     override val name: String = "模块入口"
@@ -19,7 +18,7 @@ object ModuleEntry : BaseModuleInit() {
         findMethodByCondition("com.tencent.mobileqq.activity.QQSettingSettingActivity") {
             it.name == "doOnCreate"
         }.also { m ->
-            m.hookAfter(100) {
+            m.hookAfter(this, 100) {
                 val thisObject = it.thisObject
                 //加载QQ的设置物件类
                 val cFormSimpleItem = loadClass("com.tencent.mobileqq.widget.FormSimpleItem")
