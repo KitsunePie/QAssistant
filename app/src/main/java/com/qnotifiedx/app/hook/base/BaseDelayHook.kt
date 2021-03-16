@@ -17,8 +17,12 @@ abstract class BaseDelayHook : BaseHook() {
             for (h in delayHooks) {
                 if (!h.inited) {
                     h.inited = true
-                    h.init()
-                    Log.i("Initialized Delay hook: ${h.javaClass.name}")
+                    try {
+                        h.init()
+                        Log.i("Initialized delay hook: ${h.javaClass.name}")
+                    } catch (e: Exception) {
+                        Log.i("Initialization failure delay hook: ${h.javaClass.name}")
+                    }
                 }
             }
         }

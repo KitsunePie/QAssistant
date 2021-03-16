@@ -17,11 +17,14 @@ abstract class BaseNormalHook : BaseHook() {
             for (h in normalHooks) {
                 if (!h.inited) {
                     h.inited = true
-                    h.init()
-                    Log.i("Initialized Normal hook: ${h.javaClass.name}")
+                    try {
+                        h.init()
+                        Log.i("Initialized normal hook: ${h.javaClass.name}")
+                    } catch (e: Exception) {
+                        Log.i("Initialization failure normal hook: ${h.javaClass.name}")
+                    }
                 }
             }
         }
     }
-
 }
