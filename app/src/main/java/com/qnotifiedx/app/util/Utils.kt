@@ -76,14 +76,12 @@ fun getMethods(clzName: String): Array<Method> {
 }
 
 /**
- * 扩展函数 获取实例化对象的所有方法
- * 注意 请勿对类使用此函数
+ * 扩展函数 获取类/实例化对象的所有方法
  * @return 方法数组
- * @throws IllegalArgumentException 当对象是一个Class时
  */
 fun Any.getMethodsByObject(): Array<Method> {
-    if (this is Class<*>) throw IllegalArgumentException("Do not use it on a class!")
-    return this::class.java.declaredMethods
+    val clz: Class<*> = if (this is Class<*>) this else this::class.java
+    return clz.declaredMethods
 }
 
 /**
