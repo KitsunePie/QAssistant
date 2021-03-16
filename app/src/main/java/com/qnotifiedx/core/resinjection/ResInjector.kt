@@ -98,10 +98,11 @@ object ResInjector {
             val cActivityThread = Class.forName("android.app.ActivityThread")
             Log.d("Load cActivityThread: ${cActivityThread.name}")
             val fCurrentActivityThread =
-                cActivityThread.getFieldByClzOrObj("sCurrentActivityThread")
+                cActivityThread.getStaticFiledByClass("sCurrentActivityThread")
             val sCurrentActivityThread = fCurrentActivityThread.get(null)!!
             Log.d("Get sCurrentActivityThread: $sCurrentActivityThread")
-            val fmInstrumentation = cActivityThread.getFieldByClzOrObj("mInstrumentation")
+            val fmInstrumentation =
+                cActivityThread.getFieldByClzOrObj("mInstrumentation")
             Log.d("Get fmInstrumentation: ${fmInstrumentation.name}")
             val mGetInstrumentation = cActivityThread.getMethodByClzOrObj(
                 "getInstrumentation"
@@ -134,11 +135,11 @@ object ResInjector {
             var fgDefault: Field
             try {
                 cActivityManager = Class.forName("android.app.ActivityManagerNative")
-                fgDefault = cActivityManager.getFieldByClzOrObj("gDefault")
+                fgDefault = cActivityManager.getStaticFiledByClass("gDefault")
             } catch (e1: Exception) {
                 try {
                     cActivityManager = Class.forName("android.app.ActivityManager")
-                    fgDefault = cActivityManager.getFieldByClzOrObj("IActivityManagerSingleton")
+                    fgDefault = cActivityManager.getStaticFiledByClass("IActivityManagerSingleton")
                 } catch (e2: Exception) {
                     Log.e(e1)
                     Log.e(e2)
@@ -167,10 +168,8 @@ object ResInjector {
             try {
                 val cActivityTaskManager = Class.forName("android.app.ActivityTaskManager")
                 Log.d("Load cActivityTaskManager: ${cActivityTaskManager.name}")
-                val fIActivityTaskManagerSingleton =
-                    cActivityTaskManager.getFieldByClzOrObj("IActivityTaskManagerSingleton")
-                Log.d("Get fIActivityTaskManagerSingleton: ${fIActivityTaskManagerSingleton.name}")
-                val singleton = fIActivityTaskManagerSingleton.get(null)
+                val singleton =
+                    cActivityTaskManager.getStaticObjectOrNull("IActivityTaskManagerSingleton")
                 Log.d("Get singleton: $singleton")
                 cSingleton.getMethod("get").invoke(singleton)
                 val mDefaultTaskMgr = fmInstance.get(singleton)
@@ -226,6 +225,7 @@ object ResInjector {
             mBase.sendStatus(resultCode, results)
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         override fun addResults(results: Bundle?) {
             mBase.addResults(results)
         }
@@ -262,6 +262,7 @@ object ResInjector {
             return mBase.targetContext
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         override fun getProcessName(): String {
             return mBase.processName
         }
@@ -542,6 +543,7 @@ object ResInjector {
             return mBase.getUiAutomation(flags)
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         override fun acquireLooperManager(looper: Looper?): TestLooperManager {
             return mBase.acquireLooperManager(looper)
         }

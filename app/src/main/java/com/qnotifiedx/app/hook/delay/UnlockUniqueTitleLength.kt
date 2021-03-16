@@ -1,9 +1,11 @@
 package com.qnotifiedx.app.hook.delay
 
 import android.widget.EditText
+import com.qnotifiedx.annotations.DelayHookEntry
 import com.qnotifiedx.app.hook.base.BaseDelayHook
 import com.qnotifiedx.app.util.*
 
+@DelayHookEntry
 object UnlockUniqueTitleLength : BaseDelayHook() {
     override val name: String = "解除头衔字数上限"
     override val desc: String = "最大支持18个英文字符(6个中文字符)"
