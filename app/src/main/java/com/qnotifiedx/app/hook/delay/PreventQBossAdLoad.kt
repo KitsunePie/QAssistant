@@ -1,9 +1,11 @@
 package com.qnotifiedx.app.hook.delay
 
 import android.view.View
+import com.qnotifiedx.annotations.DelayHookEntry
 import com.qnotifiedx.app.hook.base.BaseDelayHook
 import com.qnotifiedx.app.util.*
 
+@DelayHookEntry
 object PreventQBossAdLoad : BaseDelayHook() {
     override val name: String = "阻止主界面横幅广告加载"
 
