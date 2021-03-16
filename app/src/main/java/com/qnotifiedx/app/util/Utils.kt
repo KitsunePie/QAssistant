@@ -116,7 +116,7 @@ fun Any.getMethodByClzOrObj(
     var clz = if (this is Class<*>) this else this.javaClass
     do {
         for (m in clz.declaredMethods) {
-            if (isStatic && !m.isStatic) continue
+            if ((isStatic && !m.isStatic) || (!isStatic && m.isStatic)) continue
             if (m.name != methodName) continue
             if (returnType != null && m.returnType != returnType) continue
             for (type in m.parameterTypes.withIndex()) {
@@ -223,7 +223,7 @@ fun Any.getFieldByClzOrObj(
     var clz: Class<*> = if (this is Class<*>) this else this.javaClass
     do {
         for (f in clz.declaredFields) {
-            if (isStatic && !f.isStatic) continue
+            if ((isStatic && !f.isStatic) || (!isStatic && f.isStatic)) continue
             if ((fieldType == null || f.type == fieldType) && (f.name == fieldName)) {
                 f.isAccessible = true
                 return f
@@ -273,10 +273,9 @@ fun Any.getObjectOrNull(objName: String, type: Class<*>? = null): Any? {
  * 扩展函数 通过对象 获取对象中的对象
  * 注意 请勿对类使用此函数
  * @param field 属性
- * @param type 类型
  * @throws IllegalArgumentException 当对象是一个Class时
  */
-fun Any.getObjectOrNull(field: Field, type: Class<*>? = null): Any? {
+fun Any.getObjectOrNull(field: Field): Any? {
     if (this is Class<*>) throw IllegalArgumentException("Do not use it on a class!")
     try {
         field.let {
@@ -346,7 +345,6 @@ fun Any.putObject(objName: String, value: Any?, fieldType: Class<*>? = null) {
  * @param field 属性
  * @param value 值
  * @throws IllegalArgumentException 当对象是一个类时
- * @throws IllegalArgumentException 当对象名为空时
  */
 fun Any.putObject(field: Field, value: Any?) {
     if (this is Class<*>) throw IllegalArgumentException("Do not use it on a class!")
@@ -380,6 +378,19 @@ fun Class<*>.putStaticObject(objName: String, value: Any?, fieldType: Class<*>? 
             it.isAccessible = true
             it.set(null, value)
         }
+    } catch (e: Exception) {
+        Log.e(e)
+    }
+}
+
+/**
+ * 扩展函数 设置类中静态对象值
+ * @param field 静态属性
+ * @param value 值
+ */
+fun Class<*>.putStaticObject(field: Field, value: Any?) {
+    try {
+        field.set(null, value)
     } catch (e: Exception) {
         Log.e(e)
     }
