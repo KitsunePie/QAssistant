@@ -384,19 +384,6 @@ fun Class<*>.putStaticObject(objName: String, value: Any?, fieldType: Class<*>? 
 }
 
 /**
- * 扩展函数 设置类中静态对象值
- * @param field 静态属性
- * @param value 值
- */
-fun Class<*>.putStaticObject(field: Field, value: Any?) {
-    try {
-        field.set(null, value)
-    } catch (e: Exception) {
-        Log.e(e)
-    }
-}
-
-/**
  * 扩展函数 调用对象的方法
  * 注意 请勿对类使用此函数
  * @param methodName 方法名
