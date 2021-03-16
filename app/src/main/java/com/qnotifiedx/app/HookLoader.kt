@@ -1,8 +1,6 @@
 package com.qnotifiedx.app
 
-import com.qnotifiedx.app.hook.base.BaseNormalHook
-import com.qnotifiedx.app.hook.base.moduleinit.LateinitHook
-import com.qnotifiedx.app.hook.base.moduleinit.ModuleEntry
+import com.qnotifiedx.app.hook.base.BaseModuleInit
 import com.qnotifiedx.app.util.Log
 
 object HookLoader {
@@ -13,10 +11,7 @@ object HookLoader {
     private fun doInit() {
         try {
             //加载普通hooks
-            BaseNormalHook.initHooks()
-            //获取Context以及入口的hook
-            LateinitHook.init()
-            ModuleEntry.init()
+            BaseModuleInit.initHooks()
             Log.i("Module first initialization successful.")
         } catch (e: Exception) {
             Log.e(e)

@@ -1,22 +1,25 @@
-package com.qnotifiedx.app.hook.base.moduleinit
+package com.qnotifiedx.app.hook.moduleinit
 
 import android.app.Application
-import com.qnotifiedx.app.hook.base.BaseDelayHook
-import com.qnotifiedx.app.util.*
+import com.qnotifiedx.app.hook.base.BaseModuleInit
+import com.qnotifiedx.app.hook.base.BaseNormalHook
+import com.qnotifiedx.app.util.findMethodByCondition
+import com.qnotifiedx.app.util.getStaticObjectOrNull
+import com.qnotifiedx.app.util.hookAfter
+import com.qnotifiedx.app.util.loadClass
 import com.qnotifiedx.core.resinjection.ResInjector
 
-//获取宿主Application && 延迟加载
-object LateinitHook {
+object GetApplication : BaseModuleInit() {
     var application: Application? = null
         private set
-    private var inited = false
+    override val name: String = "获取Context"
+    override var enable: Boolean = true
 
-    fun init() {
+    override fun init() {
         findMethodByCondition("com.tencent.mobileqq.startup.step.LoadDex") {
             it.returnType == Boolean::class.java && it.parameterTypes.isEmpty()
         }.also { m ->
             m.hookAfter(100) {
-                if (inited) return@hookAfter
                 //加载QQ的基础Application
                 val cBaseApplicationImpl =
                     loadClass("com.tencent.common.app.BaseApplicationImpl")
@@ -31,7 +34,7 @@ object LateinitHook {
                 ResInjector.initSubActivity()
                 ResInjector.injectRes()
                 //延迟Hook部分
-                BaseDelayHook.initHooks()
+                BaseNormalHook.initHooks()
                 inited = true
             }
         }

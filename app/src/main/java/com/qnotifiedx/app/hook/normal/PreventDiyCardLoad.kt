@@ -1,11 +1,12 @@
-package com.qnotifiedx.app.hook.delay
+package com.qnotifiedx.app.hook.normal
 
-import com.qnotifiedx.annotations.DelayHookEntry
-import com.qnotifiedx.app.hook.base.BaseDelayHook
+import com.qnotifiedx.annotations.NormalHookEntry
+import com.qnotifiedx.app.hook.base.BaseNormalHook
 import com.qnotifiedx.app.util.*
+import com.qnotifiedx.core.processctrl.Process
 
-@DelayHookEntry
-object PreventDiyCardLoad : BaseDelayHook() {
+@NormalHookEntry
+object PreventDiyCardLoad : BaseNormalHook() {
     override val name: String = "阻止DIY名片加载"
 
     override fun init() {

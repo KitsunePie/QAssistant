@@ -1,15 +1,16 @@
-package com.qnotifiedx.app.hook.delay
+package com.qnotifiedx.app.hook.normal
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.qnotifiedx.annotations.DelayHookEntry
-import com.qnotifiedx.app.hook.base.BaseDelayHook
+import com.qnotifiedx.annotations.NormalHookEntry
+import com.qnotifiedx.app.hook.base.BaseNormalHook
 import com.qnotifiedx.app.util.findMethodByCondition
 import com.qnotifiedx.app.util.hookAfter
 import com.qnotifiedx.app.util.putObject
+import com.qnotifiedx.core.processctrl.Process
 
-@DelayHookEntry
-object HideRedDot : BaseDelayHook() {
+@NormalHookEntry
+object HideRedDot : BaseNormalHook() {
     override val name: String = "隐藏小红点"
     override val desc: String = "隐藏各个界面中的大部分小红点"
 

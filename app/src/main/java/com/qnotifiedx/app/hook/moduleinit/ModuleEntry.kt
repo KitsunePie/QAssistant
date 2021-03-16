@@ -1,4 +1,4 @@
-package com.qnotifiedx.app.hook.base.moduleinit
+package com.qnotifiedx.app.hook.moduleinit
 
 import android.content.Context
 import android.content.Intent
@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.size
 import com.qnotifiedx.app.BuildConfig
+import com.qnotifiedx.app.hook.base.BaseModuleInit
 import com.qnotifiedx.app.ui.activity.MainActivity
 import com.qnotifiedx.app.util.*
+import com.qnotifiedx.core.processctrl.Process
 
-//模块入口Hook
-object ModuleEntry {
-    fun init() {
+object ModuleEntry : BaseModuleInit() {
+    override val name: String = "模块入口"
+    override var enable: Boolean = true
+
+    override fun init() {
         findMethodByCondition("com.tencent.mobileqq.activity.QQSettingSettingActivity") {
             it.name == "doOnCreate"
         }.also { m ->

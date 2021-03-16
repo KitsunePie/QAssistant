@@ -5,7 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import com.qnotifiedx.app.HookInit
-import com.qnotifiedx.app.hook.base.moduleinit.LateinitHook
+import com.qnotifiedx.app.hook.moduleinit.GetApplication
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
 import java.lang.reflect.Method
@@ -26,7 +26,7 @@ val mClzLoader: ClassLoader by lazy {
 
 //宿主全局Context
 val appContext: Context?
-    get() = LateinitHook.application
+    get() = GetApplication.application
 
 /**
  * 将函数放到主线程执行 如UI更新、显示Toast等
