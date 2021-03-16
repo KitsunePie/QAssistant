@@ -15,7 +15,7 @@ enum class Process {
 
 object ProcessInfo {
     //当前的进程名称
-    val procName by lazy {
+    val currentProcName by lazy {
         HookInit.processName
     }
 
@@ -23,7 +23,7 @@ object ProcessInfo {
     val Process.isCurrentProc: Boolean
         get() = if (this == Process.PROC_ANY) true else this == currentProc
 
-    val currentProc: Process = when (procName) {
+    val currentProc: Process = when (currentProcName) {
         "${HOST_PACKAGE_NAME}:peak" -> Process.PROC_PEAK               //图片进程
         HOST_PACKAGE_NAME -> Process.PROC_MAIN                         //主进程
         "${HOST_PACKAGE_NAME}:MSF" -> Process.PROC_MSF                 //MSF
