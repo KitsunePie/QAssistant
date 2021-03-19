@@ -598,7 +598,7 @@ object ResInjector {
                                         try {
                                             val fExtras =
                                                 Intent::class.java.getFieldByClzOrObj("mExtras")
-                                            bundle = fExtras.get(wrapper) as Bundle
+                                            bundle = fExtras.get(wrapper) as Bundle?
                                         } catch (e: Exception) {
                                             Log.e(e)
                                         }
