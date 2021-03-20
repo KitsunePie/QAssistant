@@ -1,14 +1,18 @@
 package com.qnotifiedx.app.hook.moduleinit
 
 import android.app.Application
+import com.github.kyuubiran.ezxhelper.init.EzXHelperInit
+import com.github.kyuubiran.ezxhelper.utils.Log
+import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
+import com.github.kyuubiran.ezxhelper.utils.getStaticObjectOrNull
+import com.github.kyuubiran.ezxhelper.utils.loadClass
 import com.qnotifiedx.app.hook.base.BaseModuleInit
 import com.qnotifiedx.app.hook.base.BaseNormalHook
-import com.qnotifiedx.app.util.*
+import com.qnotifiedx.app.util.MMKVInit
+import com.qnotifiedx.app.util.hookAfter
 import com.qnotifiedx.core.resinjection.ResInjector
 
 object GetApplication : BaseModuleInit() {
-    var application: Application? = null
-        private set
     override val name: String = "获取Context"
     override var enable: Boolean = true
 
@@ -26,7 +30,7 @@ object GetApplication : BaseModuleInit() {
                         "sApplication",
                         cBaseApplicationImpl
                     ) as Application
-                application = context
+                EzXHelperInit.initAppContext(context)
                 //资源注入部分
                 ResInjector.initSubActivity()
                 ResInjector.injectRes()

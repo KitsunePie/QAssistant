@@ -1,5 +1,8 @@
 package com.qnotifiedx.app.util
 
+import com.github.kyuubiran.ezxhelper.utils.getFieldByClzOrObj
+import com.github.kyuubiran.ezxhelper.utils.loadClass
+
 /**
  * 用于寻找内部类/匿名函数持有的外部类的静态对象(this$0)所指向的类型
  */

@@ -1,12 +1,12 @@
 package com.qnotifiedx.app
 
+import com.github.kyuubiran.ezxhelper.init.EzXHelperInit
+import com.github.kyuubiran.ezxhelper.utils.Log
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 
 class HookInit : IXposedHookLoadPackage {
     companion object {
-        lateinit var clzLoader: ClassLoader
-            private set
         lateinit var processName: String
             private set
         lateinit var packageName: String
@@ -15,8 +15,9 @@ class HookInit : IXposedHookLoadPackage {
 
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
         if (lpparam.packageName == "com.tencent.mobileqq") {
+            EzXHelperInit.initHandleLoadPackage(lpparam)
+            EzXHelperInit.setLogTag("QNotifiedX")
             packageName = lpparam.packageName
-            clzLoader = lpparam.classLoader
             processName = lpparam.processName
             HookLoader.init
         }

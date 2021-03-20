@@ -1,6 +1,6 @@
 package com.qnotifiedx.app.hook.base
 
-import com.qnotifiedx.app.util.Log
+import com.github.kyuubiran.ezxhelper.utils.Log
 import com.qnotifiedx.core.processctrl.ProcessInfo.isCurrentProc
 
 /**

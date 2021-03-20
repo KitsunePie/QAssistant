@@ -1,9 +1,13 @@
 package com.qnotifiedx.app.hook.normal
 
 import android.view.View
+import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
+import com.github.kyuubiran.ezxhelper.utils.isStatic
 import com.qnotifiedx.annotations.NormalHookEntry
 import com.qnotifiedx.app.hook.base.BaseNormalHook
-import com.qnotifiedx.app.util.*
+import com.qnotifiedx.app.util.ClassPointer
+import com.qnotifiedx.app.util.clazz
+import com.qnotifiedx.app.util.hookBefore
 
 @NormalHookEntry
 object PreventQBossAdLoad : BaseNormalHook() {

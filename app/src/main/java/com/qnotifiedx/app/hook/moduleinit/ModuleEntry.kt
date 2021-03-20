@@ -5,10 +5,11 @@ import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.size
+import com.github.kyuubiran.ezxhelper.utils.*
 import com.qnotifiedx.app.BuildConfig
 import com.qnotifiedx.app.hook.base.BaseModuleInit
 import com.qnotifiedx.app.ui.module.activity.MainActivity
-import com.qnotifiedx.app.util.*
+import com.qnotifiedx.app.util.hookAfter
 
 object ModuleEntry : BaseModuleInit() {
     override val name: String = "模块入口"
@@ -24,7 +25,10 @@ object ModuleEntry : BaseModuleInit() {
                 val cFormSimpleItem = loadClass("com.tencent.mobileqq.widget.FormSimpleItem")
                 //获取所在的ViewGroup
                 val vg =
-                    (thisObject.getObjectOrNull("a", cFormSimpleItem) as View).parent as ViewGroup
+                    (thisObject.getObjectOrNull(
+                        "a",
+                        cFormSimpleItem
+                    ) as View).parent as ViewGroup
                 //创建入口View
                 val entry = cFormSimpleItem.newInstance(
                     arrayOf(thisObject as Context),

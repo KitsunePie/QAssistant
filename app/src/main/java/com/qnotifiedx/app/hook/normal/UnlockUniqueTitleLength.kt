@@ -1,9 +1,13 @@
 package com.qnotifiedx.app.hook.normal
 
 import android.widget.EditText
+import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
+import com.github.kyuubiran.ezxhelper.utils.getObjectOrNull
+import com.github.kyuubiran.ezxhelper.utils.putObject
 import com.qnotifiedx.annotations.NormalHookEntry
 import com.qnotifiedx.app.hook.base.BaseNormalHook
-import com.qnotifiedx.app.util.*
+import com.qnotifiedx.app.util.hookAfter
+import com.qnotifiedx.app.util.hookBefore
 
 @NormalHookEntry
 object UnlockUniqueTitleLength : BaseNormalHook() {

@@ -15,9 +15,11 @@ import android.os.*
 import android.view.KeyEvent
 import android.view.MotionEvent
 import androidx.annotation.RequiresApi
+import com.github.kyuubiran.ezxhelper.init.InitFields.appContext
+import com.github.kyuubiran.ezxhelper.utils.*
 import com.qnotifiedx.app.HookInit
 import com.qnotifiedx.app.R
-import com.qnotifiedx.app.util.*
+import com.qnotifiedx.app.util.Info
 import dalvik.system.BaseDexClassLoader
 import java.io.File
 import java.lang.reflect.*
@@ -32,7 +34,7 @@ object ResInjector {
      * @param res 注入目标
      * @throws RuntimeException 获取模块路径失败
      */
-    fun injectRes(res: Resources = appContext!!.resources) {
+    fun injectRes(res: Resources = appContext.resources) {
         try {
             //如果获取成功直接return
             res.getString(R.string.res_inject_success)
@@ -567,7 +569,7 @@ object ResInjector {
                         }
                         //设置
                         bundle?.let {
-                            it.classLoader = appContext!!.classLoader
+                            it.classLoader = appContext.classLoader
                             if (intent.hasExtra(ActivityProxyMgr.ACTIVITY_PROXY_INTENT)) {
                                 val rIntent =
                                     intent.getParcelableExtra<Intent>(ActivityProxyMgr.ACTIVITY_PROXY_INTENT)
@@ -604,7 +606,7 @@ object ResInjector {
                                         }
                                         //设置
                                         bundle?.let {
-                                            it.classLoader = appContext!!.classLoader
+                                            it.classLoader = appContext.classLoader
                                             if (wrapper.hasExtra(ActivityProxyMgr.ACTIVITY_PROXY_INTENT)) {
                                                 val rIntent =
                                                     wrapper.getParcelableExtra<Intent>(
@@ -644,12 +646,12 @@ object ResInjector {
                         val raw = it[index] as Intent
                         val component = raw.component
 
-                        if (appContext != null && component != null &&
-                            appContext?.packageName == component.packageName &&
+                        if (component != null &&
+                            appContext.packageName == component.packageName &&
                             component.className.startsWith(Info.MODULE_PACKAGE_NAME)
                         ) {
                             val wrapper = Intent()
-                            when (appContext?.packageName) {
+                            when (appContext.packageName) {
                                 "com.tencent.mobileqq" -> {
                                     wrapper.setClassName(
                                         component.packageName,

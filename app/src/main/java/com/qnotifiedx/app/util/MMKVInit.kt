@@ -1,6 +1,7 @@
 package com.qnotifiedx.app.util
 
 import android.annotation.SuppressLint
+import com.github.kyuubiran.ezxhelper.init.InitFields.appContext
 import com.tencent.mmkv.MMKV
 import java.io.File
 import java.io.IOException
@@ -9,8 +10,8 @@ object MMKVInit {
 
     @SuppressLint("UnsafeDynamicallyLoadedCode")
     fun init() {
-        val ctx = appContext!!
-        val mmkvDir = File(appContext?.filesDir, "qnx_mmkv")
+        val ctx = appContext
+        val mmkvDir = File(appContext.filesDir, "qnx_mmkv")
         if (!mmkvDir.exists()) {
             mmkvDir.mkdirs()
         } else if (mmkvDir.isFile) {

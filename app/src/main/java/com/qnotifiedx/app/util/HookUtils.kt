@@ -1,5 +1,6 @@
 package com.qnotifiedx.app.util
 
+import com.github.kyuubiran.ezxhelper.utils.Log
 import com.qnotifiedx.app.hook.base.BaseHook
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XC_MethodReplacement

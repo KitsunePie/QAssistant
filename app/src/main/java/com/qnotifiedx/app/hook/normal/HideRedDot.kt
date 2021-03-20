@@ -2,11 +2,11 @@ package com.qnotifiedx.app.hook.normal
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
+import com.github.kyuubiran.ezxhelper.utils.putObject
 import com.qnotifiedx.annotations.NormalHookEntry
 import com.qnotifiedx.app.hook.base.BaseNormalHook
-import com.qnotifiedx.app.util.findMethodByCondition
 import com.qnotifiedx.app.util.hookAfter
-import com.qnotifiedx.app.util.putObject
 
 @NormalHookEntry
 object HideRedDot : BaseNormalHook() {

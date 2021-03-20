@@ -1,10 +1,10 @@
 package com.qnotifiedx.app.hook.normal
 
+import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
+import com.github.kyuubiran.ezxhelper.utils.isPublic
 import com.qnotifiedx.annotations.NormalHookEntry
 import com.qnotifiedx.app.hook.base.BaseNormalHook
-import com.qnotifiedx.app.util.findMethodByCondition
 import com.qnotifiedx.app.util.hookBefore
-import com.qnotifiedx.app.util.isPublic
 
 @NormalHookEntry
 object PreventDiyCardLoad : BaseNormalHook() {
