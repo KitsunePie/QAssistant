@@ -2,6 +2,7 @@ package com.qnotifiedx.app.hook.base
 
 import com.github.kyuubiran.ezxhelper.utils.Log
 import com.qnotifiedx.core.processctrl.ProcessInfo.isCurrentProc
+import com.qnotifiedx.gen.DelayHooks
 
 /**
  * Delay Hooks
@@ -10,9 +11,7 @@ import com.qnotifiedx.core.processctrl.ProcessInfo.isCurrentProc
 abstract class BaseNormalHook : BaseHook() {
 
     companion object {
-        private val delayHooks =
-            com.qnotifiedx.gen.AnnotatedNormalItemList.getAnnotatedNormalItemClassList()
-                .toTypedArray()
+        private val delayHooks = DelayHooks.getAnnotatedItemClassList()
 
         fun initHooks() {
             for (h in delayHooks) {
