@@ -1,4 +1,4 @@
-package com.qnotifiedx.app.hook.normal
+package com.qnotifiedx.app.hook.normal.simplify
 
 import android.view.View
 import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition

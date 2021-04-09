@@ -1,4 +1,4 @@
-package com.qnotifiedx.app.hook.normal
+package com.qnotifiedx.app.hook.normal.simplify
 
 import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
 import com.github.kyuubiran.ezxhelper.utils.isPublic
