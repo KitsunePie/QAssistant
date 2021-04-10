@@ -15,15 +15,14 @@ abstract class BaseModuleInit : BaseHook() {
 
         fun initHooks() {
             for (h in initHooks) {
-                if (!h.inited) {
-                    try {
-                        if (HookInit.processName == HookInit.packageName) {
-                            h.init()
-                            h.inited = true
-                        }
-                    } catch (thr: Throwable) {
-                        Log.t(thr)
+                if (h.inited) continue
+                try {
+                    if (HookInit.processName == HookInit.packageName) {
+                        h.init()
+                        h.inited = true
                     }
+                } catch (thr: Throwable) {
+                    Log.t(thr)
                 }
             }
         }

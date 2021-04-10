@@ -1,4 +1,4 @@
-package com.qnotifiedx.app.hook.normal.other
+package com.qnotifiedx.app.hook.normal.function
 
 import android.widget.EditText
 import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
