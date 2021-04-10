@@ -12,6 +12,7 @@ import com.qnotifiedx.app.util.hookBefore
 @NormalHookEntry
 object PreventQBossAdLoad : BaseNormalHook() {
     override val name: String = "阻止主界面横幅广告加载"
+    override val desc: String = "还你一个干净的主界面"
 
     override fun init() {
         findMethodByCondition(ClassPointer.QbossADImmersionBannerManager.clazz!!) {

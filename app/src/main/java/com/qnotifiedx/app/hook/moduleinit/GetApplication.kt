@@ -31,12 +31,13 @@ object GetApplication : BaseModuleInit() {
                         "sApplication",
                         cBaseApplicationImpl
                     ) as Application
+                //初始化全局Context
                 EzXHelperInit.initAppContext(context)
-                //资源注入部分
+                //加载资源注入
                 ResInjector.initSubActivity()
                 ResInjector.injectRes()
                 MMKVInit.init()
-                //延迟Hook部分
+                //加载普通Hook
                 BaseNormalHook.initHooks()
                 inited = true
             }

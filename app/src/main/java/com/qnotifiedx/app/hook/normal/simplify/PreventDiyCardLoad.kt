@@ -9,6 +9,7 @@ import com.qnotifiedx.app.util.hookBefore
 @NormalHookEntry
 object PreventDiyCardLoad : BaseNormalHook() {
     override val name: String = "阻止DIY名片加载"
+    override val desc: String = "有效防止闪退名片、Zip炸弹的最佳手段"
 
     override fun init() {
         findMethodByCondition("com.tencent.mobileqq.profilecard.vas.VasProfileTemplateController") {
