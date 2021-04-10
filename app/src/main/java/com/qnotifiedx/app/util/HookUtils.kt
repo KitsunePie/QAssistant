@@ -8,7 +8,6 @@ import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.callbacks.XCallback
 import java.lang.reflect.Method
 
-
 /**
  * 扩展函数 hook方法
  * @param hookCallback XC_MethodHook
