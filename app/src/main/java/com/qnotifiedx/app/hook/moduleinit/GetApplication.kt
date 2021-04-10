@@ -11,6 +11,7 @@ import com.qnotifiedx.app.hook.base.BaseNormalHook
 import com.qnotifiedx.app.util.MMKVInit
 import com.qnotifiedx.app.util.hookAfter
 import com.qnotifiedx.core.resinjection.ResInjector
+import de.robv.android.xposed.callbacks.XCallback
 
 object GetApplication : BaseModuleInit() {
     override val name: String = "获取Context"
@@ -20,7 +21,7 @@ object GetApplication : BaseModuleInit() {
         findMethodByCondition("com.tencent.mobileqq.startup.step.LoadDex") {
             it.returnType == Boolean::class.java && it.parameterTypes.isEmpty()
         }.also { m ->
-            m.hookAfter(this, 100) {
+            m.hookAfter(this, XCallback.PRIORITY_HIGHEST) {
                 //加载QQ的基础Application
                 val cBaseApplicationImpl =
                     loadClass("com.tencent.common.app.BaseApplicationImpl")

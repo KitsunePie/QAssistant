@@ -10,6 +10,7 @@ import com.qnotifiedx.app.BuildConfig
 import com.qnotifiedx.app.hook.base.BaseModuleInit
 import com.qnotifiedx.app.ui.module.activity.MainActivity
 import com.qnotifiedx.app.util.hookAfter
+import de.robv.android.xposed.callbacks.XCallback
 
 object ModuleEntry : BaseModuleInit() {
     override val name: String = "模块入口"
@@ -19,7 +20,7 @@ object ModuleEntry : BaseModuleInit() {
         findMethodByCondition("com.tencent.mobileqq.activity.QQSettingSettingActivity") {
             it.name == "doOnCreate"
         }.also { m ->
-            m.hookAfter(this, 100) {
+            m.hookAfter(this, XCallback.PRIORITY_HIGHEST) {
                 val thisObject = it.thisObject
                 //加载QQ的设置物件类
                 val cFormSimpleItem = loadClass("com.tencent.mobileqq.widget.FormSimpleItem")
