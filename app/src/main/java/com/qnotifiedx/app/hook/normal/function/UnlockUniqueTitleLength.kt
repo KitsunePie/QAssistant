@@ -1,9 +1,13 @@
-package com.qnotifiedx.app.hook.normal
+package com.qnotifiedx.app.hook.normal.function
 
 import android.widget.EditText
+import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
+import com.github.kyuubiran.ezxhelper.utils.getObjectOrNull
+import com.github.kyuubiran.ezxhelper.utils.putObject
 import com.qnotifiedx.annotations.NormalHookEntry
 import com.qnotifiedx.app.hook.base.BaseNormalHook
-import com.qnotifiedx.app.util.*
+import com.qnotifiedx.app.util.hookAfter
+import com.qnotifiedx.app.util.hookBefore
 
 @NormalHookEntry
 object UnlockUniqueTitleLength : BaseNormalHook() {
@@ -15,8 +19,7 @@ object UnlockUniqueTitleLength : BaseNormalHook() {
         findMethodByCondition("com.tencent.biz.troop.EditUniqueTitleActivity") {
             it.name == "doOnCreate"
         }.also { m ->
-            m.hookAfter {
-                if (!enable) return@hookAfter
+            m.hookAfter(this) {
                 val et = it.thisObject.getObjectOrNull("a", EditText::class.java) as EditText
                 et.filters = arrayOf()
                 it.thisObject.putObject("a", Int.MAX_VALUE, Int::class.java)
@@ -26,8 +29,7 @@ object UnlockUniqueTitleLength : BaseNormalHook() {
         findMethodByCondition("com.tencent.biz.troop.EditUniqueTitleActivity") {
             it.name == "a" && it.parameterTypes.size == 2 && it.parameterTypes[1] == Int::class.java
         }.also { m ->
-            m.hookBefore {
-                if (!enable) return@hookBefore
+            m.hookBefore(this) {
                 it.args[1] = true
             }
         }

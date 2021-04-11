@@ -1,13 +1,12 @@
-package com.qnotifiedx.app.hook.normal
+package com.qnotifiedx.app.hook.normal.simplify
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
+import com.github.kyuubiran.ezxhelper.utils.putObject
 import com.qnotifiedx.annotations.NormalHookEntry
 import com.qnotifiedx.app.hook.base.BaseNormalHook
-import com.qnotifiedx.app.util.findMethodByCondition
 import com.qnotifiedx.app.util.hookAfter
-import com.qnotifiedx.app.util.putObject
-import com.qnotifiedx.core.processctrl.Process
 
 @NormalHookEntry
 object HideRedDot : BaseNormalHook() {
@@ -38,8 +37,7 @@ object HideRedDot : BaseNormalHook() {
         findMethodByCondition("com.tencent.theme.ResourcesFactory") {
             (it.name == "createImageFromResourceStream" || it.name == "a") && it.parameterTypes.size == 7
         }.also { m ->
-            m.hookAfter {
-                if (!enable) return@hookAfter
+            m.hookAfter(this) {
                 if (!it.args[3].toString().contains("skin_tips_dot")) return@hookAfter
                 it.result.putObject(
                     "a",

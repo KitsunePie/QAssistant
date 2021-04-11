@@ -2,6 +2,7 @@ package com.qnotifiedx.app.util
 
 import android.content.pm.PackageInfo
 import android.os.Build
+import com.github.kyuubiran.ezxhelper.init.InitFields.appContext
 import com.qnotifiedx.app.BuildConfig
 import com.qnotifiedx.app.HookInit
 
@@ -24,6 +25,6 @@ object Info {
     val HOST_VERSION_NAME: String? = getHostPackageInfo()?.versionName
 
     private fun getHostPackageInfo(): PackageInfo? {
-        return HOST_PACKAGE_NAME.let { appContext?.packageManager?.getPackageInfo(it, 0) }
+        return HOST_PACKAGE_NAME.let { appContext.packageManager?.getPackageInfo(it, 0) }
     }
 }
