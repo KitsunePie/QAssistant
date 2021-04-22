@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QNotifiedX">
         <activity
-            android:name=".ui.launch.acitivy.LaunchActivity"
+            android:name="com.kitsunepie.qnotifiedx.app.ui.launch.activity.LaunchActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.QNotifiedX.NoActionBar">
             <intent-filter>
