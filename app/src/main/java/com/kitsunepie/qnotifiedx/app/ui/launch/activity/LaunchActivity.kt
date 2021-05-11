@@ -2,8 +2,9 @@ package com.kitsunepie.qnotifiedx.app.ui.launch.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.qnotifiedx.app.R
-import com.qnotifiedx.app.databinding.ActivityMainBinding
+import com.kitsunepie.qnotifiedx.R
+import com.kitsunepie.qnotifiedx.databinding.ActivityMainBinding
+
 
 class LaunchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

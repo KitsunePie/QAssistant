@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.qnotifiedx.app">
+    package="com.kitsunepie.qnotifiedx">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QNotifiedX">
         <activity
-            android:name="com.kitsunepie.qnotifiedx.app.ui.launch.activity.LaunchActivity"
+            android:name=".app.ui.launch.activity.LaunchActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.QNotifiedX.NoActionBar">
             <intent-filter>

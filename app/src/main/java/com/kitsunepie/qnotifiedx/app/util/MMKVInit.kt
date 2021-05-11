@@ -19,7 +19,7 @@ object MMKVInit {
             mmkvDir.mkdirs()
         }
         Natives.extractNativeLibrary(ctx, "mmkv")
-        MMKV.initialize(mmkvDir.absolutePath) { s ->
+        MMKV.initialize(ctx, mmkvDir.absolutePath) { s ->
             try {
                 System.load(Natives.extractNativeLibrary(ctx, s).absolutePath)
             } catch (e: IOException) {

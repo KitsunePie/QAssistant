@@ -2,7 +2,7 @@ package com.kitsunepie.qnotifiedx.app.util
 
 import android.content.Context
 import android.os.Build
-import com.qnotifiedx.app.BuildConfig
+import com.kitsunepie.qnotifiedx.BuildConfig
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException

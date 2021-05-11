@@ -1,8 +1,8 @@
 package com.kitsunepie.qnotifiedx.app.ui.module.activity
 
 import android.os.Bundle
+import com.kitsunepie.qnotifiedx.R
 import com.kitsunepie.qnotifiedx.core.resinjection.transferactivity.AppCompatTransferActivity
-import com.qnotifiedx.app.R
 
 class MainActivity : AppCompatTransferActivity() {
 
