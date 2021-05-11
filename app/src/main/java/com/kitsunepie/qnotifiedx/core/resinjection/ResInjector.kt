@@ -17,9 +17,9 @@ import android.view.MotionEvent
 import androidx.annotation.RequiresApi
 import com.github.kyuubiran.ezxhelper.init.InitFields.appContext
 import com.github.kyuubiran.ezxhelper.utils.*
+import com.kitsunepie.qnotifiedx.R
 import com.kitsunepie.qnotifiedx.app.HookInit
 import com.kitsunepie.qnotifiedx.app.util.Info
-import com.qnotifiedx.app.R
 import dalvik.system.BaseDexClassLoader
 import java.io.File
 import java.lang.reflect.*

@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.size
 import com.github.kyuubiran.ezxhelper.utils.*
+import com.kitsunepie.qnotifiedx.BuildConfig
 import com.kitsunepie.qnotifiedx.app.hook.base.BaseModuleInit
 import com.kitsunepie.qnotifiedx.app.ui.module.activity.MainActivity
 import com.kitsunepie.qnotifiedx.app.util.hookAfter
-import com.qnotifiedx.app.BuildConfig
 import de.robv.android.xposed.callbacks.XCallback
 
 object ModuleEntry : BaseModuleInit() {

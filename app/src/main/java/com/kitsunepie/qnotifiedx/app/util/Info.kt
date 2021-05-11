@@ -3,8 +3,9 @@ package com.kitsunepie.qnotifiedx.app.util
 import android.content.pm.PackageInfo
 import android.os.Build
 import com.github.kyuubiran.ezxhelper.init.InitFields.appContext
+import com.kitsunepie.qnotifiedx.BuildConfig
 import com.kitsunepie.qnotifiedx.app.HookInit
-import com.qnotifiedx.app.BuildConfig
+
 
 /**
  * 包含了模块版本号信息以及宿主版本号信息

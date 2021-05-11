@@ -2,7 +2,7 @@ package com.kitsunepie.qnotifiedx.app.ui.common.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.qnotifiedx.app.R
+import com.kitsunepie.qnotifiedx.R
 
 class CommonActivity : AppCompatActivity() {
 
