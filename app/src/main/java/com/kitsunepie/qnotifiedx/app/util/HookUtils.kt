@@ -30,7 +30,7 @@ fun Method.hookBefore(
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun beforeHookedMethod(param: MethodHookParam) {
             try {
-                if (!baseHook.enable) return
+                if (!baseHook.isEnabled) return
                 hook(param)
             } catch (thr: Throwable) {
                 Log.t(thr)
@@ -53,7 +53,7 @@ fun Method.hookAfter(
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun afterHookedMethod(param: MethodHookParam) {
             try {
-                if (!baseHook.enable) return
+                if (!baseHook.isEnabled) return
                 hook(param)
             } catch (thr: Throwable) {
                 Log.t(thr)
@@ -76,7 +76,7 @@ fun Method.replaceHook(
     this.hookMethod(object : XC_MethodReplacement(priority) {
         override fun replaceHookedMethod(param: MethodHookParam): Any {
             return try {
-                if (!baseHook.enable) return XposedBridge.invokeOriginalMethod(
+                if (!baseHook.isEnabled) return XposedBridge.invokeOriginalMethod(
                     param.method,
                     param.thisObject,
                     param.args

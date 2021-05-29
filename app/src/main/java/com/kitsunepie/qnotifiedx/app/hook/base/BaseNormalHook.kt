@@ -15,12 +15,12 @@ abstract class BaseNormalHook : BaseHook() {
 
         fun initHooks() {
             for (h in delayHooks) {
-                if (h.inited) continue
+                if (h.isInited) continue
                 for (proc in h.targetProc) {
                     if (!proc.isCurrentProc) continue
                     try {
                         h.init()
-                        h.inited = true
+                        h.isInited = true
                         Log.i("Initialized delay hook: ${h.javaClass.name}")
                     } catch (e: Exception) {
                         Log.i("Initialization failure delay hook: ${h.javaClass.name}")

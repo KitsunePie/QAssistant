@@ -14,7 +14,7 @@ import de.robv.android.xposed.callbacks.XCallback
 
 object GetApplication : BaseModuleInit() {
     override val name: String = "获取Context"
-    override var enable: Boolean = true
+    override var isEnabled: Boolean = true
 
     override fun init() {
         findMethodByCondition("com.tencent.mobileqq.startup.step.LoadDex") {
@@ -38,7 +38,7 @@ object GetApplication : BaseModuleInit() {
                 MMKVInit.init()
                 //加载普通Hook
                 BaseNormalHook.initHooks()
-                inited = true
+                isInited = true
             }
         }
     }

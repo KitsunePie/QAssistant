@@ -14,7 +14,7 @@ import de.robv.android.xposed.callbacks.XCallback
 
 object ModuleEntry : BaseModuleInit() {
     override val name: String = "模块入口"
-    override var enable: Boolean = true
+    override var isEnabled: Boolean = true
 
     override fun init() {
         findMethodByCondition("com.tencent.mobileqq.activity.QQSettingSettingActivity") {
