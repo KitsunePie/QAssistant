@@ -26,15 +26,15 @@ object ModuleEntry : BaseModuleInit() {
                 val cFormSimpleItem = loadClass("com.tencent.mobileqq.widget.FormSimpleItem")
                 //获取所在的ViewGroup
                 val vg =
-                    (thisObject.getObjectOrNull(
+                    thisObject.getObjectAs<View>(
                         "a",
                         cFormSimpleItem
-                    ) as View).parent as ViewGroup
+                    ).parent as ViewGroup
                 //创建入口View
-                val entry = cFormSimpleItem.newInstance(
+                val entry = cFormSimpleItem.newInstanceAs<View>(
                     arrayOf(thisObject as Context),
                     arrayOf(Context::class.java)
-                ) as View
+                )!!
                 //设置入口属性
                 entry.apply {
                     invokeMethod(

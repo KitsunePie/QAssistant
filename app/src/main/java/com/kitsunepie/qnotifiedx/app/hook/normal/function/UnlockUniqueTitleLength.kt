@@ -2,7 +2,7 @@ package com.kitsunepie.qnotifiedx.app.hook.normal.function
 
 import android.widget.EditText
 import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
-import com.github.kyuubiran.ezxhelper.utils.getObjectOrNull
+import com.github.kyuubiran.ezxhelper.utils.getObjectAs
 import com.github.kyuubiran.ezxhelper.utils.putObject
 import com.kitsunepie.qnotifiedx.annotations.NormalHookEntry
 import com.kitsunepie.qnotifiedx.app.hook.base.BaseNormalHook
@@ -20,8 +20,8 @@ object UnlockUniqueTitleLength : BaseNormalHook() {
             it.name == "doOnCreate"
         }.also { m ->
             m.hookAfter(this) {
-                val et = it.thisObject.getObjectOrNull("a", EditText::class.java) as EditText
-                et.filters = arrayOf()
+                val et = it.thisObject.getObjectAs<EditText>("a", EditText::class.java)
+                et.filters = emptyArray()
                 it.thisObject.putObject("a", Int.MAX_VALUE, Int::class.java)
             }
         }

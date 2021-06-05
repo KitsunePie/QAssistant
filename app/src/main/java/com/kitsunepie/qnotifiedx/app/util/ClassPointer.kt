@@ -1,6 +1,6 @@
 package com.kitsunepie.qnotifiedx.app.util
 
-import com.github.kyuubiran.ezxhelper.utils.getFieldByClzOrObj
+import com.github.kyuubiran.ezxhelper.utils.getFieldByClassOrObject
 import com.github.kyuubiran.ezxhelper.utils.loadClass
 
 /**
@@ -45,7 +45,7 @@ val ClassPointer.clazz: Class<*>?
                 }
             }
             if (clz == null) return null
-            clz.getFieldByClzOrObj("this$0").type
+            clz.getFieldByClassOrObject("this$0").type
         } catch (e: Exception) {
             null
         }

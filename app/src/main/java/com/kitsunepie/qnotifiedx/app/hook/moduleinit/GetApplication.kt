@@ -3,7 +3,7 @@ package com.kitsunepie.qnotifiedx.app.hook.moduleinit
 import android.app.Application
 import com.github.kyuubiran.ezxhelper.init.EzXHelperInit
 import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
-import com.github.kyuubiran.ezxhelper.utils.getStaticObjectOrNull
+import com.github.kyuubiran.ezxhelper.utils.getStaticObjectAs
 import com.github.kyuubiran.ezxhelper.utils.loadClass
 import com.kitsunepie.qnotifiedx.app.hook.base.BaseModuleInit
 import com.kitsunepie.qnotifiedx.app.hook.base.BaseNormalHook
@@ -26,10 +26,10 @@ object GetApplication : BaseModuleInit() {
                     loadClass("com.tencent.common.app.BaseApplicationImpl")
                 //获取Context
                 val context =
-                    cBaseApplicationImpl.getStaticObjectOrNull(
+                    cBaseApplicationImpl.getStaticObjectAs<Application>(
                         "sApplication",
                         cBaseApplicationImpl
-                    ) as Application
+                    )
                 //初始化全局Context
                 EzXHelperInit.initAppContext(context)
                 //加载资源注入
