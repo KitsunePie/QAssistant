@@ -47,16 +47,16 @@ object ResInjector {
             var modulePath = ""
             val clzLoader =
                 HookInit::class.java.classLoader as BaseDexClassLoader
-            val pathList = clzLoader.getObjectOrNull("pathList")
-            val dexElements = pathList!!.getObjectOrNull("dexElements") as Array<*>
+            val pathList = clzLoader.getObject("pathList")
+            val dexElements = pathList.getObjectAs<Array<*>>("dexElements")
             //获取路径
             for (elem in dexElements) {
                 elem?.let {
-                    var file = it.getObjectOrNull("path") as File?
+                    var file = it.getObjectOrNullAs<File>("path")
                     if (file == null || file.isDirectory)
-                        file = it.getObjectOrNull("zip") as File?
+                        file = it.getObjectOrNullAs<File>("zip") as File?
                     if (file == null || file.isDirectory)
-                        file = it.getObjectOrNull("file") as File?
+                        file = it.getObjectOrNullAs<File>("file") as File?
                     if (file != null && !file.isDirectory) {
                         if (modulePath.isEmpty() || !modulePath.contains(Info.MODULE_PACKAGE_NAME)) {
                             modulePath = file.path
