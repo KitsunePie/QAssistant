@@ -1,7 +1,7 @@
 package com.kitsunepie.qnotifiedx.app
 
 import com.github.kyuubiran.ezxhelper.utils.Log
-import com.kitsunepie.qnotifiedx.app.hook.base.BaseModuleInit
+import com.kitsunepie.qnotifiedx.app.hook.base.BaseModuleInitHook
 
 object HookLoader {
     val init: Unit by lazy {
@@ -10,9 +10,9 @@ object HookLoader {
 
     private fun doInit() {
         try {
-            //加载普通hooks
+            //加载模块初始化hooks
             Log.i("Do init")
-            BaseModuleInit.initHooks()
+            BaseModuleInitHook.initHooks()
             Log.i("Module first initialization successful.")
         } catch (e: Exception) {
             Log.e(e)

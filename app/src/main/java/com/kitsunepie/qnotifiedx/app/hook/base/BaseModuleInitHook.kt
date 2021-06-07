@@ -8,10 +8,13 @@ import com.kitsunepie.qnotifiedx.app.hook.moduleinit.ModuleEntry
 /**
  * 模块初始化相关的Hook
  */
-abstract class BaseModuleInit : BaseHook() {
+abstract class BaseModuleInitHook : BaseHook() {
 
     companion object {
-        private val initHooks = arrayOf(GetApplication, ModuleEntry)
+        private val initHooks = arrayOf(
+            GetApplication,
+            ModuleEntry
+        )
 
         fun initHooks() {
             for (h in initHooks) {

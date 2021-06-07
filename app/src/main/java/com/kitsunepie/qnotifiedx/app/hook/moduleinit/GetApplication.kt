@@ -5,13 +5,13 @@ import com.github.kyuubiran.ezxhelper.init.EzXHelperInit
 import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
 import com.github.kyuubiran.ezxhelper.utils.getStaticObjectAs
 import com.github.kyuubiran.ezxhelper.utils.loadClass
-import com.kitsunepie.qnotifiedx.app.hook.base.BaseModuleInit
+import com.kitsunepie.qnotifiedx.app.hook.base.BaseModuleInitHook
 import com.kitsunepie.qnotifiedx.app.hook.base.BaseNormalHook
 import com.kitsunepie.qnotifiedx.app.util.MMKVInit
 import com.kitsunepie.qnotifiedx.app.util.hookAfter
 import de.robv.android.xposed.callbacks.XCallback
 
-object GetApplication : BaseModuleInit() {
+object GetApplication : BaseModuleInitHook() {
     override val name: String = "获取Context"
     override var isEnabled: Boolean = true
 
