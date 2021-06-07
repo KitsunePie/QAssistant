@@ -9,7 +9,6 @@ import com.kitsunepie.qnotifiedx.app.hook.base.BaseModuleInit
 import com.kitsunepie.qnotifiedx.app.hook.base.BaseNormalHook
 import com.kitsunepie.qnotifiedx.app.util.MMKVInit
 import com.kitsunepie.qnotifiedx.app.util.hookAfter
-import com.kitsunepie.qnotifiedx.core.resinjection.ResInjector
 import de.robv.android.xposed.callbacks.XCallback
 
 object GetApplication : BaseModuleInit() {
@@ -32,9 +31,6 @@ object GetApplication : BaseModuleInit() {
                     )
                 //初始化全局Context
                 EzXHelperInit.initAppContext(context)
-                //加载资源注入
-                ResInjector.initSubActivity()
-                ResInjector.injectRes()
                 MMKVInit.init()
                 //加载普通Hook
                 BaseNormalHook.initHooks()

@@ -1,14 +1,12 @@
 package com.kitsunepie.qnotifiedx.app.hook.moduleinit
 
 import android.content.Context
-import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.size
 import com.github.kyuubiran.ezxhelper.utils.*
 import com.kitsunepie.qnotifiedx.BuildConfig
 import com.kitsunepie.qnotifiedx.app.hook.base.BaseModuleInit
-import com.kitsunepie.qnotifiedx.app.ui.module.activity.MainActivity
 import com.kitsunepie.qnotifiedx.app.util.hookAfter
 import de.robv.android.xposed.callbacks.XCallback
 
@@ -51,15 +49,7 @@ object ModuleEntry : BaseModuleInit() {
                         context?.showToast("还没有准备好哦~")
                     }
                     setOnLongClickListener {
-                        context?.showToast("好吧 这是你要看的")
-                        try {
-                            val intent = Intent(context, MainActivity::class.java)
-                            context.startActivity(intent)
-                            true
-                        } catch (e: Exception) {
-                            Log.e(e)
-                            throw e
-                        }
+                        true
                     }
                 }
                 //添加入口
