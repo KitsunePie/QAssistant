@@ -6,13 +6,13 @@ import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XC_MethodReplacement
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.callbacks.XCallback
-import java.lang.reflect.Method
+import java.lang.reflect.Member
 
 /**
  * 扩展函数 hook方法
  * @param hookCallback XC_MethodHook
  */
-fun Method.hookMethod(hookCallback: XC_MethodHook) {
+fun Member.hookMethod(hookCallback: XC_MethodHook) {
     XposedBridge.hookMethod(this, hookCallback)
 }
 
@@ -22,7 +22,7 @@ fun Method.hookMethod(hookCallback: XC_MethodHook) {
  * @param priority 优先级 默认50
  * @param hook hook具体实现
  */
-fun Method.hookBefore(
+fun Member.hookBefore(
     baseHook: BaseHook,
     priority: Int = XCallback.PRIORITY_DEFAULT,
     hook: (XC_MethodHook.MethodHookParam) -> Unit
@@ -45,7 +45,7 @@ fun Method.hookBefore(
  * @param priority 优先级 默认50
  * @param hook hook具体实现
  */
-fun Method.hookAfter(
+fun Member.hookAfter(
     baseHook: BaseHook,
     priority: Int = XCallback.PRIORITY_DEFAULT,
     hook: (XC_MethodHook.MethodHookParam) -> Unit
@@ -68,7 +68,7 @@ fun Method.hookAfter(
  * @param priority 优先级 默认50
  * @param hook hook具体实现
  */
-fun Method.replaceHook(
+fun Member.replaceHook(
     baseHook: BaseHook,
     priority: Int = XCallback.PRIORITY_DEFAULT,
     hook: (XC_MethodHook.MethodHookParam) -> Any
