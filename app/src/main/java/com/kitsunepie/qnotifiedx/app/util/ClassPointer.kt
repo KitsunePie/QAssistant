@@ -1,6 +1,5 @@
 package com.kitsunepie.qnotifiedx.app.util
 
-import com.github.kyuubiran.ezxhelper.utils.Log
 import com.github.kyuubiran.ezxhelper.utils.getFieldByClassOrObject
 import com.github.kyuubiran.ezxhelper.utils.loadClass
 
@@ -31,18 +30,14 @@ val ClassPointer.clzIndex: Array<Int>
 val ClassPointer.clazz: Class<*>?
     get() {
         try {
+            return loadClass(this.clzName)
+        } catch (ignored: Throwable) {
+        }
+        this.clzIndex.forEach { idx ->
             try {
-                return loadClass(this.clzName)
+                return loadClass("${this.clzName}$${idx}").getFieldByClassOrObject("this$0").type
             } catch (ignored: Throwable) {
             }
-            this.clzIndex.forEach { idx ->
-                try {
-                    return loadClass("${this.clzName}$${idx}").getFieldByClassOrObject("this$0").type
-                } catch (ignored: Throwable) {
-                }
-            }
-        } catch (e: Exception) {
-            Log.e(e)
         }
         return null
     }
