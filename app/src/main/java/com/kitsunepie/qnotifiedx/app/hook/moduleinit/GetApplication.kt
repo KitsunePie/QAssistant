@@ -15,7 +15,7 @@ import com.kitsunepie.qnotifiedx.app.util.hookAfter
 import de.robv.android.xposed.callbacks.XCallback
 
 object GetApplication : BaseModuleInitHook() {
-    override val name: String = "获取Context"
+    override val name: String = "获取全局Context"
     override var isEnabled: Boolean = true
 
     override fun init() {
@@ -23,16 +23,15 @@ object GetApplication : BaseModuleInitHook() {
             it.returnType == Boolean::class.java && it.parameterTypes.isEmpty()
         }.also { m ->
             m.hookAfter(this, XCallback.PRIORITY_HIGHEST) {
-                //加载QQ的基础Application
+                //获取全局Context
                 val cBaseApplicationImpl =
                     loadClass("com.tencent.common.app.BaseApplicationImpl")
-                //获取Context
                 val context =
                     cBaseApplicationImpl.getStaticObjectAs<Application>(
                         "sApplication",
                         cBaseApplicationImpl
                     )
-                //初始化全局Context
+                //设置全局Context
                 EzXHelperInit.initAppContext(context)
                 //注入资源
                 EzXHelperInit.initResources()
