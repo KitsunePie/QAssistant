@@ -2,7 +2,6 @@ package com.kitsunepie.qnotifiedx.app.hook.normal.simplify
 
 import android.view.View
 import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
-import com.github.kyuubiran.ezxhelper.utils.isStatic
 import com.kitsunepie.qnotifiedx.annotations.NormalHookEntry
 import com.kitsunepie.qnotifiedx.app.hook.base.BaseNormalHook
 import com.kitsunepie.qnotifiedx.app.util.ClassPointer
@@ -16,7 +15,7 @@ object PreventQBossAdLoad : BaseNormalHook() {
 
     override fun init() {
         findMethodByCondition(ClassPointer.QbossADImmersionBannerManager.clazz!!) {
-            it.returnType == View::class.java && it.parameterTypes.isEmpty() && !it.isStatic
+            it.returnType == View::class.java && it.parameterTypes.isEmpty()
         }.also { m ->
             m.hookBefore(this) {
                 it.result = null
