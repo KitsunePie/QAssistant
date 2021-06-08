@@ -2,9 +2,12 @@ package com.kitsunepie.qnotifiedx.app.hook.moduleinit
 
 import android.app.Application
 import com.github.kyuubiran.ezxhelper.init.EzXHelperInit
+import com.github.kyuubiran.ezxhelper.init.InitFields.appContext
+import com.github.kyuubiran.ezxhelper.utils.Log
 import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
 import com.github.kyuubiran.ezxhelper.utils.getStaticObjectAs
 import com.github.kyuubiran.ezxhelper.utils.loadClass
+import com.kitsunepie.qnotifiedx.R
 import com.kitsunepie.qnotifiedx.app.hook.base.BaseModuleInitHook
 import com.kitsunepie.qnotifiedx.app.hook.base.BaseNormalHook
 import com.kitsunepie.qnotifiedx.app.util.MMKVInit
@@ -31,6 +34,9 @@ object GetApplication : BaseModuleInitHook() {
                     )
                 //初始化全局Context
                 EzXHelperInit.initAppContext(context)
+                //注入资源
+                EzXHelperInit.initResources()
+                Log.toast(appContext.resources.getString(R.string.load_successful))
                 MMKVInit.init()
                 //加载普通Hook
                 BaseNormalHook.initHooks()

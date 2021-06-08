@@ -16,7 +16,7 @@ object PreventQBossAdLoad : BaseNormalHook() {
 
     override fun init() {
         findMethodByCondition(ClassPointer.QbossADImmersionBannerManager.clazz!!) {
-            it.returnType == View::class.java && it.parameterTypes.isEmpty() && it.isStatic
+            it.returnType == View::class.java && it.parameterTypes.isEmpty() && !it.isStatic
         }.also { m ->
             m.hookBefore(this) {
                 it.result = null

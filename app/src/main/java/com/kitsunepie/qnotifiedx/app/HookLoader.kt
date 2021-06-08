@@ -11,9 +11,7 @@ object HookLoader {
     private fun doInit() {
         try {
             //加载模块初始化hooks
-            Log.i("Do init")
             BaseModuleInitHook.initHooks()
-            Log.i("Module first initialization successful.")
         } catch (e: Exception) {
             Log.e(e)
         }

@@ -18,14 +18,13 @@ abstract class BaseModuleInitHook : BaseHook() {
 
         fun initHooks() {
             for (h in initHooks) {
-                if (h.isInited) continue
+                if (h.isInited || HookInit.processName != HookInit.packageName) continue
                 try {
-                    if (HookInit.processName == HookInit.packageName) {
-                        h.init()
-                        h.isInited = true
-                    }
+                    h.init()
+                    h.isInited = true
+                    Log.i("Initialized init hook: ${h.javaClass.name}")
                 } catch (thr: Throwable) {
-                    Log.t(thr)
+                    Log.t(thr, "Initialization failure init hook: ${h.javaClass.name}")
                 }
             }
         }

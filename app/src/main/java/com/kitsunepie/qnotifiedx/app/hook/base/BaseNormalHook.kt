@@ -11,19 +11,19 @@ import com.kitsunepie.qnotifiedx.gen.DelayHooks
 abstract class BaseNormalHook : BaseHook() {
 
     companion object {
-        private val delayHooks = DelayHooks.getAnnotatedItemClassList()
+        private val normalHooks = DelayHooks.getAnnotatedItemClassList()
 
         fun initHooks() {
-            for (h in delayHooks) {
+            for (h in normalHooks) {
                 if (h.isInited) continue
                 for (proc in h.targetProc) {
                     if (!proc.isCurrentProc) continue
                     try {
                         h.init()
                         h.isInited = true
-                        Log.i("Initialized delay hook: ${h.javaClass.name}")
-                    } catch (e: Exception) {
-                        Log.i("Initialization failure delay hook: ${h.javaClass.name}")
+                        Log.i("Initialized normal hook: ${h.javaClass.name}")
+                    } catch (thr: Throwable) {
+                        Log.t(thr, "Initialization failure normal hook: ${h.javaClass.name}")
                     }
                 }
             }

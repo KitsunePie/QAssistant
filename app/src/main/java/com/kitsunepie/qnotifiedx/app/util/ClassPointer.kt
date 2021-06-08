@@ -30,22 +30,20 @@ val ClassPointer.clzIndex: Array<Int>
 val ClassPointer.clazz: Class<*>?
     get() {
         return try {
-            var clz: Class<*>? = null
-            try {
-                clz = loadClass(this.clzName)
-            } catch (ignored: Exception) {
+            var clz: Class<*>? = try {
+                loadClass(this.clzName)
+            } catch (ignored: Throwable) {
+                null
             }
-            if (clz == null) {
-                for (i in this.clzIndex) {
-                    try {
-                        clz = loadClass("${this.clzName}\$${this.clzIndex}")
-                    } catch (ignored: Exception) {
-                    }
-                    if (clz != null) break
+            if (clz != null) return clz
+            this.clzIndex.forEach { idx ->
+                clz = try {
+                    return loadClass("${this.clzName}$${idx}").getFieldByClassOrObject("this$0").type
+                } catch (ignored: Throwable) {
+                    null
                 }
             }
-            if (clz == null) return null
-            clz.getFieldByClassOrObject("this$0").type
+            null
         } catch (e: Exception) {
             null
         }
