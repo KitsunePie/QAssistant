@@ -11,7 +11,7 @@
         android:theme="@style/Theme.QNotifiedX">
         <activity
             android:name=".app.ui.launch.activity.LaunchActivity"
-            android:label="@string/title_activity_main"
+            android:label="@string/app_name"
             android:theme="@style/Theme.QNotifiedX.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
