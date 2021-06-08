@@ -17,8 +17,8 @@ object PreventQBossAdLoad : BaseNormalHook() {
         findMethodByCondition(ClassPointer.QbossADImmersionBannerManager.clazz!!) {
             it.returnType == View::class.java && it.parameterTypes.isEmpty()
         }.also { m ->
-            m.hookBefore(this) {
-                it.result = null
+            m.hookBefore(this) { param ->
+                param.result = null
             }
         }
     }

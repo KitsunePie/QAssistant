@@ -19,18 +19,18 @@ object UnlockUniqueTitleLength : BaseNormalHook() {
         findMethodByCondition("com.tencent.biz.troop.EditUniqueTitleActivity") {
             it.name == "doOnCreate"
         }.also { m ->
-            m.hookAfter(this) {
-                val et = it.thisObject.getObjectAs<EditText>("a", EditText::class.java)
+            m.hookAfter(this) { param ->
+                val et = param.thisObject.getObjectAs<EditText>("a", EditText::class.java)
                 et.filters = emptyArray()
-                it.thisObject.putObject("a", Int.MAX_VALUE, Int::class.java)
+                param.thisObject.putObject("a", Int.MAX_VALUE, Int::class.java)
             }
         }
         //完成按钮
         findMethodByCondition("com.tencent.biz.troop.EditUniqueTitleActivity") {
             it.name == "a" && it.parameterTypes.size == 2 && it.parameterTypes[1] == Int::class.java
         }.also { m ->
-            m.hookBefore(this) {
-                it.args[1] = true
+            m.hookBefore(this) { param ->
+                param.args[1] = true
             }
         }
     }

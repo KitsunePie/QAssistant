@@ -15,8 +15,8 @@ object PreventDiyCardLoad : BaseNormalHook() {
         findMethodByCondition("com.tencent.mobileqq.profilecard.vas.VasProfileTemplateController") {
             it.name == "a" && it.parameterTypes.size == 2 && it.parameterTypes[1] == Int::class.java && it.isPublic
         }.also { m ->
-            m.hookBefore(this) {
-                it.result = null
+            m.hookBefore(this) { param ->
+                param.result = null
             }
         }
     }

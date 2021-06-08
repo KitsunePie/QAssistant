@@ -30,7 +30,7 @@ fun Constructor<*>.hookMethod(hookCallback: XC_MethodHook) {
 fun Method.hookBefore(
     baseHook: BaseHook,
     priority: Int = XCallback.PRIORITY_DEFAULT,
-    hook: (XC_MethodHook.MethodHookParam) -> Unit
+    hook: (param: XC_MethodHook.MethodHookParam) -> Unit
 ) {
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun beforeHookedMethod(param: MethodHookParam) {
@@ -47,7 +47,7 @@ fun Method.hookBefore(
 fun Constructor<*>.hookBefore(
     baseHook: BaseHook,
     priority: Int = XCallback.PRIORITY_DEFAULT,
-    hook: (XC_MethodHook.MethodHookParam) -> Unit
+    hook: (param: XC_MethodHook.MethodHookParam) -> Unit
 ) {
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun beforeHookedMethod(param: MethodHookParam) {
@@ -70,7 +70,7 @@ fun Constructor<*>.hookBefore(
 fun Method.hookAfter(
     baseHook: BaseHook,
     priority: Int = XCallback.PRIORITY_DEFAULT,
-    hook: (XC_MethodHook.MethodHookParam) -> Unit
+    hook: (param: XC_MethodHook.MethodHookParam) -> Unit
 ) {
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun afterHookedMethod(param: MethodHookParam) {
@@ -87,7 +87,7 @@ fun Method.hookAfter(
 fun Constructor<*>.hookAfter(
     baseHook: BaseHook,
     priority: Int = XCallback.PRIORITY_DEFAULT,
-    hook: (XC_MethodHook.MethodHookParam) -> Unit
+    hook: (param: XC_MethodHook.MethodHookParam) -> Unit
 ) {
     this.hookMethod(object : XC_MethodHook(priority) {
         override fun afterHookedMethod(param: MethodHookParam) {
@@ -110,7 +110,7 @@ fun Constructor<*>.hookAfter(
 fun Method.hookReplace(
     baseHook: BaseHook,
     priority: Int = XCallback.PRIORITY_DEFAULT,
-    hook: (XC_MethodHook.MethodHookParam) -> Any?
+    hook: (param: XC_MethodHook.MethodHookParam) -> Any?
 ) {
     this.hookMethod(object : XC_MethodReplacement(priority) {
         override fun replaceHookedMethod(param: MethodHookParam): Any? {
@@ -131,7 +131,7 @@ fun Method.hookReplace(
 fun Constructor<*>.hookReplace(
     baseHook: BaseHook,
     priority: Int = XCallback.PRIORITY_DEFAULT,
-    hook: (XC_MethodHook.MethodHookParam) -> Any?
+    hook: (param: XC_MethodHook.MethodHookParam) -> Any?
 ) {
     this.hookMethod(object : XC_MethodReplacement(priority) {
         override fun replaceHookedMethod(param: MethodHookParam): Any? {
