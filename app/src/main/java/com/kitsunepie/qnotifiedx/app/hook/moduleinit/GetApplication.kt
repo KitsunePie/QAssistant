@@ -39,7 +39,6 @@ object GetApplication : BaseModuleInitHook() {
                 MMKVInit.init()
                 //加载普通Hook
                 BaseNormalHook.initHooks()
-                isInited = true
             }
         }
     }
