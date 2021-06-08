@@ -6,13 +6,18 @@ import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XC_MethodReplacement
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.callbacks.XCallback
-import java.lang.reflect.Member
+import java.lang.reflect.Constructor
+import java.lang.reflect.Method
 
 /**
  * 扩展函数 hook方法
  * @param hookCallback XC_MethodHook
  */
-fun Member.hookMethod(hookCallback: XC_MethodHook) {
+fun Method.hookMethod(hookCallback: XC_MethodHook) {
+    XposedBridge.hookMethod(this, hookCallback)
+}
+
+fun Constructor<*>.hookMethod(hookCallback: XC_MethodHook) {
     XposedBridge.hookMethod(this, hookCallback)
 }
 
@@ -22,7 +27,24 @@ fun Member.hookMethod(hookCallback: XC_MethodHook) {
  * @param priority 优先级 默认50
  * @param hook hook具体实现
  */
-fun Member.hookBefore(
+fun Method.hookBefore(
+    baseHook: BaseHook,
+    priority: Int = XCallback.PRIORITY_DEFAULT,
+    hook: (XC_MethodHook.MethodHookParam) -> Unit
+) {
+    this.hookMethod(object : XC_MethodHook(priority) {
+        override fun beforeHookedMethod(param: MethodHookParam) {
+            try {
+                if (!baseHook.isEnabled) return
+                hook(param)
+            } catch (thr: Throwable) {
+                Log.t(thr)
+            }
+        }
+    })
+}
+
+fun Constructor<*>.hookBefore(
     baseHook: BaseHook,
     priority: Int = XCallback.PRIORITY_DEFAULT,
     hook: (XC_MethodHook.MethodHookParam) -> Unit
@@ -45,7 +67,24 @@ fun Member.hookBefore(
  * @param priority 优先级 默认50
  * @param hook hook具体实现
  */
-fun Member.hookAfter(
+fun Method.hookAfter(
+    baseHook: BaseHook,
+    priority: Int = XCallback.PRIORITY_DEFAULT,
+    hook: (XC_MethodHook.MethodHookParam) -> Unit
+) {
+    this.hookMethod(object : XC_MethodHook(priority) {
+        override fun afterHookedMethod(param: MethodHookParam) {
+            try {
+                if (!baseHook.isEnabled) return
+                hook(param)
+            } catch (thr: Throwable) {
+                Log.t(thr)
+            }
+        }
+    })
+}
+
+fun Constructor<*>.hookAfter(
     baseHook: BaseHook,
     priority: Int = XCallback.PRIORITY_DEFAULT,
     hook: (XC_MethodHook.MethodHookParam) -> Unit
@@ -68,13 +107,34 @@ fun Member.hookAfter(
  * @param priority 优先级 默认50
  * @param hook hook具体实现
  */
-fun Member.replaceHook(
+fun Method.hookReplace(
     baseHook: BaseHook,
     priority: Int = XCallback.PRIORITY_DEFAULT,
-    hook: (XC_MethodHook.MethodHookParam) -> Any
+    hook: (XC_MethodHook.MethodHookParam) -> Any?
 ) {
     this.hookMethod(object : XC_MethodReplacement(priority) {
-        override fun replaceHookedMethod(param: MethodHookParam): Any {
+        override fun replaceHookedMethod(param: MethodHookParam): Any? {
+            return try {
+                if (!baseHook.isEnabled) return XposedBridge.invokeOriginalMethod(
+                    param.method,
+                    param.thisObject,
+                    param.args
+                )
+                hook(param)
+            } catch (thr: Throwable) {
+                Log.t(thr)
+            }
+        }
+    })
+}
+
+fun Constructor<*>.hookReplace(
+    baseHook: BaseHook,
+    priority: Int = XCallback.PRIORITY_DEFAULT,
+    hook: (XC_MethodHook.MethodHookParam) -> Any?
+) {
+    this.hookMethod(object : XC_MethodReplacement(priority) {
+        override fun replaceHookedMethod(param: MethodHookParam): Any? {
             return try {
                 if (!baseHook.isEnabled) return XposedBridge.invokeOriginalMethod(
                     param.method,
