@@ -32,9 +32,8 @@ object GetApplication : BaseModuleInitHook() {
                         cBaseApplicationImpl
                     )
                 //设置全局Context
-                EzXHelperInit.initAppContext(context)
+                EzXHelperInit.initAppContext(context, true)
                 //注入资源
-                EzXHelperInit.addResourcesPath(appContext)
                 Log.toast(appContext.resources.getString(R.string.load_successful))
                 MMKVInit.init()
                 //加载普通Hook

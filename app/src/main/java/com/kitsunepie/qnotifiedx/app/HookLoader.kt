@@ -4,6 +4,7 @@ import com.github.kyuubiran.ezxhelper.utils.Log
 import com.kitsunepie.qnotifiedx.app.hook.base.BaseModuleInitHook
 
 object HookLoader {
+    @JvmStatic
     val init: Unit by lazy {
         doInit()
     }

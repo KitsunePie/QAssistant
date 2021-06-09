@@ -21,6 +21,7 @@ class HookInit : IXposedHookLoadPackage, IXposedHookZygoteInit {
         if (lpparam.packageName == "com.tencent.mobileqq") {
             EzXHelperInit.initHandleLoadPackage(lpparam)
             EzXHelperInit.setLogTag("QNotifiedX")
+            EzXHelperInit.setToastTag("QNotifiedX")
             packageName = lpparam.packageName
             processName = lpparam.processName
             HookLoader.init
