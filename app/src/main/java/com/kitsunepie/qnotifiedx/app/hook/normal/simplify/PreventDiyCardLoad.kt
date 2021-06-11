@@ -1,7 +1,6 @@
 package com.kitsunepie.qnotifiedx.app.hook.normal.simplify
 
-import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
-import com.github.kyuubiran.ezxhelper.utils.isPublic
+import com.github.kyuubiran.ezxhelper.utils.getMethodBySig
 import com.kitsunepie.qnotifiedx.annotations.NormalHookEntry
 import com.kitsunepie.qnotifiedx.app.hook.base.BaseNormalHook
 import com.kitsunepie.qnotifiedx.app.util.hookBefore
@@ -12,9 +11,7 @@ object PreventDiyCardLoad : BaseNormalHook() {
     override val desc: String = "有效防止闪退名片、Zip炸弹的最佳手段"
 
     override fun init() {
-        findMethodByCondition("com.tencent.mobileqq.profilecard.vas.VasProfileTemplateController") {
-            it.name == "a" && it.parameterTypes.size == 2 && it.parameterTypes[1] == Int::class.java && it.isPublic
-        }.also { m ->
+        getMethodBySig("Lcom/tencent/mobileqq/profilecard/vas/VasProfileTemplateController;->a(Lcom/tencent/mobileqq/data/Card;I)V").also { m ->
             m.hookBefore(this) { param ->
                 param.result = null
             }

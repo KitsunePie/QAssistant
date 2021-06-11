@@ -17,9 +17,7 @@ object ModuleEntry : BaseModuleInitHook() {
     override var isEnabled: Boolean = true
 
     override fun init() {
-        findMethodByCondition("com.tencent.mobileqq.activity.QQSettingSettingActivity") {
-            it.name == "doOnCreate"
-        }.also { m ->
+        getMethodBySig("Lcom/tencent/mobileqq/activity/QQSettingSettingActivity;->doOnCreate(Landroid/os/Bundle;)Z").also { m ->
             m.hookAfter(this, XCallback.PRIORITY_HIGHEST) { param ->
                 val cFormSimpleItem = try {
                     loadClass("com.tencent.mobileqq.widget.FormSimpleItem")

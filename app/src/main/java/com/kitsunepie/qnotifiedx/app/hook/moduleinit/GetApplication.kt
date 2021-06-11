@@ -5,8 +5,8 @@ import com.github.kyuubiran.ezxhelper.init.EzXHelperInit
 import com.github.kyuubiran.ezxhelper.init.InitFields.appContext
 import com.github.kyuubiran.ezxhelper.utils.Log
 import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
-import com.github.kyuubiran.ezxhelper.utils.getStaticObjectAs
-import com.github.kyuubiran.ezxhelper.utils.loadClass
+import com.github.kyuubiran.ezxhelper.utils.getFieldBySig
+import com.github.kyuubiran.ezxhelper.utils.getStaticNonNullAs
 import com.kitsunepie.qnotifiedx.R
 import com.kitsunepie.qnotifiedx.app.hook.base.BaseModuleInitHook
 import com.kitsunepie.qnotifiedx.app.hook.base.BaseNormalHook
@@ -23,14 +23,10 @@ object GetApplication : BaseModuleInitHook() {
             it.returnType == Boolean::class.java && it.parameterTypes.isEmpty()
         }.also { m ->
             m.hookAfter(this, XCallback.PRIORITY_HIGHEST) {
-                //获取全局Context
-                val cBaseApplicationImpl =
-                    loadClass("com.tencent.common.app.BaseApplicationImpl")
+                //获取Context
                 val context =
-                    cBaseApplicationImpl.getStaticObjectAs<Application>(
-                        "sApplication",
-                        cBaseApplicationImpl
-                    )
+                    getFieldBySig("Lcom/tencent/common/app/BaseApplicationImpl;->sApplication:Lcom/tencent/common/app/BaseApplicationImpl;")
+                        .getStaticNonNullAs<Application>()
                 //设置全局Context
                 EzXHelperInit.initAppContext(context, true)
                 //注入资源
