@@ -27,7 +27,6 @@ object GetApplication : BaseModuleInitHook() {
                         .getStaticNonNullAs<Application>()
                 //设置全局Context
                 EzXHelperInit.initAppContext(context, true)
-                //注入资源
                 Log.toast(appContext.resources.getString(R.string.load_successful))
                 MMKVInit.init()
                 //加载普通Hook
