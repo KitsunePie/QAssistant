@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">QNotifiedX</string>
     <string name="module_desc">一个完全重构版的QNotified</string>
-    <string name="res_inject_success">资源注入成功</string>
-    <string name="title_activity_main">QNotifiedX</string>
+    <string name="load_successful">加载成功</string>
     <string name="nothing_here">这里还什么都没有哦~</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+
 </resources>
