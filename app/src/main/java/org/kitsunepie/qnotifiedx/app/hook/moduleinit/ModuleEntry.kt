@@ -1,14 +1,15 @@
 package org.kitsunepie.qnotifiedx.app.hook.moduleinit
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.size
-import com.github.kyuubiran.ezxhelper.init.InitFields.moduleRes
 import com.github.kyuubiran.ezxhelper.utils.*
 import de.robv.android.xposed.callbacks.XCallback
-import org.kitsunepie.qnotifiedx.R
 import org.kitsunepie.qnotifiedx.app.hook.base.BaseModuleInitHook
+import org.kitsunepie.qnotifiedx.app.ui.module.ModuleActivity
 import org.kitsunepie.qnotifiedx.app.util.hookAfter
 
 object ModuleEntry : BaseModuleInitHook() {
@@ -46,7 +47,8 @@ object ModuleEntry : BaseModuleInitHook() {
                     )
                 }
                 entry.setOnClickListener {
-                    Log.toast(moduleRes.getString(R.string.nothing_here))
+                    val intent = Intent(param.thisObject as Activity, ModuleActivity::class.java)
+                    (param.thisObject as Activity).startActivity(intent)
                 }
                 //添加入口
                 vg.addView(entry, (vg.size / 2) - 4)
