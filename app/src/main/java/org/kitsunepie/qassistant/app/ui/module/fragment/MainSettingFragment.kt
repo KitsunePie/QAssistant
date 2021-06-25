@@ -4,18 +4,18 @@ import com.github.kyuubiran.ezxhelper.init.InitFields.moduleRes
 import com.github.kyuubiran.ezxhelper.utils.Log
 import org.kitsunepie.maitungtmui.base.*
 import org.kitsunepie.qassistant.R
-import org.kitsunepie.qassistant.app.ui.module.fragment.page.PurifySettingPage
+import org.kitsunepie.qassistant.app.ui.module.fragment.page.purifySettingPage
 
-object MainSettingFragment : UiScreen {
-    override var name: String = moduleRes.getString(R.string.app_name)
-    override var summary: String? = null
-    override var contains: UiMap = linkedMapOf(
+val mainSettingFragment = uiScreen {
+    name = moduleRes.getString(R.string.app_name)
+    summary = null
+    contains = linkedMapOf(
         uiCategory {
             name = moduleRes.getString(R.string.module_setting_title)
             contains = linkedMapOf(
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_setting_purify)
-                    onClickListener = ClickToNewPages(PurifySettingPage.page)
+                    onClickListener = ClickToNewPages(purifySettingPage)
                 },
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_setting_enhancement)
@@ -56,9 +56,9 @@ object MainSettingFragment : UiScreen {
                 },
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_more_setting_about)
-                    onClickListener = ClickToNewSetting(AboutFragment)
+                    onClickListener = ClickToNewSetting(aboutFragment)
                 }
             )
         },
     )
-}
+}.second

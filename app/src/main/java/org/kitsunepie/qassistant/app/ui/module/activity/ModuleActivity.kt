@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import org.kitsunepie.maitungtmui.base.TitleAble
 import org.kitsunepie.maitungtmui.fragment.MaiTungTMSettingFragment
 import org.kitsunepie.qassistant.R
-import org.kitsunepie.qassistant.app.ui.module.fragment.MainSettingFragment
+import org.kitsunepie.qassistant.app.ui.module.fragment.mainSettingFragment
 import org.kitsunepie.qassistant.core.transfer.TransferMaiTungActivity
 
 class ModuleActivity<T> : TransferMaiTungActivity<T>() where T : Fragment, T : TitleAble {
@@ -15,5 +15,5 @@ class ModuleActivity<T> : TransferMaiTungActivity<T>() where T : Fragment, T : T
     }
 
     @Suppress("UNCHECKED_CAST")
-    override val fragment: T = MaiTungTMSettingFragment().setUiScreen(MainSettingFragment) as T
+    override val fragment: T = MaiTungTMSettingFragment().setUiScreen(mainSettingFragment) as T
 }
