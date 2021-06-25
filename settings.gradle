@@ -1,5 +1,5 @@
 include ':app', ':compiler', ':annotations'
-rootProject.name = "QNotifiedX"
+rootProject.name = "QAssistant"
 include 'annotations'
 include 'compiler'
 include ':MaiTungTM_UI:MaiTungTMUI'

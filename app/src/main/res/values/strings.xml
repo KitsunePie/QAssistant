@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">QNotifiedX</string>
-    <string name="module_desc">一个完全重构版的QNotified</string>
+    <string name="app_name">QAssistant</string>
+    <string name="module_desc">一个辅助QQ使其变得更好的模块</string>
     <string name="load_successful">加载成功</string>
     <string name="nothing_here">这里还什么都没有哦~</string>
     <string name="confirm">确定</string>
