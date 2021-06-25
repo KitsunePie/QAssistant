@@ -18,7 +18,7 @@ import org.kitsunepie.qassistant.app.util.hookAfter
 
 object GetApplication : BaseModuleInitHook() {
     override val name: String = "获取全局Context"
-    override var isEnabled: Boolean = true
+    override var isEnable: Boolean = true
 
     override fun init() {
         getMethodBySig("Lcom/tencent/mobileqq/startup/step/LoadDex;->doStep()Z").also { m ->

@@ -15,12 +15,12 @@ abstract class BaseNormalHook : BaseHook() {
 
         fun initHooks() {
             for (h in normalHooks) {
-                if (h.isInited) continue
+                if (h.isInit) continue
                 for (proc in h.targetProc) {
                     if (!proc.isCurrentProc) continue
                     try {
                         h.init()
-                        h.isInited = true
+                        h.isInit = true
                         Log.i("Initialized normal hook: ${h.javaClass.name}")
                     } catch (thr: Throwable) {
                         Log.t(thr, "Initialization failure normal hook: ${h.javaClass.name}")

@@ -24,7 +24,7 @@ abstract class BaseHook {
     open val desc: String = ""
 
     //是否已加载
-    protected var isInited = false
+    protected var isInit = false
 
     //是否重启生效
     protected var needReboot = false
@@ -33,7 +33,7 @@ abstract class BaseHook {
     protected abstract fun init()
 
     //是否开启
-    open var isEnabled: Boolean
+    open var isEnable: Boolean
         get() = sp.getBoolean(javaClass.simpleName, false)
         set(value) {
             sp.putBoolean(javaClass.simpleName, value)

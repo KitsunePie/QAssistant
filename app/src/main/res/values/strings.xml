@@ -5,5 +5,17 @@
     <string name="nothing_here">这里还什么都没有哦~</string>
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
+    <!--    模块设置主界面    -->
+    <string name="module_setting_title">模块设置</string>
+    <string name="module_setting_purify">净化功能</string>
+    <string name="module_setting_extension">增强功能</string>
+    <string name="module_setting_assistant">辅助功能</string>
+    <string name="module_setting_other">其他功能</string>
+
+    <string name="module_other_setting_title">其他</string>
+    <string name="module_other_setting_args">参数设定</string>
+    <string name="module_other_setting_fault_finding">故障排查</string>
+    <string name="module_more_setting_about">关于</string>
+
 
 </resources>

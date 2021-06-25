@@ -11,12 +11,12 @@ import com.github.kyuubiran.ezxhelper.utils.*
 import de.robv.android.xposed.callbacks.XCallback
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.app.hook.base.BaseModuleInitHook
-import org.kitsunepie.qassistant.app.ui.module.ModuleActivity
+import org.kitsunepie.qassistant.app.ui.module.activity.ModuleActivity
 import org.kitsunepie.qassistant.app.util.hookAfter
 
 object ModuleEntry : BaseModuleInitHook() {
     override val name: String = "模块入口"
-    override var isEnabled: Boolean = true
+    override var isEnable: Boolean = true
 
     override fun init() {
         getMethodBySig("Lcom/tencent/mobileqq/activity/QQSettingSettingActivity;->doOnCreate(Landroid/os/Bundle;)Z").also { m ->
