@@ -4,11 +4,12 @@ import android.widget.EditText
 import com.github.kyuubiran.ezxhelper.utils.getMethodBySig
 import com.github.kyuubiran.ezxhelper.utils.getObjectAs
 import com.github.kyuubiran.ezxhelper.utils.putObject
+import org.kitsunepie.qassistant.annotations.NormalHookEntry
 import org.kitsunepie.qassistant.app.hook.base.BaseSwitchHook
 import org.kitsunepie.qassistant.app.util.hookAfter
 import org.kitsunepie.qassistant.app.util.hookBefore
 
-@org.kitsunepie.qassistant.annotations.NormalHookEntry
+@NormalHookEntry
 object UnlockUniqueTitleLength : BaseSwitchHook() {
     override var title = "解除头衔字数上限"
     override var summary: String? = "最大支持18个英文字符(6个中文字符)"

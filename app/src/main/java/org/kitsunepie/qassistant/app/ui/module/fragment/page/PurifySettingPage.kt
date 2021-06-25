@@ -1,25 +1,44 @@
 package org.kitsunepie.qassistant.app.ui.module.fragment.page
 
 import com.github.kyuubiran.ezxhelper.init.InitFields.moduleRes
+import org.kitsunepie.maitungtmui.base.uiCategory
 import org.kitsunepie.maitungtmui.base.uiScreen
 import org.kitsunepie.maitungtmui.fragment.ViewMap
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.app.hook.normal.simplify.HideRedDot
 import org.kitsunepie.qassistant.app.hook.normal.simplify.PreventDiyCardLoad
 import org.kitsunepie.qassistant.app.hook.normal.simplify.PreventQBossAdLoad
+import org.kitsunepie.qassistant.app.hook.normal.simplify.RemoveGroupApp
 
 val purifySettingPage: ViewMap = listOf(
     uiScreen {
         name = moduleRes.getString(R.string.module_setting_purify_main)
         contains = linkedMapOf(
-            PreventQBossAdLoad.title to PreventQBossAdLoad,
+            uiCategory {
+                name = moduleRes.getString(R.string.module_setting_purify_main_top)
+                contains = linkedMapOf(PreventQBossAdLoad.title to PreventQBossAdLoad)
+            }
+        )
+    },
+    uiScreen {
+        name = moduleRes.getString(R.string.module_setting_purify_chat)
+        contains = linkedMapOf(
+            uiCategory {
+                name = moduleRes.getString(R.string.module_setting_purify_chat_group)
+                contains = linkedMapOf(RemoveGroupApp.title to RemoveGroupApp)
+            }
         )
     },
     uiScreen {
         name = moduleRes.getString(R.string.module_setting_purify_extension)
         contains = linkedMapOf(
-            HideRedDot.title to PreventDiyCardLoad,
-            PreventDiyCardLoad.title to PreventDiyCardLoad,
+            uiCategory {
+                name = moduleRes.getString(R.string.module_setting_purify_extension_prevent_load)
+                contains = linkedMapOf(
+                    HideRedDot.title to HideRedDot,
+                    PreventDiyCardLoad.title to PreventDiyCardLoad,
+                )
+            }
         )
     }
 )

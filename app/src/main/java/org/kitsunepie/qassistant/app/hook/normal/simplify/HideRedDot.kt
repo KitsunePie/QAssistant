@@ -4,13 +4,16 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
 import com.github.kyuubiran.ezxhelper.utils.putObject
+import org.kitsunepie.qassistant.annotations.NormalHookEntry
 import org.kitsunepie.qassistant.app.hook.base.BaseSwitchHook
 import org.kitsunepie.qassistant.app.util.hookAfter
 
-@org.kitsunepie.qassistant.annotations.NormalHookEntry
+@NormalHookEntry
 object HideRedDot : BaseSwitchHook() {
     override var title: String = "隐藏小红点"
     override var summary: String? = "隐藏各个界面中的大部分小红点"
+
+    override val needReboot: Boolean = true
 
     private val TRANSPARENT_PNG = byteArrayOf(
         0x89.toByte(), 0x50.toByte(), 0x4E.toByte(), 0x47.toByte(),

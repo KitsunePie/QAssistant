@@ -9,7 +9,7 @@ import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.core.config.Config
 import org.kitsunepie.qassistant.core.config.ModuleConfig
 
-val EnhancementSettingFragment: UiScreen = uiScreen {
+val moduleSettingFragment: UiScreen = uiScreen {
     name = moduleRes.getString(R.string.module_other_setting_args)
     summary = null
     contains = linkedMapOf(

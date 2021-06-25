@@ -3,6 +3,7 @@
     <string name="module_desc">一个辅助QQ使其变得更好的模块</string>
     <string name="load_successful">加载成功</string>
     <string name="nothing_here">这里还什么都没有哦~</string>
+    <string name="reboot_to_effect">重启后生效</string>
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
     <!--    模块设置主界面    -->
@@ -10,8 +11,11 @@
 
     <string name="module_setting_purify">净化功能</string>
     <string name="module_setting_purify_main">主页</string>
+    <string name="module_setting_purify_main_top">顶栏</string>
+    <string name="module_setting_purify_chat">聊天</string>
+    <string name="module_setting_purify_chat_group">群组</string>
     <string name="module_setting_purify_extension">扩展</string>
-
+    <string name="module_setting_purify_extension_prevent_load">阻止加载</string>
 
     <string name="module_setting_enhancement">增强功能</string>
 

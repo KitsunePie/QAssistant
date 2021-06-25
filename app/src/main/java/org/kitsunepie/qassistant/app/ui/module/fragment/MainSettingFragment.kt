@@ -45,7 +45,7 @@ val mainSettingFragment = uiScreen {
             contains = linkedMapOf(
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_other_setting_args)
-                    onClickListener = ClickToNewSetting(EnhancementSettingFragment)
+                    onClickListener = ClickToNewSetting(moduleSettingFragment)
                 },
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_other_setting_fault_finding)

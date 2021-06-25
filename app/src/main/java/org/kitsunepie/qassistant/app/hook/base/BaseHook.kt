@@ -1,5 +1,8 @@
 package org.kitsunepie.qassistant.app.hook.base
 
+import com.github.kyuubiran.ezxhelper.init.InitFields.moduleRes
+import com.github.kyuubiran.ezxhelper.utils.Log
+import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.core.config.Config
 import org.kitsunepie.qassistant.core.processctrl.Process
 
@@ -19,12 +22,15 @@ interface BaseHook {
     //是否重启生效
     val needReboot: Boolean
         get() {
-            return true
+            return false
         }
 
     //Hook执行过程
     fun init()
 
     fun isActivated(): Boolean = Config.sHookPref.getBoolean(javaClass.simpleName, false)
-    fun setActivated(value: Boolean) = Config.sHookPref.putBoolean(javaClass.simpleName, value)
+    fun setActivated(value: Boolean) {
+        if (needReboot && (isActivated() != value)) Log.toast(moduleRes.getString(R.string.reboot_to_effect))
+        Config.sHookPref.putBoolean(javaClass.simpleName, value)
+    }
 }
