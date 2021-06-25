@@ -6,7 +6,7 @@ import org.kitsunepie.maitungtmui.base.*
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.app.ui.module.fragment.page.purifySettingPage
 
-val mainSettingFragment = uiScreen {
+val mainSettingFragment: UiScreen = uiScreen {
     name = moduleRes.getString(R.string.app_name)
     summary = null
     contains = linkedMapOf(
@@ -19,10 +19,7 @@ val mainSettingFragment = uiScreen {
                 },
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_setting_enhancement)
-                    onClickListener = {
-                        Log.toast(moduleRes.getString(R.string.nothing_here))
-                        true
-                    }
+                    onClickListener = ClickToNewSetting(enhancementSettingFragment)
                 },
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_setting_assistant)
@@ -44,7 +41,7 @@ val mainSettingFragment = uiScreen {
             name = moduleRes.getString(R.string.module_other_setting_title)
             contains = linkedMapOf(
                 uiClickableItem {
-                    title = moduleRes.getString(R.string.module_other_setting_args)
+                    title = moduleRes.getString(R.string.module_other_setting_module)
                     onClickListener = ClickToNewSetting(moduleSettingFragment)
                 },
                 uiClickableItem {

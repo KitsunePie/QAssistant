@@ -10,14 +10,14 @@ import org.kitsunepie.qassistant.core.config.Config
 import org.kitsunepie.qassistant.core.config.ModuleConfig
 
 val moduleSettingFragment: UiScreen = uiScreen {
-    name = moduleRes.getString(R.string.module_other_setting_args)
+    name = moduleRes.getString(R.string.module_other_setting_module)
     summary = null
     contains = linkedMapOf(
         uiCategory {
-            name = moduleRes.getString(R.string.module_other_setting_args_startup)
+            name = moduleRes.getString(R.string.module_other_setting_module_startup)
             contains = linkedMapOf(
                 uiSwitchItem {
-                    title = moduleRes.getString(R.string.module_other_setting_args_startup_toast)
+                    title = moduleRes.getString(R.string.module_other_setting_module_startup_toast)
                     value.value = Config.sModulePref.getBoolean(ModuleConfig.M_STARTUP_TOAST, false)
                     value.observeForever {
                         Config.sModulePref.putBoolean(ModuleConfig.M_STARTUP_TOAST, it)

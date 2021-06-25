@@ -18,6 +18,7 @@
     <string name="module_setting_purify_extension_prevent_load">阻止加载</string>
 
     <string name="module_setting_enhancement">增强功能</string>
+    <string name="module_setting_enhancement_chat">聊天</string>
 
     <string name="module_setting_assistant">辅助功能</string>
 
@@ -25,9 +26,9 @@
 
     <string name="module_other_setting_title">其他</string>
 
-    <string name="module_other_setting_args">参数设定</string>
-    <string name="module_other_setting_args_startup">启动</string>
-    <string name="module_other_setting_args_startup_toast">不显示加载成功Toast</string>
+    <string name="module_other_setting_module">模块设定</string>
+    <string name="module_other_setting_module_startup">启动</string>
+    <string name="module_other_setting_module_startup_toast">不显示加载成功Toast</string>
 
     <string name="module_other_setting_fault_finding">故障排查</string>
 
