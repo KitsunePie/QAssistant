@@ -3,7 +3,7 @@
 ![License](https://img.shields.io/github/license/KitsunePie/QAssistant)
 点击加入:[Telegram频道](https://t.me/QAssistant)   [Telegram聊天群组](https://t.me/QAssistantXChat)
 
-一个辅助QQ使其变得更好的模块
+兼具实用与美观于一身的 QQ 小帮手
 
 ## Q&A
 Q:什么时候能用上?    
