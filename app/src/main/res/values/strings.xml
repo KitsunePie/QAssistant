@@ -7,9 +7,16 @@
     <string name="cancel">取消</string>
     <!--    模块设置主界面    -->
     <string name="module_setting_title">模块设置</string>
+
     <string name="module_setting_purify">净化功能</string>
-    <string name="module_setting_extension">增强功能</string>
+    <string name="module_setting_purify_main">主页</string>
+    <string name="module_setting_purify_extension">扩展</string>
+
+
+    <string name="module_setting_enhancement">增强功能</string>
+
     <string name="module_setting_assistant">辅助功能</string>
+
     <string name="module_setting_other">其他功能</string>
 
     <string name="module_other_setting_title">其他</string>
