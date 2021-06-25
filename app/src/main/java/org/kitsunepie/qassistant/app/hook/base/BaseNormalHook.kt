@@ -7,8 +7,7 @@ import org.kitsunepie.qassistant.core.processctrl.ProcessInfo.isCurrentProc
  * Delay Hooks
  * 在模块获取到宿主全局Context后执行的Hook将继承于此类
  */
-abstract class BaseNormalHook : BaseHook() {
-
+interface BaseNormalHook : BaseHook {
     companion object {
         private val normalHooks =
             org.kitsunepie.qassistant.gen.DelayHooks.getAnnotatedItemClassList()

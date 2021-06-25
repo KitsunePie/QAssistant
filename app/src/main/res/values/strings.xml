@@ -20,9 +20,19 @@
     <string name="module_setting_other">其他功能</string>
 
     <string name="module_other_setting_title">其他</string>
+
     <string name="module_other_setting_args">参数设定</string>
+    <string name="module_other_setting_args_startup">启动</string>
+    <string name="module_other_setting_args_startup_toast">不显示加载成功Toast</string>
+
     <string name="module_other_setting_fault_finding">故障排查</string>
+
     <string name="module_more_setting_about">关于</string>
+    <string name="module_more_setting_about_links">友情链接</string>
+    <string name="module_more_setting_about_goto_github">前往Github浏览本项目</string>
+    <string name="module_more_setting_about_goto_github_summary">点一个小星星支持一下开源项目吧~</string>
+    <string name="module_more_setting_about_join_telegram_channel">加入Telegram频道</string>
+    <string name="module_more_setting_about_join_telegram_channel_summary">好耶!点个关注吧~</string>
 
 
 </resources>

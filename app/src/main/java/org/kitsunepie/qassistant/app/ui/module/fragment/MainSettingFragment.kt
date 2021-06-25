@@ -45,10 +45,7 @@ object MainSettingFragment : UiScreen {
             contains = linkedMapOf(
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_other_setting_args)
-                    onClickListener = {
-                        Log.toast(moduleRes.getString(R.string.nothing_here))
-                        true
-                    }
+                    onClickListener = ClickToNewSetting(EnhancementSettingFragment)
                 },
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_other_setting_fault_finding)
@@ -59,10 +56,7 @@ object MainSettingFragment : UiScreen {
                 },
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_more_setting_about)
-                    onClickListener = {
-                        Log.toast(moduleRes.getString(R.string.nothing_here))
-                        true
-                    }
+                    onClickListener = ClickToNewSetting(AboutFragment)
                 }
             )
         },

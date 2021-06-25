@@ -13,6 +13,7 @@ class ModuleActivity<T> : TransferMaiTungActivity<T>() where T : Fragment, T : T
         setTheme(R.style.Theme_MaiTungTMUI)
         super.onCreate(savedInstanceState)
     }
+
     @Suppress("UNCHECKED_CAST")
     override val fragment: T = MaiTungTMSettingFragment().setUiScreen(MainSettingFragment) as T
 }

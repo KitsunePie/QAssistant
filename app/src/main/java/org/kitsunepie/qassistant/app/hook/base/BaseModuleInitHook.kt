@@ -8,8 +8,7 @@ import org.kitsunepie.qassistant.app.hook.moduleinit.ModuleEntry
 /**
  * 模块初始化相关的Hook
  */
-abstract class BaseModuleInitHook : BaseHook() {
-
+interface BaseModuleInitHook : BaseHook {
     companion object {
         private val initHooks = arrayOf(
             GetApplication,
