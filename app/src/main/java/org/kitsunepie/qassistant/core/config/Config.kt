@@ -14,7 +14,7 @@ class Config {
         @SuppressLint("UnsafeDynamicallyLoadedCode")
         private fun init() {
             val ctx = appContext
-            val mmkvDir = File(ctx.filesDir, "qnx_mmkv")
+            val mmkvDir = File(ctx.filesDir, "qa_mmkv")
             if (!mmkvDir.exists()) {
                 mmkvDir.mkdirs()
             } else if (mmkvDir.isFile) {
