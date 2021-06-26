@@ -7,30 +7,36 @@
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
     <!--    模块设置主界面    -->
-    <string name="module_setting_title">模块设置</string>
+    <string name="module_function_setting_title">功能设置</string>
 
-    <string name="module_setting_purify">净化功能</string>
-    <string name="module_setting_purify_main">主页</string>
-    <string name="module_setting_purify_main_top">顶栏</string>
-    <string name="module_setting_purify_chat">聊天</string>
-    <string name="module_setting_purify_chat_group">群组</string>
-    <string name="module_setting_purify_extension">扩展</string>
-    <string name="module_setting_purify_extension_prevent_load">阻止加载</string>
+    <string name="module_function_setting_purify">净化功能</string>
+    <string name="module_function_setting_purify_main">主页</string>
+    <string name="module_function_setting_purify_main_top">顶栏</string>
+    <string name="module_function_setting_purify_side">侧滑</string>
+    <string name="module_function_setting_purify_chat">聊天</string>
+    <string name="module_function_setting_purify_group">群聊</string>
+    <string name="module_function_setting_purify_group_other">其他</string>
+    <string name="module_function_setting_purify_extension">扩展</string>
+    <string name="module_function_setting_purify_extension_prevent_load">阻止加载</string>
 
-    <string name="module_setting_enhancement">增强功能</string>
-    <string name="module_setting_enhancement_chat">聊天</string>
+    <string name="module_function_setting_enhancement">增强功能</string>
+    <string name="module_function_setting_enhancement_chat">聊天</string>
 
-    <string name="module_setting_assistant">辅助功能</string>
+    <string name="module_function_setting_assistant">辅助功能</string>
 
-    <string name="module_setting_other">其他功能</string>
+    <string name="module_function_setting_other">其他功能</string>
 
-    <string name="module_other_setting_title">其他</string>
 
-    <string name="module_other_setting_module">模块设定</string>
+    <string name="module_other_setting_title">其他设置</string>
+
+    <string name="module_other_setting_module">模块设置</string>
     <string name="module_other_setting_module_startup">启动</string>
     <string name="module_other_setting_module_startup_toast">不显示加载成功Toast</string>
 
     <string name="module_other_setting_fault_finding">故障排查</string>
+
+
+    <string name="module_more_setting_title">更多</string>
 
     <string name="module_more_setting_about">关于</string>
     <string name="module_more_setting_about_agreement">用户协议</string>
@@ -51,6 +57,7 @@
     <string name="module_more_setting_about_main_devs_join_us">加入我们</string>
     <string name="module_more_setting_about_open_sources_license">开放源代码许可</string>
 
+    <string name="module_more_setting_gugugu">鸽子画饼</string>
 
 
 </resources>

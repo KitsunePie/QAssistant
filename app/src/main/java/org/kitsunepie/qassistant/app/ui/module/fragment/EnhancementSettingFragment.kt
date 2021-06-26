@@ -8,11 +8,11 @@ import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.app.hook.normal.function.PreventMessageRevoke
 
 val enhancementSettingFragment: UiScreen = uiScreen {
-    name = moduleRes.getString(R.string.module_setting_enhancement)
+    name = moduleRes.getString(R.string.module_function_setting_enhancement)
     summary = null
     contains = linkedMapOf(
         uiCategory {
-            name = moduleRes.getString(R.string.module_setting_enhancement_chat)
+            name = moduleRes.getString(R.string.module_function_setting_enhancement_chat)
             contains = linkedMapOf(
                 PreventMessageRevoke.title to PreventMessageRevoke
             )

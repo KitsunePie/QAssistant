@@ -11,25 +11,25 @@ val mainSettingFragment: UiScreen = uiScreen {
     summary = null
     contains = linkedMapOf(
         uiCategory {
-            name = moduleRes.getString(R.string.module_setting_title)
+            name = moduleRes.getString(R.string.module_function_setting_title)
             contains = linkedMapOf(
                 uiClickableItem {
-                    title = moduleRes.getString(R.string.module_setting_purify)
+                    title = moduleRes.getString(R.string.module_function_setting_purify)
                     onClickListener = ClickToNewPages(purifySettingPage)
                 },
                 uiClickableItem {
-                    title = moduleRes.getString(R.string.module_setting_enhancement)
+                    title = moduleRes.getString(R.string.module_function_setting_enhancement)
                     onClickListener = ClickToNewSetting(enhancementSettingFragment)
                 },
                 uiClickableItem {
-                    title = moduleRes.getString(R.string.module_setting_assistant)
+                    title = moduleRes.getString(R.string.module_function_setting_assistant)
                     onClickListener = {
                         Log.toast(moduleRes.getString(R.string.nothing_here))
                         true
                     }
                 },
                 uiClickableItem {
-                    title = moduleRes.getString(R.string.module_setting_other)
+                    title = moduleRes.getString(R.string.module_function_setting_other)
                     onClickListener = {
                         Log.toast(moduleRes.getString(R.string.nothing_here))
                         true
@@ -51,11 +51,19 @@ val mainSettingFragment: UiScreen = uiScreen {
                         true
                     }
                 },
+            )
+        },
+        uiCategory {
+            name = moduleRes.getString(R.string.module_more_setting_title)
+            contains = linkedMapOf(
+                uiClickableItem {
+                    title = moduleRes.getString(R.string.module_more_setting_gugugu)
+                },
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_more_setting_about)
                     onClickListener = ClickToNewSetting(aboutFragment)
                 }
             )
-        },
+        }
     )
 }.second
