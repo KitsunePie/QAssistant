@@ -10,7 +10,7 @@ val aboutFragment: UiScreen = uiScreen {
     summary = null
     contains = linkedMapOf(
         uiCategory {
-            name = ""
+            noTitle = true
             contains = linkedMapOf(
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_more_setting_about_agreement)
@@ -21,7 +21,7 @@ val aboutFragment: UiScreen = uiScreen {
             )
         },
         uiCategory {
-            name = " "
+            noTitle = true
             contains = linkedMapOf(
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_more_setting_about_check_update)
@@ -29,7 +29,7 @@ val aboutFragment: UiScreen = uiScreen {
             )
         },
         uiCategory {
-            name = "  "
+            noTitle = true
             contains = linkedMapOf(
                 uiClickableItem {
                     title =
@@ -42,7 +42,7 @@ val aboutFragment: UiScreen = uiScreen {
             )
         },
         uiCategory {
-            name = "   "
+            noTitle = true
             contains = linkedMapOf(
                 uiClickableItem {
                     title =
@@ -52,7 +52,7 @@ val aboutFragment: UiScreen = uiScreen {
             )
         },
         uiCategory {
-            name = "    "
+            noTitle = true
             contains = linkedMapOf(
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_more_setting_about_github)

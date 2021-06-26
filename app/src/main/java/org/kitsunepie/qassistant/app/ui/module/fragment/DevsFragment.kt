@@ -13,7 +13,7 @@ val devsFragment: UiScreen = uiScreen {
     summary = null
     contains = linkedMapOf(
         uiCategory {
-            name = ""
+            noTitle = true
             contains = linkedMapOf(
                 uiClickableItem {
                     title =
@@ -69,7 +69,7 @@ val devsFragment: UiScreen = uiScreen {
             )
         },
         uiCategory {
-            name = "  "
+            noTitle = true
             summary = null
             contains = linkedMapOf(
                 uiClickableItem {
