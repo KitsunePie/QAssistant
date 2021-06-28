@@ -8,7 +8,7 @@ import java.io.IOException
 
 object Natives {
     /**
-     * 导出或更新Native支持库到"qnx_dyn_lib"目录
+     * 导出或更新Native支持库到"qa_dyn_lib"目录
      *
      * @param libraryName 支持库名字，不含 "lib" or ".so", 例如： "mmkv"
      */
@@ -17,7 +17,7 @@ object Natives {
         @Suppress("DEPRECATION") val abi = Build.CPU_ABI
         val soName =
             "lib" + libraryName + ".so." + org.kitsunepie.qassistant.BuildConfig.VERSION_NAME + "." + abi
-        val dir = File(ctx.filesDir, "qnx_dyn_lib")
+        val dir = File(ctx.filesDir, "qa_dyn_lib")
         if (!dir.isDirectory) {
             if (dir.isFile) {
                 dir.delete()

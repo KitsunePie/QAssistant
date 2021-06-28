@@ -3,7 +3,61 @@
     <string name="module_desc">一个辅助QQ使其变得更好的模块</string>
     <string name="load_successful">加载成功</string>
     <string name="nothing_here">这里还什么都没有哦~</string>
+    <string name="reboot_to_effect">重启后生效</string>
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
+    <!--    模块设置主界面    -->
+    <string name="module_function_setting_title">功能设置</string>
+
+    <string name="module_function_setting_purify">净化功能</string>
+    <string name="module_function_setting_purify_main">主页</string>
+    <string name="module_function_setting_purify_main_top">顶栏</string>
+    <string name="module_function_setting_purify_side">侧滑</string>
+    <string name="module_function_setting_purify_chat">聊天</string>
+    <string name="module_function_setting_purify_group">群聊</string>
+    <string name="module_function_setting_purify_group_other">其他</string>
+    <string name="module_function_setting_purify_extension">扩展</string>
+    <string name="module_function_setting_purify_extension_prevent_load">阻止加载</string>
+
+    <string name="module_function_setting_enhancement">增强功能</string>
+    <string name="module_function_setting_enhancement_chat">聊天</string>
+
+    <string name="module_function_setting_assistant">辅助功能</string>
+
+    <string name="module_function_setting_other">其他功能</string>
+
+
+    <string name="module_other_setting_title">其他设置</string>
+
+    <string name="module_other_setting_module">模块设置</string>
+    <string name="module_other_setting_module_startup">启动</string>
+    <string name="module_other_setting_module_startup_toast">不显示加载成功Toast</string>
+
+    <string name="module_other_setting_fault_finding">故障排查</string>
+
+
+    <string name="module_more_setting_title">更多</string>
+
+    <string name="module_more_setting_about">关于</string>
+    <string name="module_more_setting_about_agreement">用户协议</string>
+    <string name="module_more_setting_about_privacy">隐私条款</string>
+    <string name="module_more_setting_about_check_update">检查更新</string>
+    <string name="module_more_setting_about_check_update_has_update">有新版本</string>
+    <string name="module_more_setting_about_check_update_is_latest">已是最新</string>
+    <string name="module_more_setting_about_github">Github</string>
+    <string name="module_more_setting_about_telegram_channel">Telegram 频道</string>
+    <string name="module_more_setting_about_main_devs">主要开发者</string>
+    <string name="module_more_setting_about_main_devs_kyuubiran">KyuubiRan</string>
+    <string name="module_more_setting_about_main_devs_ketal">Ketal⑨</string>
+    <string name="module_more_setting_about_main_devs_singleneuron">singleNeuron</string>
+    <string name="module_more_setting_about_main_devs_nextalone">NextAlone</string>
+    <string name="module_more_setting_about_main_devs_maitung">MaiTungTM</string>
+    <string name="module_more_setting_about_main_devs_dev_summary">Developer</string>
+    <string name="module_more_setting_about_main_devs_ui_summary">UI &amp; Icon Designer</string>
+    <string name="module_more_setting_about_main_devs_join_us">加入我们</string>
+    <string name="module_more_setting_about_open_sources_license">开放源代码许可</string>
+
+    <string name="module_more_setting_gugugu">鸽子画饼</string>
+
 
 </resources>
