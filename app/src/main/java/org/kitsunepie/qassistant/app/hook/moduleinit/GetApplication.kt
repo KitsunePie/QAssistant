@@ -13,12 +13,16 @@ import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.app.HookLoader
 import org.kitsunepie.qassistant.app.hook.base.BaseModuleInitHook
 import org.kitsunepie.qassistant.app.hook.base.BaseNormalHook
-import org.kitsunepie.qassistant.app.util.MMKVInit
 import org.kitsunepie.qassistant.app.util.hookAfter
+import org.kitsunepie.qassistant.core.config.Config
+import org.kitsunepie.qassistant.core.config.ModuleConfig
 
-object GetApplication : BaseModuleInitHook() {
-    override val name: String = "获取全局Context"
-    override var isEnabled: Boolean = true
+object GetApplication : BaseModuleInitHook {
+    override fun isActivated(): Boolean {
+        return true
+    }
+
+    override var isInit: Boolean = false
 
     override fun init() {
         getMethodBySig("Lcom/tencent/mobileqq/startup/step/LoadDex;->doStep()Z").also { m ->
@@ -35,8 +39,9 @@ object GetApplication : BaseModuleInitHook() {
                     HookLoader::class.java.classLoader!!
                 )
                 EzXHelperInit.initSubActivity()
-                Log.toast(appContext.resources.getString(R.string.load_successful))
-                MMKVInit.init()
+                if (!Config.sModulePref.getBoolean(ModuleConfig.M_STARTUP_TOAST, false)) {
+                    Log.toast(appContext.resources.getString(R.string.load_successful))
+                }
                 //加载普通Hook
                 BaseNormalHook.initHooks()
             }

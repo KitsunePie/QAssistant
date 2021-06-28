@@ -1,42 +1,36 @@
 package org.kitsunepie.qassistant.app.hook.base
 
-import com.tencent.mmkv.MMKV
-import org.kitsunepie.qassistant.app.util.SpProxy
+import com.github.kyuubiran.ezxhelper.init.InitFields.moduleRes
+import com.github.kyuubiran.ezxhelper.utils.Log
+import org.kitsunepie.qassistant.R
+import org.kitsunepie.qassistant.core.config.Config
 import org.kitsunepie.qassistant.core.processctrl.Process
-import org.kitsunepie.qassistant.core.processctrl.Process.PROC_MAIN
 
 /**
  * Hook基类
  */
-abstract class BaseHook {
-    private val sp by lazy {
-        SpProxy(MMKV.mmkvWithID("HookConfig", MMKV.MULTI_PROCESS_MODE))
-    }
-
+interface BaseHook {
     //进程控制
-    protected open val targetProc: Array<Process> =
-        arrayOf(PROC_MAIN)
-
-    //Hook名称
-    abstract val name: String
-
-    //Hook说明
-    open val desc: String = ""
-
-    //是否已加载
-    protected var isInited = false
-
-    //是否重启生效
-    protected var needReboot = false
-
-    //Hook执行过程
-    protected abstract fun init()
-
-    //是否开启
-    open var isEnabled: Boolean
-        get() = sp.getBoolean(javaClass.simpleName, false)
-        set(value) {
-            sp.putBoolean(javaClass.simpleName, value)
+    val targetProc: Array<Process>
+        get() {
+            return arrayOf(Process.PROC_MAIN)
         }
 
+    //是否已加载
+    var isInit: Boolean
+
+    //是否重启生效
+    val needReboot: Boolean
+        get() {
+            return false
+        }
+
+    //Hook执行过程
+    fun init()
+
+    fun isActivated(): Boolean = Config.sHookPref.getBoolean(javaClass.simpleName, false)
+    fun setActivated(value: Boolean) {
+        if (needReboot && (isActivated() != value)) Log.toast(moduleRes.getString(R.string.reboot_to_effect))
+        Config.sHookPref.putBoolean(javaClass.simpleName, value)
+    }
 }

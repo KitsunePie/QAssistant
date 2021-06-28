@@ -7,20 +7,19 @@ import org.kitsunepie.qassistant.core.processctrl.ProcessInfo.isCurrentProc
  * Delay Hooks
  * 在模块获取到宿主全局Context后执行的Hook将继承于此类
  */
-abstract class BaseNormalHook : BaseHook() {
-
+interface BaseNormalHook : BaseHook {
     companion object {
         private val normalHooks =
             org.kitsunepie.qassistant.gen.DelayHooks.getAnnotatedItemClassList()
 
         fun initHooks() {
             for (h in normalHooks) {
-                if (h.isInited) continue
+                if (h.isInit) continue
                 for (proc in h.targetProc) {
                     if (!proc.isCurrentProc) continue
                     try {
                         h.init()
-                        h.isInited = true
+                        h.isInit = true
                         Log.i("Initialized normal hook: ${h.javaClass.name}")
                     } catch (thr: Throwable) {
                         Log.t(thr, "Initialization failure normal hook: ${h.javaClass.name}")

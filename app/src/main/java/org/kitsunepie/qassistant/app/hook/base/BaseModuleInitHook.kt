@@ -8,8 +8,7 @@ import org.kitsunepie.qassistant.app.hook.moduleinit.ModuleEntry
 /**
  * 模块初始化相关的Hook
  */
-abstract class BaseModuleInitHook : BaseHook() {
-
+interface BaseModuleInitHook : BaseHook {
     companion object {
         private val initHooks = arrayOf(
             GetApplication,
@@ -18,10 +17,10 @@ abstract class BaseModuleInitHook : BaseHook() {
 
         fun initHooks() {
             for (h in initHooks) {
-                if (h.isInited || HookInit.processName != HookInit.packageName) continue
+                if (h.isInit || HookInit.processName != HookInit.packageName) continue
                 try {
                     h.init()
-                    h.isInited = true
+                    h.isInit = true
                     Log.i("Initialized init hook: ${h.javaClass.name}")
                 } catch (thr: Throwable) {
                     Log.t(thr, "Initialization failure init hook: ${h.javaClass.name}")
