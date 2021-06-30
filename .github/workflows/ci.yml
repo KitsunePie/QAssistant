@@ -3,7 +3,7 @@ name: Build CI
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 env:
   WARN_ON_PR: "artifact upload is disabled due to the workflow is trigged by pull request."
@@ -35,12 +35,5 @@ jobs:
 
     - name: Build project
       run: |
-        if ${{ !!github.head_ref }}; then echo "::warning:: Gradle $WARN_ON_PR"; fi
         ./gradlew build
     
-    - name: Upload articact
-      uses: actions/upload-artifact@v2
-      if: ${{ !github.head_ref }}
-      with:
-        path: app/build/outputs/apk
-        name: gradle
