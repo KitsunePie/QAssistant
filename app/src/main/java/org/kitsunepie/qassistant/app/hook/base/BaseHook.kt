@@ -30,7 +30,11 @@ interface BaseHook {
 
     fun isActivated(): Boolean = Config.sHookPref.getBoolean(javaClass.simpleName, false)
     fun setActivated(value: Boolean) {
-        if (needReboot && (isActivated() != value)) Log.toast(moduleRes.getString(R.string.reboot_to_effect))
-        Config.sHookPref.putBoolean(javaClass.simpleName, value)
+        try {
+            if (needReboot && (isActivated() != value)) Log.toast(moduleRes.getString(R.string.reboot_to_effect))
+            Config.sHookPref.putBoolean(javaClass.simpleName, value)
+        } catch (e: Exception) {
+            //ignore
+        }
     }
 }
