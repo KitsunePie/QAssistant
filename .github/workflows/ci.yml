@@ -1,0 +1,39 @@
+
+name: Build CI
+
+on:
+  pull_request:
+    branches: [ main ]
+
+env:
+  WARN_ON_PR: "artifact upload is disabled due to the workflow is trigged by pull request."
+
+jobs:
+  gradle:
+    name: Gradle CI Build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      name: Clone repository
+
+    - name: Checkout submodules
+      run: git submodule update --init --recursive
+
+    - name: Prepare Java 15
+      uses: actions/setup-java@v1
+      with:
+        java-version: 15
+        java-package: jdk+fx
+
+    - name: Cache Gradle packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+        restore-keys: ${{ runner.os }}-gradle
+
+    - name: Build project
+      run: |
+        ./gradlew build
+    
