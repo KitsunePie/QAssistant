@@ -2,21 +2,21 @@ package org.kitsunepie.qassistant.app.ui.module.fragment
 
 import org.kitsunepie.maitungtmui.base.*
 import org.kitsunepie.qassistant.R
-import org.kitsunepie.qassistant.app.ui.module.activity.safeResources
 import org.kitsunepie.qassistant.app.util.Utils.openUrl
+import org.kitsunepie.qassistant.app.util.Utils.resources
 
 val aboutFragment: UiScreen = uiScreen {
-    name = safeResources.getString(R.string.module_more_setting_about)
+    name = resources.getString(R.string.module_more_setting_about)
     summary = null
     contains = linkedMapOf(
         uiCategory {
             noTitle = true
             contains = linkedMapOf(
                 uiClickableItem {
-                    title = safeResources.getString(R.string.module_more_setting_about_agreement)
+                    title = resources.getString(R.string.module_more_setting_about_agreement)
                 },
                 uiClickableItem {
-                    title = safeResources.getString(R.string.module_more_setting_about_privacy)
+                    title = resources.getString(R.string.module_more_setting_about_privacy)
                 }
             )
         },
@@ -24,7 +24,7 @@ val aboutFragment: UiScreen = uiScreen {
             noTitle = true
             contains = linkedMapOf(
                 uiClickableItem {
-                    title = safeResources.getString(R.string.module_more_setting_about_check_update)
+                    title = resources.getString(R.string.module_more_setting_about_check_update)
                 }
             )
         },
@@ -33,7 +33,7 @@ val aboutFragment: UiScreen = uiScreen {
             contains = linkedMapOf(
                 uiClickableItem {
                     title =
-                        safeResources.getString(R.string.module_more_setting_about_telegram_channel)
+                        resources.getString(R.string.module_more_setting_about_telegram_channel)
                     onClickListener = {
                         it.openUrl("https://t.me/QAssistant")
                         true
@@ -46,7 +46,7 @@ val aboutFragment: UiScreen = uiScreen {
             contains = linkedMapOf(
                 uiClickableItem {
                     title =
-                        safeResources.getString(R.string.module_more_setting_about_main_devs)
+                        resources.getString(R.string.module_more_setting_about_main_devs)
                     onClickListener = ClickToNewSetting(devsFragment)
                 }
             )
@@ -55,7 +55,7 @@ val aboutFragment: UiScreen = uiScreen {
             noTitle = true
             contains = linkedMapOf(
                 uiClickableItem {
-                    title = safeResources.getString(R.string.module_more_setting_about_github)
+                    title = resources.getString(R.string.module_more_setting_about_github)
                     onClickListener = {
                         it.openUrl("https://github.com/KitsunePie/QAssistant")
                         true
@@ -63,7 +63,7 @@ val aboutFragment: UiScreen = uiScreen {
                 },
                 uiClickableItem {
                     title =
-                        safeResources.getString(R.string.module_more_setting_about_open_sources_license)
+                        resources.getString(R.string.module_more_setting_about_open_sources_license)
                 }
             )
         }

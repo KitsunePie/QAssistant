@@ -8,47 +8,47 @@ import org.kitsunepie.qassistant.app.hook.normal.simplify.HideRedDot
 import org.kitsunepie.qassistant.app.hook.normal.simplify.PreventDiyCardLoad
 import org.kitsunepie.qassistant.app.hook.normal.simplify.PreventQBossAdLoad
 import org.kitsunepie.qassistant.app.hook.normal.simplify.RemoveGroupApp
-import org.kitsunepie.qassistant.app.ui.module.activity.safeResources
+import org.kitsunepie.qassistant.app.util.Utils.resources
 
 val purifySettingPage: ViewMap = listOf(
     uiScreen {
-        name = safeResources.getString(R.string.module_function_setting_purify_main)
+        name = resources.getString(R.string.module_function_setting_purify_main)
         contains = linkedMapOf(
             uiCategory {
-                name = safeResources.getString(R.string.module_function_setting_purify_main_top)
+                name = resources.getString(R.string.module_function_setting_purify_main_top)
                 contains = linkedMapOf(PreventQBossAdLoad.title to PreventQBossAdLoad)
             }
         )
     },
     uiScreen {
-        name = safeResources.getString(R.string.module_function_setting_purify_side)
+        name = resources.getString(R.string.module_function_setting_purify_side)
         contains = linkedMapOf(
             uiCategory {
-                name = safeResources.getString(R.string.module_function_setting_purify_main_top)
+                name = resources.getString(R.string.module_function_setting_purify_main_top)
                 contains = linkedMapOf(PreventQBossAdLoad.title to PreventQBossAdLoad)
             }
         )
     },
     uiScreen {
-        name = safeResources.getString(R.string.module_function_setting_purify_chat)
+        name = resources.getString(R.string.module_function_setting_purify_chat)
         contains = linkedMapOf(
         )
     },
     uiScreen {
-        name = safeResources.getString(R.string.module_function_setting_purify_group)
+        name = resources.getString(R.string.module_function_setting_purify_group)
         contains = linkedMapOf(
             uiCategory {
-                name = safeResources.getString(R.string.module_function_setting_purify_group_other)
+                name = resources.getString(R.string.module_function_setting_purify_group_other)
                 contains = linkedMapOf(RemoveGroupApp.title to RemoveGroupApp)
             }
         )
     },
     uiScreen {
-        name = safeResources.getString(R.string.module_function_setting_purify_extension)
+        name = resources.getString(R.string.module_function_setting_purify_extension)
         contains = linkedMapOf(
             uiCategory {
                 name =
-                    safeResources.getString(R.string.module_function_setting_purify_extension_prevent_load)
+                    resources.getString(R.string.module_function_setting_purify_extension_prevent_load)
                 contains = linkedMapOf(
                     HideRedDot.title to HideRedDot,
                     PreventDiyCardLoad.title to PreventDiyCardLoad,

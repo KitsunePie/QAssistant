@@ -12,15 +12,10 @@ abstract class TransferMaiTungActivity<T> :
     MaiTungTMStyleActivity<T>() where T : Fragment, T : TitleAble {
 
     override fun getClassLoader(): ClassLoader {
-        return try {
-            FixedClassLoader(
-                ActivityProxyManager.MODULE_CLASS_LOADER,
-                ActivityProxyManager.HOST_CLASS_LOADER
-            )
-        } catch (e: Exception) {
-            //e.printStackTrace()
-            super.getClassLoader()
-        }
+        return FixedClassLoader(
+            ActivityProxyManager.MODULE_CLASS_LOADER,
+            ActivityProxyManager.HOST_CLASS_LOADER
+        )
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {

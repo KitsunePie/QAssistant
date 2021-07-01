@@ -3,6 +3,7 @@ package org.kitsunepie.qassistant.app.hook.base
 import com.github.kyuubiran.ezxhelper.init.InitFields.moduleRes
 import com.github.kyuubiran.ezxhelper.utils.Log
 import org.kitsunepie.qassistant.R
+import org.kitsunepie.qassistant.app.util.Utils
 import org.kitsunepie.qassistant.core.config.Config
 import org.kitsunepie.qassistant.core.processctrl.Process
 
@@ -28,13 +29,21 @@ interface BaseHook {
     //Hook执行过程
     fun init()
 
-    fun isActivated(): Boolean = Config.sHookPref.getBoolean(javaClass.simpleName, false)
+    fun isActivated(): Boolean {
+        return if (!Utils.isPreview) {
+            Config.sHookPref.getBoolean(javaClass.simpleName, false)
+        } else {
+            false
+        }
+    }
+
     fun setActivated(value: Boolean) {
-        try {
-            if (needReboot && (isActivated() != value)) Log.toast(moduleRes.getString(R.string.reboot_to_effect))
-            Config.sHookPref.putBoolean(javaClass.simpleName, value)
-        } catch (e: Exception) {
-            //ignore
+        if (!Utils.isPreview) {
+            try {
+                if (needReboot && (isActivated() != value)) Log.toast(moduleRes.getString(R.string.reboot_to_effect))
+                Config.sHookPref.putBoolean(javaClass.simpleName, value)
+            } catch (thr: Throwable) {
+            }
         }
     }
 }

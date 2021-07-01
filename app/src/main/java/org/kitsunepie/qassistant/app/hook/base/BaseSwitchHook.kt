@@ -3,6 +3,7 @@ package org.kitsunepie.qassistant.app.hook.base
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import org.kitsunepie.maitungtmui.base.UiSwitchPreference
+import org.kitsunepie.qassistant.app.util.Utils.isPreview
 
 abstract class BaseSwitchHook : BaseNormalHook, UiSwitchPreference {
     override var summary: String? = null

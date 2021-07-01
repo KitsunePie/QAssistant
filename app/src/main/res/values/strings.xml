@@ -6,6 +6,13 @@
     <string name="reboot_to_effect">重启后生效</string>
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
+    <string name="notice">注意</string>
+    <string name="warning">警告</string>
+    <string name="error">错误</string>
+    <!--    MainActivity设置主界面    -->
+    <string name="main_activity_function_preview">功能预览</string>
+    <string name="main_activity_function_preview_summary">仅预览 所有更改不均会生效</string>
+    <string name="main_activity_function_preview_dialog_msg">你将要预览模块功能设置\n打开/关闭里面的任何功能都不会使Hook生效/失效</string>
     <!--    模块设置主界面    -->
     <string name="module_function_setting_title">功能设置</string>
 
