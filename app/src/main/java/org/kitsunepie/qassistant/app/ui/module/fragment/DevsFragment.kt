@@ -1,15 +1,15 @@
 package org.kitsunepie.qassistant.app.ui.module.fragment
 
+import com.github.kyuubiran.ezxhelper.init.InitFields.moduleRes
 import org.kitsunepie.maitungtmui.base.UiScreen
 import org.kitsunepie.maitungtmui.base.uiCategory
 import org.kitsunepie.maitungtmui.base.uiClickableItem
 import org.kitsunepie.maitungtmui.base.uiScreen
 import org.kitsunepie.qassistant.R
-import org.kitsunepie.qassistant.app.ui.module.activity.safeResources
 import org.kitsunepie.qassistant.app.util.Utils.openUrl
 
 val devsFragment: UiScreen = uiScreen {
-    name = safeResources.getString(R.string.module_more_setting_about_main_devs)
+    name = moduleRes.getString(R.string.module_more_setting_about_main_devs)
     summary = null
     contains = linkedMapOf(
         uiCategory {
@@ -17,9 +17,9 @@ val devsFragment: UiScreen = uiScreen {
             contains = linkedMapOf(
                 uiClickableItem {
                     title =
-                        safeResources.getString(R.string.module_more_setting_about_main_devs_kyuubiran)
+                        moduleRes.getString(R.string.module_more_setting_about_main_devs_kyuubiran)
                     summary =
-                        safeResources.getString(R.string.module_more_setting_about_main_devs_dev_summary)
+                        moduleRes.getString(R.string.module_more_setting_about_main_devs_dev_summary)
                     onClickListener = {
                         it.openUrl("https://github.com/KyuubiRan")
                         true
@@ -27,9 +27,9 @@ val devsFragment: UiScreen = uiScreen {
                 },
                 uiClickableItem {
                     title =
-                        safeResources.getString(R.string.module_more_setting_about_main_devs_ketal)
+                        moduleRes.getString(R.string.module_more_setting_about_main_devs_ketal)
                     summary =
-                        safeResources.getString(R.string.module_more_setting_about_main_devs_dev_summary)
+                        moduleRes.getString(R.string.module_more_setting_about_main_devs_dev_summary)
                     onClickListener = {
                         it.openUrl("https://github.com/keta1")
                         true
@@ -37,9 +37,9 @@ val devsFragment: UiScreen = uiScreen {
                 },
                 uiClickableItem {
                     title =
-                        safeResources.getString(R.string.module_more_setting_about_main_devs_singleneuron)
+                        moduleRes.getString(R.string.module_more_setting_about_main_devs_singleneuron)
                     summary =
-                        safeResources.getString(R.string.module_more_setting_about_main_devs_dev_summary)
+                        moduleRes.getString(R.string.module_more_setting_about_main_devs_dev_summary)
                     onClickListener = {
                         it.openUrl("https://github.com/singleNeuron")
                         true
@@ -47,9 +47,9 @@ val devsFragment: UiScreen = uiScreen {
                 },
                 uiClickableItem {
                     title =
-                        safeResources.getString(R.string.module_more_setting_about_main_devs_nextalone)
+                        moduleRes.getString(R.string.module_more_setting_about_main_devs_nextalone)
                     summary =
-                        safeResources.getString(R.string.module_more_setting_about_main_devs_dev_summary)
+                        moduleRes.getString(R.string.module_more_setting_about_main_devs_dev_summary)
                     onClickListener = {
                         it.openUrl("https://github.com/NextAlone")
                         true
@@ -58,9 +58,9 @@ val devsFragment: UiScreen = uiScreen {
                 },
                 uiClickableItem {
                     title =
-                        safeResources.getString(R.string.module_more_setting_about_main_devs_maitung)
+                        moduleRes.getString(R.string.module_more_setting_about_main_devs_maitung)
                     summary =
-                        safeResources.getString(R.string.module_more_setting_about_main_devs_ui_summary)
+                        moduleRes.getString(R.string.module_more_setting_about_main_devs_ui_summary)
                     onClickListener = {
                         it.openUrl("https://github.com/Lagrio")
                         true
@@ -74,7 +74,7 @@ val devsFragment: UiScreen = uiScreen {
             contains = linkedMapOf(
                 uiClickableItem {
                     title =
-                        safeResources.getString(R.string.module_more_setting_about_main_devs_join_us)
+                        moduleRes.getString(R.string.module_more_setting_about_main_devs_join_us)
                 }
             )
         }
