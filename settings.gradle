@@ -3,3 +3,4 @@ rootProject.name = "QAssistant"
 include 'annotations'
 include 'compiler'
 include ':MaiTungTM_UI:MaiTungTMUI'
+include ':EzXHelper:EzXHelper'

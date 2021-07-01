@@ -1,3 +1,6 @@
 [submodule "MaiTungTM_UI"]
 	path = MaiTungTM_UI
 	url = https://github.com/KitsunePie/MaiTungTM_UI
+[submodule "EzXHelper"]
+	path = EzXHelper
+	url = https://github.com/KyuubiRan/EzXHelper.git
