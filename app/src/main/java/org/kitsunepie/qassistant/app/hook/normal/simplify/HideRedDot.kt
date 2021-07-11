@@ -38,15 +38,13 @@ object HideRedDot : BaseSwitchHook() {
     override fun init() {
         findMethodByCondition("com.tencent.theme.ResourcesFactory") {
             (it.name == "createImageFromResourceStream" || it.name == "a") && it.parameterTypes.size == 7
-        }.also { m ->
-            m.hookAfter(this) { param ->
-                if (!param.args[3].toString().contains("skin_tips_dot")) return@hookAfter
-                param.result.putObject(
-                    "a",
-                    BitmapFactory.decodeByteArray(TRANSPARENT_PNG, 0, TRANSPARENT_PNG.size),
-                    Bitmap::class.java
-                )
-            }
+        }.hookAfter(this) { param ->
+            if (!param.args[3].toString().contains("skin_tips_dot")) return@hookAfter
+            param.result.putObject(
+                "a",
+                BitmapFactory.decodeByteArray(TRANSPARENT_PNG, 0, TRANSPARENT_PNG.size),
+                Bitmap::class.java
+            )
         }
     }
 }

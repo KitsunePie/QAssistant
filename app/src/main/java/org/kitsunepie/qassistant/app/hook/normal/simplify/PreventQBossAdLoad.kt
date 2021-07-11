@@ -16,10 +16,8 @@ object PreventQBossAdLoad : BaseSwitchHook() {
     override fun init() {
         findMethodByCondition(ClassPointer.QbossADImmersionBannerManager.clazz!!) {
             it.returnType == View::class.java && it.parameterTypes.isEmpty()
-        }.also { m ->
-            m.hookBefore(this) { param ->
-                param.result = null
-            }
+        }.hookBefore(this) { param ->
+            param.result = null
         }
     }
 }

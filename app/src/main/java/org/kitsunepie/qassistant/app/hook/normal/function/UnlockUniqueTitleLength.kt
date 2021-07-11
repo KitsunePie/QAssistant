@@ -16,18 +16,16 @@ object UnlockUniqueTitleLength : BaseSwitchHook() {
 
     override fun init() {
         //EditText控制
-        getMethodBySig("Lcom/tencent/biz/troop/EditUniqueTitleActivity;->doOnCreate(Landroid/os/Bundle;)Z").also { m ->
-            m.hookAfter(this) { param ->
+        getMethodBySig("Lcom/tencent/biz/troop/EditUniqueTitleActivity;->doOnCreate(Landroid/os/Bundle;)Z")
+            .hookAfter(this) { param ->
                 val et = param.thisObject.getObjectAs<EditText>("a", EditText::class.java)
                 et.filters = emptyArray()
                 param.thisObject.putObject("a", Int.MAX_VALUE, Int::class.java)
             }
-        }
         //完成按钮
-        getMethodBySig("Lcom/tencent/biz/troop/EditUniqueTitleActivity;->a(Lcom/tencent/biz/troop/EditUniqueTitleActivity;Z)V").also { m ->
-            m.hookBefore(this) { param ->
+        getMethodBySig("Lcom/tencent/biz/troop/EditUniqueTitleActivity;->a(Lcom/tencent/biz/troop/EditUniqueTitleActivity;Z)V")
+            .hookBefore(this) { param ->
                 param.args[1] = true
             }
-        }
     }
 }
