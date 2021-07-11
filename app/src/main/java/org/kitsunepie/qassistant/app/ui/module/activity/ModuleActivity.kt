@@ -8,6 +8,7 @@ import com.github.kyuubiran.ezxhelper.init.InitFields.appContext
 import com.github.kyuubiran.ezxhelper.init.InitFields.moduleRes
 import com.github.kyuubiran.ezxhelper.utils.Log
 import com.github.kyuubiran.ezxhelper.utils.showToast
+import com.github.kyuubiran.ezxhelper.utils.tryOrFalse
 import org.kitsunepie.maitungtmui.base.TitleAble
 import org.kitsunepie.maitungtmui.fragment.MaiTungTMSettingFragment
 import org.kitsunepie.qassistant.R
@@ -15,18 +16,8 @@ import org.kitsunepie.qassistant.app.ui.module.fragment.mainSettingFragment
 import org.kitsunepie.qassistant.core.transfer.TransferMaiTungActivity
 
 class ModuleActivity<T> : TransferMaiTungActivity<T>() where T : Fragment, T : TitleAble {
-    private val isAppContextInitialized = try {
-        appContext
-        true
-    } catch (thr: Throwable) {
-        false
-    }
-    private val isModuleResInitialized = try {
-        moduleRes
-        true
-    } catch (thr: Throwable) {
-        false
-    }
+    private val isAppContextInitialized = tryOrFalse { appContext }
+    private val isModuleResInitialized = tryOrFalse { moduleRes }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_MaiTungTMUI)
