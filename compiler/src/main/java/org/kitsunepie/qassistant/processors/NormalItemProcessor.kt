@@ -26,7 +26,7 @@ class NormalItemProcessor : BaseProcessor() {
             println(">>>> NormalItemProcessor skipped because empty <<<<")
             return false
         }
-        val hook = ClassName("org.kitsunepie.qassistant.app.hook.base", "BaseNormalHook")
+        val hook = ClassName("org.kitsunepie.qassistant.app.hook.base", "BaseHook")
         val arrayList = ClassName("kotlin.collections", "ArrayList")
         val arrayListOfHook = arrayList.parameterizedBy(hook)
         val mGetApi = FunSpec.builder("getAnnotatedItemClassList")

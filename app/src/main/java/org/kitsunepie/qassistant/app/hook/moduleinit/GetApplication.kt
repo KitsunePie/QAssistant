@@ -11,13 +11,13 @@ import de.robv.android.xposed.callbacks.XCallback
 import org.kitsunepie.qassistant.BuildConfig
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.app.HookLoader
-import org.kitsunepie.qassistant.app.hook.base.BaseModuleInitHook
-import org.kitsunepie.qassistant.app.hook.base.BaseNormalHook
+import org.kitsunepie.qassistant.app.hook.base.BaseHook
+import org.kitsunepie.qassistant.app.hook.base.HookInitializer
 import org.kitsunepie.qassistant.app.util.hookAfter
 import org.kitsunepie.qassistant.core.config.Config
 import org.kitsunepie.qassistant.core.config.ModuleConfig
 
-object GetApplication : BaseModuleInitHook {
+object GetApplication : BaseHook {
     override fun isActivated(): Boolean {
         return true
     }
@@ -43,7 +43,7 @@ object GetApplication : BaseModuleInitHook {
                     Log.toast(appContext.resources.getString(R.string.load_successful))
                 }
                 //加载普通Hook
-                BaseNormalHook.initHooks()
+                HookInitializer.initNormalHooks()
             }
         }
     }
