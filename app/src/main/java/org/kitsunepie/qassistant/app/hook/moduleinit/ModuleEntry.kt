@@ -10,11 +10,11 @@ import com.github.kyuubiran.ezxhelper.init.InitFields.moduleRes
 import com.github.kyuubiran.ezxhelper.utils.*
 import de.robv.android.xposed.callbacks.XCallback
 import org.kitsunepie.qassistant.R
-import org.kitsunepie.qassistant.app.hook.base.BaseModuleInitHook
+import org.kitsunepie.qassistant.app.hook.base.BaseHook
 import org.kitsunepie.qassistant.app.ui.module.activity.ModuleActivity
 import org.kitsunepie.qassistant.app.util.hookAfter
 
-object ModuleEntry : BaseModuleInitHook {
+object ModuleEntry : BaseHook {
     override fun isActivated(): Boolean {
         return true
     }

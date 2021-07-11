@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import org.kitsunepie.maitungtmui.base.UiSwitchPreference
 
-abstract class BaseSwitchHook : BaseNormalHook, UiSwitchPreference {
+abstract class BaseSwitchHook : BaseHook, UiSwitchPreference {
     override var summary: String? = null
     override var enable: Boolean = true
     override var isInit: Boolean = false
