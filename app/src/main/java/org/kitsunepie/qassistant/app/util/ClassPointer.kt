@@ -8,6 +8,7 @@ import com.github.kyuubiran.ezxhelper.utils.loadClass
  */
 enum class ClassPointer {
     QbossADImmersionBannerManager,
+    ConversationTitleBtnCtrl,
 }
 
 //此处声明包含this$0的类的类名
@@ -15,6 +16,7 @@ val ClassPointer.clzName: String
     get() {
         return when (this) {
             ClassPointer.QbossADImmersionBannerManager -> "cooperation.vip.qqbanner.QbossADImmersionBannerManager"
+            ClassPointer.ConversationTitleBtnCtrl -> "com.tencent.mobileqq.activity.ConversationTitleBtnCtrl"
         }
     }
 
@@ -23,6 +25,7 @@ val ClassPointer.clzIndex: Array<Int>
     get() {
         return when (this) {
             ClassPointer.QbossADImmersionBannerManager -> arrayOf(1, 2)
+            ClassPointer.ConversationTitleBtnCtrl -> arrayOf(1, 2, 4, 5, 6)
         }
     }
 

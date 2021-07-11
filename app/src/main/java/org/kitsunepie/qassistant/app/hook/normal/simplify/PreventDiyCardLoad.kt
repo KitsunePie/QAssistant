@@ -11,10 +11,9 @@ object PreventDiyCardLoad : BaseSwitchHook() {
     override var summary: String? = "有效防止闪退名片、Zip炸弹的最佳手段"
 
     override fun init() {
-        getMethodBySig("Lcom/tencent/mobileqq/profilecard/vas/VasProfileTemplateController;->a(Lcom/tencent/mobileqq/data/Card;I)V").also { m ->
-            m.hookBefore(this) { param ->
+        getMethodBySig("Lcom/tencent/mobileqq/profilecard/vas/VasProfileTemplateController;->a(Lcom/tencent/mobileqq/data/Card;I)V")
+            .hookBefore(this) { param ->
                 param.result = null
             }
-        }
     }
 }
