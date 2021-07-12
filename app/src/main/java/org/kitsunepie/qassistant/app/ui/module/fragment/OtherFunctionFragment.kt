@@ -14,7 +14,7 @@ val otherFunctionFragment: UiScreen = uiScreen {
         uiCategory {
             noTitle = true
             contains = linkedMapOf(
-                PreventUpdate.title to PreventUpdate
+                PreventUpdate.v
             )
         }
     )
