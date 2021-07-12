@@ -1,7 +1,6 @@
 package org.kitsunepie.qassistant.app.hook.normal.function
 
 import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
-import com.github.kyuubiran.ezxhelper.utils.isStatic
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
 import org.kitsunepie.qassistant.app.hook.base.BaseSwitchHook
 import org.kitsunepie.qassistant.app.util.ClassPointer
@@ -15,7 +14,7 @@ object PreventUpdate : BaseSwitchHook() {
     override fun init() {
         val clz = ClassPointer.UpgradeController1.clazz ?: ClassPointer.UpgradeController2.clazz!!
         findMethodByCondition(clz) {
-            it.name == "a" && !it.isStatic && it.parameterTypes.isEmpty()
+            it.name == "a" && it.returnType.name.contains("UpgradeDetailWrapper") && it.parameterTypes.isEmpty()
         }.hookBefore(this) {
             it.result = null
         }
