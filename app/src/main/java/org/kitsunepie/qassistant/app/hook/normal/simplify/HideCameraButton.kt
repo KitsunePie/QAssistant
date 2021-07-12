@@ -9,6 +9,8 @@ import org.kitsunepie.qassistant.app.util.hookBefore
 
 @NormalHookEntry
 object HideCameraButton : BaseSwitchHook() {
+    override val needReboot: Boolean = true
+
     override fun init() {
         findMethodByCondition(ClassPointer.ConversationTitleBtnCtrl.clazz!!) {
             it.name == "a" && it.returnType == Void.TYPE && it.parameterTypes.isEmpty()

@@ -7,7 +7,7 @@ import org.kitsunepie.maitungtmui.base.UiSwitchPreference
 abstract class BaseSwitchHook : BaseHook, UiSwitchPreference {
     override var summary: String? = null
     override var enable: Boolean = true
-    override var isInit: Boolean = false
+    override var isInited: Boolean = false
     override val value: MutableLiveData<Boolean> = MutableLiveData<Boolean>().apply {
         value = isActivated()
         observeForever {

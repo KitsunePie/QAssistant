@@ -6,6 +6,7 @@
     <string name="reboot_to_effect">重启后生效</string>
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
+    <string name="resourcesFallback">模块资源未初始化，已自动回退为宿主资源。如果您在Xposed环境下看到这条消息，说明您的模块很可能已经出现灾难性错误。</string>
     <!--    模块设置主界面    -->
     <string name="module_function_setting_title">功能设置</string>
 
@@ -58,7 +59,5 @@
     <string name="module_more_setting_about_open_sources_license">开放源代码许可</string>
 
     <string name="module_more_setting_gugugu">鸽子画饼</string>
-    <string name="resourcesFallback">模块资源未初始化，已自动回退为宿主资源。如果您在Xposed环境下看到这条消息，说明您的模块很可能已经出现灾难性错误。</string>
-
 
 </resources>

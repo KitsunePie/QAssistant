@@ -7,7 +7,7 @@ import org.kitsunepie.maitungtmui.fragment.ViewMap
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.app.hook.normal.simplify.*
 
-val purifySettingPage: ViewMap = listOf(
+val purifyFunctionPage: ViewMap = listOf(
     uiScreen {
         name = moduleRes.getString(R.string.module_function_setting_purify_main)
         contains = linkedMapOf(

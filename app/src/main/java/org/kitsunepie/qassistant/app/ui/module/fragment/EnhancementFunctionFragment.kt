@@ -7,7 +7,7 @@ import org.kitsunepie.maitungtmui.base.uiScreen
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.app.hook.normal.function.PreventMessageRevoke
 
-val enhancementSettingFragment: UiScreen = uiScreen {
+val enhancementFunctionFragment: UiScreen = uiScreen {
     name = moduleRes.getString(R.string.module_function_setting_enhancement)
     summary = null
     contains = linkedMapOf(

@@ -10,35 +10,36 @@ import org.kitsunepie.qassistant.core.processctrl.ProcessInfo.isCurrentProc
  * 模块初始化相关的Hook
  */
 object HookInitializer {
-    private val initHooks = arrayOf(
+    private val moduleHooks = arrayOf(
         GetApplication,
         ModuleEntry
     )
 
     fun initModuleHooks() {
-        for (h in initHooks) {
-            if (h.isInit || HookInit.processName != HookInit.packageName) continue
+        for (h in moduleHooks) {
+            if (h.isInited || HookInit.processName != HookInit.packageName) continue
             try {
                 h.init()
-                h.isInit = true
-                Log.i("Initialized init hook: ${h.javaClass.name}")
+                h.isInited = true
+                Log.i("Initialized module hook: ${h.javaClass.name}")
             } catch (thr: Throwable) {
-                Log.t(thr, "Initialization failure init hook: ${h.javaClass.name}")
+                Log.t(thr, "Initialization failure module hook: ${h.javaClass.name}")
             }
         }
     }
 
-    private val normalHooks =
+    private val normalHooks by lazy {
         org.kitsunepie.qassistant.gen.DelayHooks.getAnnotatedItemClassList()
+    }
 
     fun initNormalHooks() {
         for (h in normalHooks) {
-            if (h.isInit) continue
+            if (h.isInited) continue
             for (proc in h.targetProc) {
                 if (!proc.isCurrentProc) continue
                 try {
                     h.init()
-                    h.isInit = true
+                    h.isInited = true
                     Log.i("Initialized normal hook: ${h.javaClass.name}")
                 } catch (thr: Throwable) {
                     Log.t(thr, "Initialization failure normal hook: ${h.javaClass.name}")

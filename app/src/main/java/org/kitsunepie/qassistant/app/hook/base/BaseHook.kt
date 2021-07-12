@@ -17,7 +17,7 @@ interface BaseHook {
         }
 
     //是否已加载
-    var isInit: Boolean
+    var isInited: Boolean
 
     //是否重启生效
     val needReboot: Boolean
