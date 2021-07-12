@@ -14,8 +14,8 @@ val purifyFunctionPage: ViewMap = listOf(
             uiCategory {
                 name = moduleRes.getString(R.string.module_function_setting_purify_main_top)
                 contains = linkedMapOf(
-                    PreventQBossAdLoad.it,
-                    HideCameraButton.it,
+                    PreventQBossAdLoad.v,
+                    HideCameraButton.v,
                 )
             }
         )
@@ -35,7 +35,7 @@ val purifyFunctionPage: ViewMap = listOf(
         contains = linkedMapOf(
             uiCategory {
                 name = moduleRes.getString(R.string.module_function_setting_purify_group_other)
-                contains = linkedMapOf(RemoveGroupApp.it)
+                contains = linkedMapOf(RemoveGroupApp.v)
             }
         )
     },
@@ -46,8 +46,8 @@ val purifyFunctionPage: ViewMap = listOf(
                 name =
                     moduleRes.getString(R.string.module_function_setting_purify_extension_prevent_load)
                 contains = linkedMapOf(
-                    HideRedDot.it,
-                    PreventDiyCardLoad.it,
+                    HideRedDot.v,
+                    PreventDiyCardLoad.v,
                 )
             }
         )

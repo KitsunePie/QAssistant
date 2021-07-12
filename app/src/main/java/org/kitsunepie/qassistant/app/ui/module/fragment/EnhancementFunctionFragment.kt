@@ -14,7 +14,7 @@ val enhancementFunctionFragment: UiScreen = uiScreen {
         uiCategory {
             name = moduleRes.getString(R.string.module_function_setting_enhancement_chat)
             contains = linkedMapOf(
-                PreventMessageRevoke.it
+                PreventMessageRevoke.v
             )
         }
     )
