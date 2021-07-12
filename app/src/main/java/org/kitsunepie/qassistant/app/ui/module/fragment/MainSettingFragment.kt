@@ -4,7 +4,7 @@ import com.github.kyuubiran.ezxhelper.init.InitFields.moduleRes
 import com.github.kyuubiran.ezxhelper.utils.Log
 import org.kitsunepie.maitungtmui.base.*
 import org.kitsunepie.qassistant.R
-import org.kitsunepie.qassistant.app.ui.module.fragment.page.purifySettingPage
+import org.kitsunepie.qassistant.app.ui.module.fragment.page.purifyFunctionPage
 
 val mainSettingFragment: UiScreen = uiScreen {
     name = moduleRes.getString(R.string.app_name)
@@ -15,11 +15,11 @@ val mainSettingFragment: UiScreen = uiScreen {
             contains = linkedMapOf(
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_function_setting_purify)
-                    onClickListener = ClickToNewPages(purifySettingPage)
+                    onClickListener = ClickToNewPages(purifyFunctionPage)
                 },
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_function_setting_enhancement)
-                    onClickListener = ClickToNewSetting(enhancementSettingFragment)
+                    onClickListener = ClickToNewSetting(enhancementFunctionFragment)
                 },
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_function_setting_assistant)
@@ -30,10 +30,7 @@ val mainSettingFragment: UiScreen = uiScreen {
                 },
                 uiClickableItem {
                     title = moduleRes.getString(R.string.module_function_setting_other)
-                    onClickListener = {
-                        Log.toast(moduleRes.getString(R.string.nothing_here))
-                        true
-                    }
+                    onClickListener = ClickToNewSetting(otherFunctionFragment)
                 }
             )
         },
