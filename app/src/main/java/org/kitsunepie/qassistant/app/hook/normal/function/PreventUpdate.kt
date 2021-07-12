@@ -13,12 +13,13 @@ object PreventUpdate : BaseSwitchHook() {
     override val needReboot: Boolean = true
 
     override fun init() {
-        findMethodByCondition(ClassPointer.UpgradeController.clazz!!) {
+        val clz = ClassPointer.UpgradeController1.clazz ?: ClassPointer.UpgradeController2.clazz!!
+        findMethodByCondition(clz) {
             it.name == "a" && !it.isStatic && it.parameterTypes.isEmpty()
         }.hookBefore(this) {
             it.result = null
         }
     }
 
-    override val title: String = "屏蔽更新提示"
+    override val title: String = "屏蔽更新"
 }
