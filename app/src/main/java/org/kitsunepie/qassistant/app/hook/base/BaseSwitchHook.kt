@@ -17,5 +17,5 @@ abstract class BaseSwitchHook : BaseHook, UiSwitchPreference {
     override var onClickListener: (Context) -> Boolean = { true }
 
     val v: Pair<String, UiSwitchPreference>
-        get() = title to this
+        inline get() = title to this
 }
