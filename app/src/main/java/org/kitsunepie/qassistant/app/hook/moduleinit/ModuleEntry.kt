@@ -19,7 +19,7 @@ object ModuleEntry : BaseHook {
         return true
     }
 
-    override var isInit: Boolean = false
+    override var isInited: Boolean = false
 
     override fun init() {
         getMethodBySig("Lcom/tencent/mobileqq/activity/QQSettingSettingActivity;->doOnCreate(Landroid/os/Bundle;)Z").also { m ->
