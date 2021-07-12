@@ -20,5 +20,5 @@ object PreventUpdate : BaseSwitchHook() {
         }
     }
 
-    override val title: String = "屏蔽更新"
+    override val title: String = "阻止更新提示"
 }
