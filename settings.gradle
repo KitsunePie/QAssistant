@@ -1,6 +1,6 @@
-include ':app', ':compiler', ':annotations'
+include ':app', ':compiler', ':annotations', ':dex-ptm'
 rootProject.name = "QAssistant"
-include 'annotations'
-include 'compiler'
 include ':MaiTungTM_UI:MaiTungTMUI'
 include ':EzXHelper:EzXHelper'
+File compilerLibsDir = new File(settingsDir, 'libs')
+project(':dex-ptm').projectDir = new File(compilerLibsDir, 'dex-ptm')
