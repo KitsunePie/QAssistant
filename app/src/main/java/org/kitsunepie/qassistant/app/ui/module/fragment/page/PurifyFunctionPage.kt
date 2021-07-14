@@ -32,6 +32,7 @@ val purifyFunctionPage: ViewMap = listOf(
                 name = moduleRes.getString(R.string.module_function_setting_purify_dress_up)
                 contains = linkedMapOf(
                     DefaultBubbleHook.v,
+                    DefaultFont.v,
                 )
             }
         )
