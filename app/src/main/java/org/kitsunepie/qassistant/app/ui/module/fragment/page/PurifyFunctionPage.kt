@@ -28,6 +28,12 @@ val purifyFunctionPage: ViewMap = listOf(
     uiScreen {
         name = moduleRes.getString(R.string.module_function_setting_purify_chat)
         contains = linkedMapOf(
+            uiCategory {
+                name = moduleRes.getString(R.string.module_function_setting_purify_dress_up)
+                contains = linkedMapOf(
+                    DefaultBubbleHook.v,
+                )
+            }
         )
     },
     uiScreen {
