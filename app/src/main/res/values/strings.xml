@@ -8,37 +8,58 @@
     <string name="cancel">取消</string>
     <string name="resourcesFallback">模块资源未初始化，已自动回退为宿主资源。如果您在Xposed环境下看到这条消息，说明您的模块很可能已经出现灾难性错误。</string>
     <!--    模块设置主界面    -->
+    <!-- <editor-fold desc="功能设置"> -->
     <string name="module_function_setting_title">功能设置</string>
 
+    <!-- <editor-fold desc="净化功能"> -->
     <string name="module_function_setting_purify">净化功能</string>
     <string name="module_function_setting_purify_main">主页</string>
     <string name="module_function_setting_purify_main_top">顶栏</string>
     <string name="module_function_setting_purify_side">侧滑</string>
     <string name="module_function_setting_purify_chat">聊天</string>
+    <string name="module_function_setting_purify_dress_up">装扮</string>
     <string name="module_function_setting_purify_group">群聊</string>
     <string name="module_function_setting_purify_group_other">其他</string>
     <string name="module_function_setting_purify_extension">扩展</string>
     <string name="module_function_setting_purify_extension_prevent_load">阻止加载</string>
+    <!-- </editor-fold> // 净化功能 -->
 
+    <!-- <editor-fold desc="增强功能"> -->
     <string name="module_function_setting_enhancement">增强功能</string>
     <string name="module_function_setting_enhancement_chat">聊天</string>
+    <!-- </editor-fold> // 增强功能 -->
 
+    <!-- <editor-fold desc="辅助功能"> -->
     <string name="module_function_setting_assistant">辅助功能</string>
+    <!-- </editor-fold> // 辅助功能 -->
 
+    <!-- <editor-fold desc="其他功能"> -->
     <string name="module_function_setting_other">其他功能</string>
+    <!-- </editor-fold> // 其他功能 -->
+
+    <!-- </editor-fold> // 功能设置 -->
 
 
+    <!-- <editor-fold desc="其他设置"> -->
     <string name="module_other_setting_title">其他设置</string>
 
+    <!-- <editor-fold desc="模块设置"> -->
     <string name="module_other_setting_module">模块设置</string>
     <string name="module_other_setting_module_startup">启动</string>
     <string name="module_other_setting_module_startup_toast">不显示加载成功Toast</string>
+    <!-- </editor-fold> // 模块设置 -->
 
+    <!-- <editor-fold desc="故障排查"> -->
     <string name="module_other_setting_fault_finding">故障排查</string>
+    <!-- </editor-fold> // 故障排查 -->
+
+    <!-- </editor-fold> // 其他设置 -->
 
 
+    <!-- <editor-fold desc="更多"> -->
     <string name="module_more_setting_title">更多</string>
 
+    <!-- <editor-fold desc="关于"> -->
     <string name="module_more_setting_about">关于</string>
     <string name="module_more_setting_about_agreement">用户协议</string>
     <string name="module_more_setting_about_privacy">隐私条款</string>
@@ -57,7 +78,12 @@
     <string name="module_more_setting_about_main_devs_ui_summary">UI &amp; Icon Designer</string>
     <string name="module_more_setting_about_main_devs_join_us">加入我们</string>
     <string name="module_more_setting_about_open_sources_license">开放源代码许可</string>
+    <!-- </editor-fold> // 关于 -->
 
+    <!-- <editor-fold desc="鸽子画饼"> -->
     <string name="module_more_setting_gugugu">鸽子画饼</string>
+    <!-- </editor-fold> //鸽子画饼 -->
+
+    <!-- </editor-fold> // 更多 -->
 
 </resources>

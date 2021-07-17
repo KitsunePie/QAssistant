@@ -11,6 +11,7 @@ enum class ClassPointer {
     ConversationTitleBtnCtrl,
     UpgradeController1,
     UpgradeController2,
+    TextItemBuilder
 }
 
 //此处声明包含this$0的类的类名
@@ -21,6 +22,7 @@ val ClassPointer.clzName: String
             ClassPointer.ConversationTitleBtnCtrl -> "com.tencent.mobileqq.activity.ConversationTitleBtnCtrl"
             ClassPointer.UpgradeController1 -> "com.tencent.mobileqq.upgrade.UpgradeController"
             ClassPointer.UpgradeController2 -> "com.tencent.mobileqq.app.upgrade.UpgradeController"
+            ClassPointer.TextItemBuilder -> "com.tencent.mobileqq.activity.aio.item.TextItemBuilder"
         }
     }
 
@@ -32,6 +34,7 @@ val ClassPointer.clzIndex: Array<Int>
             ClassPointer.ConversationTitleBtnCtrl -> arrayOf(1, 2, 4, 5, 6)
             ClassPointer.UpgradeController1 -> arrayOf(1, 2)
             ClassPointer.UpgradeController2 -> arrayOf(1, 2)
+            ClassPointer.TextItemBuilder -> arrayOf(3, 6 ,7, 8, 10)
         }
     }
 
@@ -41,11 +44,13 @@ val ClassPointer.clazz: Class<*>?
         try {
             return loadClass(this.clzName)
         } catch (ignored: Throwable) {
+            // ignore
         }
         this.clzIndex.forEach { idx ->
             try {
                 return loadClass("${this.clzName}\$${idx}").getFieldByClassOrObject("this$0").type
             } catch (ignored: Throwable) {
+                // ignore
             }
         }
         return null
