@@ -1,7 +1,7 @@
 include ':app', ':compiler', ':annotations', 'MaiTungTMUI', 'EzXHelper'
 rootProject.name = "QAssistant"
 File compilerLibsDir = new File(settingsDir, 'libs')
-project(':MaiTungTMUI').projectDir = new File(compilerLibsDir, 'MaiTungTM_UI')
+project(':MaiTungTMUI').projectDir = new File(compilerLibsDir, 'MaiTungTM_UI/MaiTungTMUI')
 project(':annotations').projectDir = new File(compilerLibsDir, 'annotations')
 project(':compiler').projectDir = new File(compilerLibsDir, 'compiler')
-project(':EzXHelper').projectDir = new File(compilerLibsDir, 'EzXHelper')
+project(':EzXHelper').projectDir = new File(compilerLibsDir, 'EzXHelper/EzXHelper')
