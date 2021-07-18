@@ -58,6 +58,16 @@ val devsFragment: UiScreen = uiScreen {
                 },
                 uiClickableItem {
                     title =
+                        moduleRes.getString(R.string.module_more_setting_about_main_devs_jamesclef)
+                    summary =
+                        moduleRes.getString(R.string.module_more_setting_about_main_devs_dev_summary)
+                    onClickListener = {
+                        it.openUrl("https://qwq2333.top")
+                        true
+                    }
+                },
+                uiClickableItem {
+                    title =
                         moduleRes.getString(R.string.module_more_setting_about_main_devs_maitung)
                     summary =
                         moduleRes.getString(R.string.module_more_setting_about_main_devs_ui_summary)
