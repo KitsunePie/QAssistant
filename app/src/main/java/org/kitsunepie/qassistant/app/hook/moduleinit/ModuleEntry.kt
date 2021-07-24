@@ -1,8 +1,28 @@
+/*
+ * QAssistant - An Xposed module for QQ/TIM
+ * Copyright (C) 2019-2021
+ * https://github.com/KitsunePie/QAssistant
+ *
+ * This software is non-free but opensource software: you can redistribute it
+ * and/or modify it under the terms of the GNU Affero General Public License
+ * as published by the Free Software Foundation and our eula published by us;
+ *  either version 3 of the License, or any later version and our eula as published
+ * by us.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * and eula along with this software.  If not, see
+ * <https://www.gnu.org/licenses/>
+ * <https://github.com/KitsunePie/QAssistant/blob/master/LICENSE.md>.
+ */
+
 package org.kitsunepie.qassistant.app.hook.moduleinit
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.size
@@ -11,7 +31,6 @@ import com.github.kyuubiran.ezxhelper.utils.*
 import de.robv.android.xposed.callbacks.XCallback
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
-import org.kitsunepie.qassistant.app.ui.module.activity.ModuleActivity
 import org.kitsunepie.qassistant.app.util.hookAfter
 
 object ModuleEntry : BaseHook {
@@ -51,10 +70,11 @@ object ModuleEntry : BaseHook {
                         arrayOf(CharSequence::class.java)
                     )
                 }
+                /*
                 entry.setOnClickListener {
                     val intent = Intent(param.thisObject as Activity, ModuleActivity::class.java)
                     (param.thisObject as Activity).startActivity(intent)
-                }
+                }*/
                 //添加入口
                 vg.addView(entry, (vg.size / 2) - 4)
             }
