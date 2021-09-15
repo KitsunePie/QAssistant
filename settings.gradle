@@ -20,7 +20,7 @@
  * <https://github.com/KitsunePie/QAssistant/blob/master/LICENSE.md>.
  */
 
-include ':app', ':compiler', ':annotations', 'MaiTungTMUI', 'EzXHelper'
+include ':app', ':compiler', ':annotations', 'EzXHelper'
 rootProject.name = "QAssistant"
 File compilerLibsDir = new File(settingsDir, 'libs')
 project(':annotations').projectDir = new File(compilerLibsDir, 'annotations')
