@@ -27,30 +27,26 @@ val ClassPointer.clzName: String
     }
 
 //此处标明类后面的数字
-val ClassPointer.clzIndex: Array<Int>
+val ClassPointer.clzIndex: IntArray
     get() {
         return when (this) {
-            ClassPointer.QbossADImmersionBannerManager -> arrayOf(1, 2)
-            ClassPointer.ConversationTitleBtnCtrl -> arrayOf(1, 2, 4, 5, 6)
-            ClassPointer.UpgradeController1 -> arrayOf(1, 2)
-            ClassPointer.UpgradeController2 -> arrayOf(1, 2)
-            ClassPointer.TextItemBuilder -> arrayOf(3, 6 ,7, 8, 10)
+            ClassPointer.QbossADImmersionBannerManager -> intArrayOf(1, 2)
+            ClassPointer.ConversationTitleBtnCtrl -> intArrayOf(1, 2, 4, 5, 6)
+            ClassPointer.UpgradeController1 -> intArrayOf(1, 2)
+            ClassPointer.UpgradeController2 -> intArrayOf(1, 2)
+            ClassPointer.TextItemBuilder -> intArrayOf(3, 6 ,7, 8, 10)
         }
     }
 
 //使用.clazz来获取类 如果获取失败则返回null
 val ClassPointer.clazz: Class<*>?
     get() {
-        try {
+        runCatching {
             return loadClass(this.clzName)
-        } catch (ignored: Throwable) {
-            // ignore
         }
         this.clzIndex.forEach { idx ->
-            try {
+            runCatching {
                 return loadClass("${this.clzName}\$${idx}").getFieldByClassOrObject("this$0").type
-            } catch (ignored: Throwable) {
-                // ignore
             }
         }
         return null
