@@ -30,9 +30,8 @@ dependencyResolutionManagement {
     }
 }
 
-include ':app', ':compiler', ':annotations', 'EzXHelper'
+include ':app', ':compiler', ':annotations'
 rootProject.name = "QAssistant"
 File compilerLibsDir = new File(settingsDir, 'libs')
 project(':annotations').projectDir = new File(compilerLibsDir, 'annotations')
 project(':compiler').projectDir = new File(compilerLibsDir, 'compiler')
-project(':EzXHelper').projectDir = new File(compilerLibsDir, 'EzXHelper/EzXHelper')
