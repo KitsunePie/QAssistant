@@ -1,23 +1,22 @@
 package org.kitsunepie.qassistant.app.hook.normal.simplify
 
-import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
+import com.github.kyuubiran.ezxhelper.utils.emptyParam
+import com.github.kyuubiran.ezxhelper.utils.findMethod
+import com.github.kyuubiran.ezxhelper.utils.hookBefore
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
-import org.kitsunepie.qassistant.app.hook.base.BaseSwitchHook
+import org.kitsunepie.qassistant.app.hook.base.BaseHook
 import org.kitsunepie.qassistant.app.util.ClassPointer
 import org.kitsunepie.qassistant.app.util.clazz
-import org.kitsunepie.qassistant.app.util.hookBefore
 
 @NormalHookEntry
-object HideCameraButton : BaseSwitchHook() {
+object HideCameraButton : BaseHook() {
     override val needReboot: Boolean = true
 
     override fun init() {
-        findMethodByCondition(ClassPointer.ConversationTitleBtnCtrl.clazz!!) {
-            it.name == "a" && it.returnType == Void.TYPE && it.parameterTypes.isEmpty()
-        }.hookBefore(this) { param ->
+        findMethod(ClassPointer.ConversationTitleBtnCtrl.clazz!!) {
+            name == "a" && returnType == Void.TYPE && emptyParam
+        }.hookBefore { param ->
             param.result = null
         }
     }
-
-    override val title: String = "隐藏相机图标"
 }

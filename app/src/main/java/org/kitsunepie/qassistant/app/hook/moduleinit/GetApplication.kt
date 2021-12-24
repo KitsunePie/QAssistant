@@ -3,33 +3,31 @@ package org.kitsunepie.qassistant.app.hook.moduleinit
 import android.app.Application
 import com.github.kyuubiran.ezxhelper.init.EzXHelperInit
 import com.github.kyuubiran.ezxhelper.init.InitFields.appContext
-import com.github.kyuubiran.ezxhelper.utils.Log
-import com.github.kyuubiran.ezxhelper.utils.getFieldBySig
-import com.github.kyuubiran.ezxhelper.utils.getMethodBySig
-import com.github.kyuubiran.ezxhelper.utils.getStaticNonNullAs
+import com.github.kyuubiran.ezxhelper.utils.*
+import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.callbacks.XCallback
 import org.kitsunepie.qassistant.BuildConfig
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.app.HookLoader
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
 import org.kitsunepie.qassistant.app.hook.base.HookInitializer
-import org.kitsunepie.qassistant.app.util.hookAfter
 import org.kitsunepie.qassistant.core.config.Config
 import org.kitsunepie.qassistant.core.config.ModuleConfig
 
-object GetApplication : BaseHook {
+object GetApplication : BaseHook() {
     override fun isActivated(): Boolean {
         return true
     }
 
-    override var isInited: Boolean = false
+    private var unhook: XC_MethodHook.Unhook? = null
 
     override fun init() {
-        getMethodBySig("Lcom/tencent/mobileqq/startup/step/LoadDex;->doStep()Z").also { m ->
-            m.hookAfter(this, XCallback.PRIORITY_HIGHEST) {
+        getMethodByDesc("Lcom/tencent/mobileqq/startup/step/LoadDex;->doStep()Z").also { m ->
+            m.hookAfter(XCallback.PRIORITY_HIGHEST) {
+                unhook?.unhook()
                 //获取Context
                 val context =
-                    getFieldBySig("Lcom/tencent/common/app/BaseApplicationImpl;->sApplication:Lcom/tencent/common/app/BaseApplicationImpl;")
+                    getFieldByDesc("Lcom/tencent/common/app/BaseApplicationImpl;->sApplication:Lcom/tencent/common/app/BaseApplicationImpl;")
                         .getStaticNonNullAs<Application>()
                 //设置全局Context
                 EzXHelperInit.initAppContext(context, true)

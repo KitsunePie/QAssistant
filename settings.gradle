@@ -20,7 +20,17 @@
  * <https://github.com/KitsunePie/QAssistant/blob/master/LICENSE.md>.
  */
 
-include ':app', ':compiler', ':annotations', 'MaiTungTMUI', 'EzXHelper'
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://api.xposed.info/' }
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+include ':app', ':compiler', ':annotations', 'EzXHelper'
 rootProject.name = "QAssistant"
 File compilerLibsDir = new File(settingsDir, 'libs')
 project(':annotations').projectDir = new File(compilerLibsDir, 'annotations')

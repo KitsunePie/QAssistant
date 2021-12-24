@@ -42,5 +42,4 @@ object Config {
         initMmkv
         SpProxy(MMKV.mmkvWithID("QAHooks", MMKV.MULTI_PROCESS_MODE))
     }
-
 }

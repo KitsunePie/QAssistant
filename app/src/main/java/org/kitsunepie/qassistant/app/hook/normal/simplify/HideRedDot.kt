@@ -2,17 +2,14 @@ package org.kitsunepie.qassistant.app.hook.normal.simplify
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.github.kyuubiran.ezxhelper.utils.findMethodByCondition
+import com.github.kyuubiran.ezxhelper.utils.findMethod
+import com.github.kyuubiran.ezxhelper.utils.hookAfter
 import com.github.kyuubiran.ezxhelper.utils.putObject
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
-import org.kitsunepie.qassistant.app.hook.base.BaseSwitchHook
-import org.kitsunepie.qassistant.app.util.hookAfter
+import org.kitsunepie.qassistant.app.hook.base.BaseHook
 
 @NormalHookEntry
-object HideRedDot : BaseSwitchHook() {
-    override var title: String = "隐藏小红点"
-    override var summary: String? = "隐藏各个界面中的大部分小红点"
-
+object HideRedDot : BaseHook() {
     override val needReboot: Boolean = true
 
     private val TRANSPARENT_PNG = byteArrayOf(
@@ -36,9 +33,9 @@ object HideRedDot : BaseSwitchHook() {
     )
 
     override fun init() {
-        findMethodByCondition("com.tencent.theme.ResourcesFactory") {
-            (it.name == "createImageFromResourceStream" || it.name == "a") && it.parameterTypes.size == 7
-        }.hookAfter(this) { param ->
+        findMethod("com.tencent.theme.ResourcesFactory") {
+            (name == "createImageFromResourceStream" || name == "a") && parameterTypes.size == 7
+        }.hookAfter { param ->
             if (!param.args[3].toString().contains("skin_tips_dot")) return@hookAfter
             param.result.putObject(
                 "a",

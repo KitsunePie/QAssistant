@@ -6,14 +6,13 @@ import com.github.kyuubiran.ezxhelper.utils.Log
 import com.github.kyuubiran.ezxhelper.utils.showToast
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
-import org.kitsunepie.qassistant.app.hook.base.BaseSwitchHook
+import org.kitsunepie.qassistant.app.hook.base.BaseHook
 import java.io.File
 
 @NormalHookEntry
-object DefaultBubbleHook : BaseSwitchHook() {
+object DefaultBubbleHook : BaseHook() {
 
     override fun init() {
-        Unit
     }
 
     override fun isActivated(): Boolean {
@@ -45,6 +44,4 @@ object DefaultBubbleHook : BaseSwitchHook() {
             appContext.showToast("出错力：$e")
         }
     }
-
-    override val title: String = "隐藏个性气泡"
 }

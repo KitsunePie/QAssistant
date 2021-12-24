@@ -9,32 +9,28 @@ import org.kitsunepie.qassistant.core.processctrl.Process
 /**
  * Hook基类
  */
-interface BaseHook {
+abstract class BaseHook {
     //进程控制
     val targetProc: Array<Process>
-        get() {
-            return arrayOf(Process.PROC_MAIN)
-        }
+        get() = arrayOf(Process.PROC_MAIN)
 
     //是否已加载
-    var isInited: Boolean
+    var isInited: Boolean = false
 
     //是否重启生效
-    val needReboot: Boolean
-        get() {
-            return false
-        }
+    open val needReboot: Boolean
+        get() = false
+
 
     //Hook执行过程
-    fun init()
+    abstract fun init()
 
-    fun isActivated(): Boolean = Config.sHookPref.getBoolean(javaClass.simpleName, false)
-    fun setActivated(value: Boolean) {
-        try {
+    open fun isActivated(): Boolean = Config.sHookPref.getBoolean(javaClass.simpleName, false)
+
+    open fun setActivated(value: Boolean) {
+        runCatching {
             if (needReboot && (isActivated() != value)) Log.toast(moduleRes.getString(R.string.reboot_to_effect))
             Config.sHookPref.putBoolean(javaClass.simpleName, value)
-        } catch (e: Exception) {
-            //ignore
         }
     }
 }
