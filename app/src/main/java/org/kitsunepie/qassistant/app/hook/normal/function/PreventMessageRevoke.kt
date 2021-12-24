@@ -1,12 +1,8 @@
 package org.kitsunepie.qassistant.app.hook.normal.function
 
-import org.kitsunepie.qassistant.app.hook.base.BaseSwitchHook
+import org.kitsunepie.qassistant.app.hook.base.BaseHook
 
-object PreventMessageRevoke : BaseSwitchHook() {
+object PreventMessageRevoke : BaseHook() {
     override fun init() {
     }
-
-    override var enable: Boolean = false
-
-    override var title: String = "防止消息撤回"
 }

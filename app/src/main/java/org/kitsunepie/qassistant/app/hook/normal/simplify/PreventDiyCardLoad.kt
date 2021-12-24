@@ -1,18 +1,15 @@
 package org.kitsunepie.qassistant.app.hook.normal.simplify
 
-import com.github.kyuubiran.ezxhelper.utils.getMethodBySig
+import com.github.kyuubiran.ezxhelper.utils.getMethodByDesc
+import com.github.kyuubiran.ezxhelper.utils.hookBefore
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
-import org.kitsunepie.qassistant.app.hook.base.BaseSwitchHook
-import org.kitsunepie.qassistant.app.util.hookBefore
+import org.kitsunepie.qassistant.app.hook.base.BaseHook
 
 @NormalHookEntry
-object PreventDiyCardLoad : BaseSwitchHook() {
-    override var title: String = "阻止DIY名片加载"
-    override var summary: String? = "有效防止闪退名片、Zip炸弹的最佳手段"
-
+object PreventDiyCardLoad : BaseHook() {
     override fun init() {
-        getMethodBySig("Lcom/tencent/mobileqq/profilecard/vas/VasProfileTemplateController;->a(Lcom/tencent/mobileqq/data/Card;I)V")
-            .hookBefore(this) { param ->
+        getMethodByDesc("Lcom/tencent/mobileqq/profilecard/vas/VasProfileTemplateController;->a(Lcom/tencent/mobileqq/data/Card;I)V")
+            .hookBefore { param ->
                 param.result = null
             }
     }

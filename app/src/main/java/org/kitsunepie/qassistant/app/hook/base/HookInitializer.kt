@@ -5,6 +5,7 @@ import org.kitsunepie.qassistant.app.HookInit
 import org.kitsunepie.qassistant.app.hook.moduleinit.GetApplication
 import org.kitsunepie.qassistant.app.hook.moduleinit.ModuleEntry
 import org.kitsunepie.qassistant.core.processctrl.ProcessInfo.isCurrentProc
+import org.kitsunepie.qassistant.gen.DelayHooks
 
 /**
  * 模块初始化相关的Hook
@@ -16,33 +17,34 @@ object HookInitializer {
     )
 
     fun initModuleHooks() {
-        for (h in moduleHooks) {
-            if (h.isInited || HookInit.processName != HookInit.packageName) continue
+        moduleHooks.forEach { h ->
+            if (h.isInited || HookInit.processName != HookInit.packageName) return@forEach
             try {
                 h.init()
                 h.isInited = true
-                Log.i("Initialized module hook: ${h.javaClass.name}")
+                Log.i("Inited module hook: ${h.javaClass.name}")
             } catch (thr: Throwable) {
-                Log.t(thr, "Initialization failure module hook: ${h.javaClass.name}")
+                Log.e(thr, "Init failed module hook: ${h.javaClass.name}")
+                throw thr
             }
         }
     }
 
     private val normalHooks by lazy {
-        org.kitsunepie.qassistant.gen.DelayHooks.getAnnotatedItemClassList()
+        DelayHooks.getAnnotatedItemClassList()
     }
 
     fun initNormalHooks() {
-        for (h in normalHooks) {
-            if (h.isInited) continue
-            for (proc in h.targetProc) {
-                if (!proc.isCurrentProc) continue
+        normalHooks.forEach hook@{ h ->
+            if (h.isInited) return@hook
+            h.targetProc.forEach proc@{ p ->
+                if (!p.isCurrentProc) return@proc
                 try {
                     h.init()
                     h.isInited = true
-                    Log.i("Initialized normal hook: ${h.javaClass.name}")
+                    Log.i("Init normal hook: ${h.javaClass.name}")
                 } catch (thr: Throwable) {
-                    Log.t(thr, "Initialization failure normal hook: ${h.javaClass.name}")
+                    Log.e(thr, "Init failed normal hook: ${h.javaClass.name}")
                 }
             }
         }

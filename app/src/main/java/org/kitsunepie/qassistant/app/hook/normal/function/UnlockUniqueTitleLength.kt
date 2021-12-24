@@ -1,30 +1,23 @@
 package org.kitsunepie.qassistant.app.hook.normal.function
 
 import android.widget.EditText
-import com.github.kyuubiran.ezxhelper.utils.getMethodBySig
-import com.github.kyuubiran.ezxhelper.utils.getObjectAs
-import com.github.kyuubiran.ezxhelper.utils.putObject
+import com.github.kyuubiran.ezxhelper.utils.*
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
-import org.kitsunepie.qassistant.app.hook.base.BaseSwitchHook
-import org.kitsunepie.qassistant.app.util.hookAfter
-import org.kitsunepie.qassistant.app.util.hookBefore
+import org.kitsunepie.qassistant.app.hook.base.BaseHook
 
 @NormalHookEntry
-object UnlockUniqueTitleLength : BaseSwitchHook() {
-    override var title = "解除头衔字数上限"
-    override var summary: String? = "最大支持18个英文字符(6个中文字符)"
-
+object UnlockUniqueTitleLength : BaseHook() {
     override fun init() {
         //EditText控制
-        getMethodBySig("Lcom/tencent/biz/troop/EditUniqueTitleActivity;->doOnCreate(Landroid/os/Bundle;)Z")
-            .hookAfter(this) { param ->
+        getMethodByDesc("Lcom/tencent/biz/troop/EditUniqueTitleActivity;->doOnCreate(Landroid/os/Bundle;)Z")
+            .hookAfter { param ->
                 val et = param.thisObject.getObjectAs<EditText>("a", EditText::class.java)
                 et.filters = emptyArray()
                 param.thisObject.putObject("a", Int.MAX_VALUE, Int::class.java)
             }
         //完成按钮
-        getMethodBySig("Lcom/tencent/biz/troop/EditUniqueTitleActivity;->a(Lcom/tencent/biz/troop/EditUniqueTitleActivity;Z)V")
-            .hookBefore(this) { param ->
+        getMethodByDesc("Lcom/tencent/biz/troop/EditUniqueTitleActivity;->a(Lcom/tencent/biz/troop/EditUniqueTitleActivity;Z)V")
+            .hookBefore { param ->
                 param.args[1] = true
             }
     }

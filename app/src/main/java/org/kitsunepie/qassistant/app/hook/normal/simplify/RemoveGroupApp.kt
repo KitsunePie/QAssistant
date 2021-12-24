@@ -1,12 +1,8 @@
 package org.kitsunepie.qassistant.app.hook.normal.simplify
 
-import org.kitsunepie.qassistant.app.hook.base.BaseSwitchHook
+import org.kitsunepie.qassistant.app.hook.base.BaseHook
 
-object RemoveGroupApp : BaseSwitchHook() {
+object RemoveGroupApp : BaseHook() {
     override fun init() {
     }
-
-    override var enable: Boolean = false
-
-    override var title: String = "移除群组应用"
 }

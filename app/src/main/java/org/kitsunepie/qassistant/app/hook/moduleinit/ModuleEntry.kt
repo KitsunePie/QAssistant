@@ -25,24 +25,19 @@ package org.kitsunepie.qassistant.app.hook.moduleinit
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.size
 import com.github.kyuubiran.ezxhelper.init.InitFields.moduleRes
 import com.github.kyuubiran.ezxhelper.utils.*
-import de.robv.android.xposed.callbacks.XCallback
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
-import org.kitsunepie.qassistant.app.util.hookAfter
 
-object ModuleEntry : BaseHook {
+object ModuleEntry : BaseHook() {
     override fun isActivated(): Boolean {
         return true
     }
 
-    override var isInited: Boolean = false
-
     override fun init() {
-        getMethodBySig("Lcom/tencent/mobileqq/activity/QQSettingSettingActivity;->doOnCreate(Landroid/os/Bundle;)Z").also { m ->
-            m.hookAfter(this, XCallback.PRIORITY_HIGHEST) { param ->
+        getMethodByDesc("Lcom/tencent/mobileqq/activity/QQSettingSettingActivity;->doOnCreate(Landroid/os/Bundle;)Z").also { m ->
+            m.hookAfter { param ->
                 val cFormSimpleItem = try {
                     loadClass("com.tencent.mobileqq.widget.FormSimpleItem")
                 } catch (e: Exception) {
@@ -76,7 +71,7 @@ object ModuleEntry : BaseHook {
                     (param.thisObject as Activity).startActivity(intent)
                 }*/
                 //添加入口
-                vg.addView(entry, (vg.size / 2) - 4)
+                vg.addView(entry, (vg.childCount / 2) - 4)
             }
         }
     }
