@@ -30,7 +30,7 @@ object Config {
         }
     }
 
-    val initMmkv: Unit by lazy {
+    private val initMmkv: Unit by lazy {
         init()
     }
 

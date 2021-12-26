@@ -4,7 +4,7 @@ import com.github.kyuubiran.ezxhelper.utils.Log
 import org.kitsunepie.qassistant.app.HookInit
 import org.kitsunepie.qassistant.app.hook.moduleinit.GetApplication
 import org.kitsunepie.qassistant.app.hook.moduleinit.ModuleEntry
-import org.kitsunepie.qassistant.core.processctrl.ProcessInfo.isCurrentProc
+import org.kitsunepie.qassistant.app.util.ProcessInfo.isCurrentProc
 import org.kitsunepie.qassistant.gen.DelayHooks
 
 /**

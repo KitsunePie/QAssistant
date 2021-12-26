@@ -4,7 +4,7 @@ import com.github.kyuubiran.ezxhelper.init.InitFields.moduleRes
 import com.github.kyuubiran.ezxhelper.utils.Log
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.core.config.Config
-import org.kitsunepie.qassistant.core.processctrl.Process
+import org.kitsunepie.qassistant.app.util.Process
 
 /**
  * Hook基类
