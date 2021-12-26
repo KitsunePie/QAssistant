@@ -5,7 +5,7 @@ import org.kitsunepie.qassistant.app.HookInit
 import org.kitsunepie.qassistant.app.hook.moduleinit.GetApplication
 import org.kitsunepie.qassistant.app.hook.moduleinit.ModuleEntry
 import org.kitsunepie.qassistant.app.util.ProcessInfo.isCurrentProc
-import org.kitsunepie.qassistant.gen.DelayHooks
+import org.kitsunepie.qassistant.gen.normalHooks
 
 /**
  * 模块初始化相关的Hook
@@ -28,10 +28,6 @@ object HookInitializer {
                 throw thr
             }
         }
-    }
-
-    private val normalHooks by lazy {
-        DelayHooks.getAnnotatedItemClassList()
     }
 
     fun initNormalHooks() {

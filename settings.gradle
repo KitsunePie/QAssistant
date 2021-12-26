@@ -30,8 +30,7 @@ dependencyResolutionManagement {
     }
 }
 
-include ':app', ':compiler', ':annotations'
+include ':app', ':compiler'
 rootProject.name = "QAssistant"
-File compilerLibsDir = new File(settingsDir, 'libs')
-project(':annotations').projectDir = new File(compilerLibsDir, 'annotations')
+def compilerLibsDir = new File(settingsDir, 'libs')
 project(':compiler').projectDir = new File(compilerLibsDir, 'compiler')
