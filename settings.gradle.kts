@@ -19,18 +19,26 @@
  * <https://www.gnu.org/licenses/>
  * <https://github.com/KitsunePie/QAssistant/blob/master/LICENSE.md>.
  */
+pluginManagement {
+    val kspVersion: String by settings
+    val kotlinVersion: String by settings
+    plugins {
+        id("com.google.devtools.ksp") version kspVersion
+        kotlin("jvm") version kotlinVersion
+    }
+}
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://api.xposed.info/' }
-        maven { url 'https://jitpack.io' }
+        maven("https://api.xposed.info/")
+        maven("https://jitpack.io")
     }
 }
 
-include ':app', ':compiler'
+include(":app", ":compiler")
 rootProject.name = "QAssistant"
-def compilerLibsDir = new File(settingsDir, 'libs')
-project(':compiler').projectDir = new File(compilerLibsDir, 'compiler')
+val compilerLibsDir = File(settingsDir, "libs")
+project(":compiler").projectDir = File(compilerLibsDir, "compiler")
