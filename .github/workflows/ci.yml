@@ -17,23 +17,32 @@ jobs:
     - uses: actions/checkout@v2
       name: Clone repository
 
-    - name: Checkout submodules
-      run: git submodule update --init --recursive
-
-    - name: Prepare Java 15
+    - name: set up JDK 11
       uses: actions/setup-java@v1
       with:
-        java-version: 15
-        java-package: jdk+fx
-
-    - name: Cache Gradle packages
+        java-version: 11
+        
+    - name: Cache Gradle Dependencies
       uses: actions/cache@v2
       with:
-        path: ~/.gradle/caches
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-        restore-keys: ${{ runner.os }}-gradle
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+          !~/.gradle/caches/build-cache-*
+        key: gradle-deps-core-${{ hashFiles('**/build.gradle.kts') }}
+        restore-keys: |
+          gradle-deps
+          
+    - name: Cache Gradle Build
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches/build-cache-*
+        key: gradle-builds-core-${{ github.sha }}
+        restore-keys: |
+          gradle-builds
 
     - name: Build project
       run: |
-        ./gradlew build
+        ./gradlew :app:assembleDebug
     
