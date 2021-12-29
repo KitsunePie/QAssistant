@@ -1,6 +1,6 @@
 /*
  * QAssistant - An Xposed module for QQ/TIM
- * Copyright (C) 2019-2021
+ * Copyright (C) 2021-2022
  * https://github.com/KitsunePie/QAssistant
  *
  * This software is non-free but opensource software: you can redistribute it
