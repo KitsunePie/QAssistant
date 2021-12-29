@@ -12,7 +12,7 @@ import org.kitsunepie.qassistant.app.util.ClassPointer
 import org.kitsunepie.qassistant.app.util.clazz
 
 @NormalHookEntry
-object DefaultFont : BaseHook(),IHookInfo {
+object DefaultFont : BaseHook(), IHookInfo {
     override fun init() {
         ClassPointer.TextItemBuilder.clazz?.let {
             findMethod(it) {

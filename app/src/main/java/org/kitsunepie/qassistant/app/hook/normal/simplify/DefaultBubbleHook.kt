@@ -11,7 +11,7 @@ import org.kitsunepie.qassistant.app.hook.base.IHookInfo
 import java.io.File
 
 @NormalHookEntry
-object DefaultBubbleHook : BaseHook(),IHookInfo {
+object DefaultBubbleHook : BaseHook(), IHookInfo {
 
     override fun init() {
     }

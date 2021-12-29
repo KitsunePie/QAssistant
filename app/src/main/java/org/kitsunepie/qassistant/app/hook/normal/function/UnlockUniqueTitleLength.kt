@@ -7,7 +7,7 @@ import org.kitsunepie.qassistant.app.hook.base.BaseHook
 import org.kitsunepie.qassistant.app.hook.base.IHookInfo
 
 @NormalHookEntry
-object UnlockUniqueTitleLength : BaseHook(),IHookInfo {
+object UnlockUniqueTitleLength : BaseHook(), IHookInfo {
     override fun init() {
         //EditText控制
         getMethodByDesc("Lcom/tencent/biz/troop/EditUniqueTitleActivity;->doOnCreate(Landroid/os/Bundle;)Z")

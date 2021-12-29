@@ -9,7 +9,7 @@ import org.kitsunepie.qassistant.app.util.ClassPointer
 import org.kitsunepie.qassistant.app.util.clazz
 
 @NormalHookEntry
-object PreventUpdate : BaseHook(),IHookInfo {
+object PreventUpdate : BaseHook(), IHookInfo {
     override val needReboot: Boolean = true
 
     override fun init() {
