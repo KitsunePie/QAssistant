@@ -7,10 +7,11 @@ import com.github.kyuubiran.ezxhelper.utils.showToast
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
+import org.kitsunepie.qassistant.app.hook.base.IHookInfo
 import java.io.File
 
 @NormalHookEntry
-object DefaultBubbleHook : BaseHook() {
+object DefaultBubbleHook : BaseHook(),IHookInfo {
 
     override fun init() {
     }
@@ -44,4 +45,10 @@ object DefaultBubbleHook : BaseHook() {
             appContext.showToast("出错力：$e")
         }
     }
+
+    override val title: String
+        get() = "默认气泡"
+
+    override val summary: String
+        get() = "那么多花里胡哨的，你礼貌吗？"
 }

@@ -7,11 +7,12 @@ import com.github.kyuubiran.ezxhelper.utils.isStatic
 import com.github.kyuubiran.ezxhelper.utils.loadClass
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
+import org.kitsunepie.qassistant.app.hook.base.IHookInfo
 import org.kitsunepie.qassistant.app.util.ClassPointer
 import org.kitsunepie.qassistant.app.util.clazz
 
 @NormalHookEntry
-object DefaultFont : BaseHook() {
+object DefaultFont : BaseHook(),IHookInfo {
     override fun init() {
         ClassPointer.TextItemBuilder.clazz?.let {
             findMethod(it) {
@@ -28,4 +29,10 @@ object DefaultFont : BaseHook() {
             }
         }
     }
+
+    override val title: String
+        get() = "默认字体"
+
+    override val summary: String
+        get() = "别再给我用花里胡哨的字体了！！！"
 }
