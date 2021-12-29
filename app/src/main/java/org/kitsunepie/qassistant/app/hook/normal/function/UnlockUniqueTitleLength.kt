@@ -27,10 +27,9 @@ import com.github.kyuubiran.ezxhelper.utils.*
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
-import org.kitsunepie.qassistant.app.hook.base.IHookInfo
 
 @NormalHookEntry
-object UnlockUniqueTitleLength : BaseHook(), IHookInfo {
+object UnlockUniqueTitleLength : BaseHook() {
     override fun init() {
         //EditText控制
         getMethodByDesc("Lcom/tencent/biz/troop/EditUniqueTitleActivity;->doOnCreate(Landroid/os/Bundle;)Z")

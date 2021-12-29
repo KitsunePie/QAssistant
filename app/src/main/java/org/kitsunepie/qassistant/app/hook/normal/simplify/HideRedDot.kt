@@ -30,10 +30,9 @@ import com.github.kyuubiran.ezxhelper.utils.putObject
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
-import org.kitsunepie.qassistant.app.hook.base.IHookInfo
 
 @NormalHookEntry
-object HideRedDot : BaseHook(), IHookInfo {
+object HideRedDot : BaseHook() {
     override val needReboot: Boolean = true
 
     private val TRANSPARENT_PNG = byteArrayOf(

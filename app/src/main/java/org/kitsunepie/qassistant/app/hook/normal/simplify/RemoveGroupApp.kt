@@ -24,9 +24,8 @@ package org.kitsunepie.qassistant.app.hook.normal.simplify
 
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
-import org.kitsunepie.qassistant.app.hook.base.IHookInfo
 
-object RemoveGroupApp : BaseHook(), IHookInfo {
+object RemoveGroupApp : BaseHook() {
     override fun init() {
     }
 

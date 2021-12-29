@@ -31,7 +31,7 @@ import org.kitsunepie.qassistant.core.config.Config
 /**
  * Hook基类
  */
-abstract class BaseHook {
+abstract class BaseHook : IHookInfo {
     //进程控制
     val targetProc: Array<Process>
         get() = arrayOf(Process.PROC_MAIN)

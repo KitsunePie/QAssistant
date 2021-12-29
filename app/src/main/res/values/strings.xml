@@ -21,6 +21,7 @@
   -->
 
 <resources>
+    <string name="empty"> </string>
     <string name="app_name">QAssistant</string>
     <string name="module_desc">一个辅助QQ使其变得更好的模块</string>
     <string name="load_successful">加载成功</string>

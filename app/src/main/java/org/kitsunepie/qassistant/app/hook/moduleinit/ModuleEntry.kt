@@ -35,6 +35,9 @@ object ModuleEntry : BaseHook() {
         return true
     }
 
+    override val titleRes: Int
+        get() = R.string.empty
+
     override fun init() {
         getMethodByDesc("Lcom/tencent/mobileqq/activity/QQSettingSettingActivity;->doOnCreate(Landroid/os/Bundle;)Z").also { m ->
             m.hookAfter { param ->

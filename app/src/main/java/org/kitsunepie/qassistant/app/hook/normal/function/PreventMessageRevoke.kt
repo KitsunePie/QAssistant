@@ -24,9 +24,8 @@ package org.kitsunepie.qassistant.app.hook.normal.function
 
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
-import org.kitsunepie.qassistant.app.hook.base.IHookInfo
 
-object PreventMessageRevoke : BaseHook(), IHookInfo {
+object PreventMessageRevoke : BaseHook() {
     override fun init() {
     }
 

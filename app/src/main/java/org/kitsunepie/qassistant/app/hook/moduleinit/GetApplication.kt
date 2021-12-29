@@ -41,6 +41,9 @@ object GetApplication : BaseHook() {
         return true
     }
 
+    override val titleRes: Int
+        get() = R.string.empty
+
     private var unhook: XC_MethodHook.Unhook? = null
 
     override fun init() {

@@ -30,12 +30,11 @@ import com.github.kyuubiran.ezxhelper.utils.loadClass
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
-import org.kitsunepie.qassistant.app.hook.base.IHookInfo
 import org.kitsunepie.qassistant.app.util.ClassPointer
 import org.kitsunepie.qassistant.app.util.clazz
 
 @NormalHookEntry
-object DefaultFont : BaseHook(), IHookInfo {
+object DefaultFont : BaseHook() {
     override fun init() {
         ClassPointer.TextItemBuilder.clazz?.let {
             findMethod(it) {

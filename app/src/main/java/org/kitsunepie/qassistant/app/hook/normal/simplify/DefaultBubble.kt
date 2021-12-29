@@ -29,11 +29,10 @@ import com.github.kyuubiran.ezxhelper.utils.showToast
 import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
-import org.kitsunepie.qassistant.app.hook.base.IHookInfo
 import java.io.File
 
 @NormalHookEntry
-object DefaultBubble : BaseHook(), IHookInfo {
+object DefaultBubble : BaseHook() {
 
     override fun init() {
     }
