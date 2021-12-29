@@ -73,7 +73,10 @@ class SpProxy(private val mmkv: MMKV?) : SharedPreferences, SharedPreferences.Ed
         return mmkv?.putString(typeKey, value)
     }
 
-    override fun putStringSet(key: String?, values: MutableSet<String>?): SharedPreferences.Editor? {
+    override fun putStringSet(
+        key: String?,
+        values: MutableSet<String>?
+    ): SharedPreferences.Editor? {
         throw Exception("no support")
     }
 
@@ -99,7 +102,7 @@ class SpProxy(private val mmkv: MMKV?) : SharedPreferences, SharedPreferences.Ed
 
     override fun remove(key: String?): SharedPreferences.Editor? {
         val realKey = getRealKey(key)
-        if (realKey.isNotEmpty()){
+        if (realKey.isNotEmpty()) {
             return mmkv?.remove(realKey)
         }
         return null
@@ -111,7 +114,7 @@ class SpProxy(private val mmkv: MMKV?) : SharedPreferences, SharedPreferences.Ed
 
     //无需调用，自动保存
     override fun commit(): Boolean {
-        return mmkv?.commit()?:false
+        return mmkv?.commit() ?: false
     }
 
     //无须调用，自动保存
@@ -128,10 +131,16 @@ class SpProxy(private val mmkv: MMKV?) : SharedPreferences, SharedPreferences.Ed
         }
     }
 
-    private fun getRealKey(key: String?):String{
-        val typeKys = listOf(getTypeKey<String>(key), getTypeKey<Long>(key), getTypeKey<Float>(key), getTypeKey<Int>(key), getTypeKey<Boolean>(key))
+    private fun getRealKey(key: String?): String {
+        val typeKys = listOf(
+            getTypeKey<String>(key),
+            getTypeKey<Long>(key),
+            getTypeKey<Float>(key),
+            getTypeKey<Int>(key),
+            getTypeKey<Boolean>(key)
+        )
         typeKys.forEach {
-            if (mmkv?.containsKey(it) == true){
+            if (mmkv?.containsKey(it) == true) {
                 return it
             }
         }

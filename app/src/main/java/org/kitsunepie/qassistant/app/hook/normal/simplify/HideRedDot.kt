@@ -7,9 +7,10 @@ import com.github.kyuubiran.ezxhelper.utils.hookAfter
 import com.github.kyuubiran.ezxhelper.utils.putObject
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
+import org.kitsunepie.qassistant.app.hook.base.IHookInfo
 
 @NormalHookEntry
-object HideRedDot : BaseHook() {
+object HideRedDot : BaseHook(), IHookInfo {
     override val needReboot: Boolean = true
 
     private val TRANSPARENT_PNG = byteArrayOf(
@@ -44,4 +45,10 @@ object HideRedDot : BaseHook() {
             )
         }
     }
+
+    override val title: String
+        get() = "隐藏小红点"
+
+    override val summary: String
+        get() = "拜托，你很烦内！"
 }
