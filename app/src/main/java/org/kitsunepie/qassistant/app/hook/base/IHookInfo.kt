@@ -1,6 +1,6 @@
 /*
  * QAssistant - An Xposed module for QQ/TIM
- * Copyright (C) 2019-2021
+ * Copyright (C) 2021-2022
  * https://github.com/KitsunePie/QAssistant
  *
  * This software is non-free but opensource software: you can redistribute it
@@ -22,12 +22,19 @@
 
 package org.kitsunepie.qassistant.app.hook.base
 
+import androidx.annotation.StringRes
+import com.github.kyuubiran.ezxhelper.init.InitFields.moduleRes
+
 interface IHookInfo {
+    val titleRes: Int
+        @StringRes get
+
+    val descRes: Int?
+        @StringRes get() = null
+
     val title: String
+        get() = moduleRes.getString(titleRes)
 
-    val summary: String?
-        get() = null
-
-    val isSummaryBlank: Boolean
-        get() = summary?.isBlank() ?: true
+    val desc: String?
+        get() = descRes?.let { moduleRes.getString(it) }
 }

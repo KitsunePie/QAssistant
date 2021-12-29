@@ -1,6 +1,6 @@
 /*
  * QAssistant - An Xposed module for QQ/TIM
- * Copyright (C) 2019-2021
+ * Copyright (C) 2021-2022
  * https://github.com/KitsunePie/QAssistant
  *
  * This software is non-free but opensource software: you can redistribute it
@@ -34,6 +34,9 @@ object ModuleEntry : BaseHook() {
     override fun isActivated(): Boolean {
         return true
     }
+
+    override val titleRes: Int
+        get() = R.string.empty
 
     override fun init() {
         getMethodByDesc("Lcom/tencent/mobileqq/activity/QQSettingSettingActivity;->doOnCreate(Landroid/os/Bundle;)Z").also { m ->

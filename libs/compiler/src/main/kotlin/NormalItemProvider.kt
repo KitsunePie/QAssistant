@@ -1,6 +1,6 @@
 /*
  * QAssistant - An Xposed module for QQ/TIM
- * Copyright (C) 2019-2021
+ * Copyright (C) 2021-2022
  * https://github.com/KitsunePie/QAssistant
  *
  * This software is non-free but opensource software: you can redistribute it
@@ -23,8 +23,11 @@
 import com.google.devtools.ksp.processing.*
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
-import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.asClassName
 import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 import com.squareup.kotlinpoet.ksp.toTypeName
 import com.squareup.kotlinpoet.ksp.writeTo
