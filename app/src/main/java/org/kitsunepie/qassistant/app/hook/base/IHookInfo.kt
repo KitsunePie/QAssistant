@@ -22,12 +22,19 @@
 
 package org.kitsunepie.qassistant.app.hook.base
 
+import androidx.annotation.StringRes
+import com.github.kyuubiran.ezxhelper.init.InitFields.moduleRes
+
 interface IHookInfo {
+    val titleRes: Int
+        @StringRes get
+
+    val descRes: Int?
+        @StringRes get() = null
+
     val title: String
+        get() = moduleRes.getString(titleRes)
 
-    val summary: String?
-        get() = null
-
-    val isSummaryBlank: Boolean
-        get() = summary?.isBlank() ?: true
+    val desc: String?
+        get() = descRes?.let { moduleRes.getString(it) }
 }
