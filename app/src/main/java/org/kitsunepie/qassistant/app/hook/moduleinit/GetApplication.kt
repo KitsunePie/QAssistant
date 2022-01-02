@@ -47,27 +47,27 @@ object GetApplication : BaseHook() {
     private var unhook: XC_MethodHook.Unhook? = null
 
     override fun init() {
-        getMethodByDesc("Lcom/tencent/mobileqq/startup/step/LoadDex;->doStep()Z").also { m ->
-            m.hookAfter(XCallback.PRIORITY_HIGHEST) {
-                unhook?.unhook()
-                //获取Context
-                val context =
-                    getFieldByDesc("Lcom/tencent/common/app/BaseApplicationImpl;->sApplication:Lcom/tencent/common/app/BaseApplicationImpl;")
-                        .getStaticNonNullAs<Application>()
-                //设置全局Context
-                EzXHelperInit.initAppContext(context, true)
-                EzXHelperInit.initActivityProxyManager(
-                    BuildConfig.APPLICATION_ID,
-                    "com.tencent.mobileqq.activity.photo.CameraPreviewActivity",
-                    HookLoader::class.java.classLoader!!
-                )
-                EzXHelperInit.initSubActivity()
-                if (!Config.sModulePref.getBoolean(ModuleConfig.M_STARTUP_TOAST, false)) {
-                    Log.toast(appContext.resources.getString(R.string.load_successful))
-                }
-                //加载普通Hook
-                HookInitializer.initNormalHooks()
+        getMethodByDesc("Lcom/tencent/mobileqq/startup/step/LoadDex;->doStep()Z").hookAfter(
+            XCallback.PRIORITY_HIGHEST
+        ) {
+            unhook?.unhook()
+            //获取Context
+            val context =
+                getFieldByDesc("Lcom/tencent/common/app/BaseApplicationImpl;->sApplication:Lcom/tencent/common/app/BaseApplicationImpl;")
+                    .getStaticNonNullAs<Application>()
+            //设置全局Context
+            EzXHelperInit.initAppContext(context, true)
+            EzXHelperInit.initActivityProxyManager(
+                BuildConfig.APPLICATION_ID,
+                "com.tencent.mobileqq.activity.photo.CameraPreviewActivity",
+                HookLoader::class.java.classLoader!!
+            )
+            EzXHelperInit.initSubActivity()
+            if (!Config.sModulePref.getBoolean(ModuleConfig.M_STARTUP_TOAST, false)) {
+                Log.toast(appContext.resources.getString(R.string.load_successful))
             }
+            //加载普通Hook
+            HookInitializer.initNormalHooks()
         }
     }
 }

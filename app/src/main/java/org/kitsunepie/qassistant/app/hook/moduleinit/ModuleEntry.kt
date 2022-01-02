@@ -39,43 +39,41 @@ object ModuleEntry : BaseHook() {
         get() = R.string.empty
 
     override fun init() {
-        getMethodByDesc("Lcom/tencent/mobileqq/activity/QQSettingSettingActivity;->doOnCreate(Landroid/os/Bundle;)Z").also { m ->
-            m.hookAfter { param ->
-                val cFormSimpleItem = try {
-                    loadClass("com.tencent.mobileqq.widget.FormSimpleItem")
-                } catch (e: Exception) {
-                    loadClass("com.tencent.mobileqq.widget.FormCommonSingleLineItem")
-                }
-                //获取ViewGroup
-                val vg: ViewGroup = try {
-                    param.thisObject.getObjectAs("a", cFormSimpleItem)
-                } catch (e: Exception) {
-                    param.thisObject.getObjectOrNullByType(cFormSimpleItem) as View
-                }.parent as ViewGroup
-                //创建入口
-                val entry = cFormSimpleItem.newInstanceAs<View>(
-                    arrayOf(param.thisObject),
-                    arrayOf(Context::class.java)
-                )!!.also {
-                    it.invokeMethod(
-                        "setLeftText",
-                        arrayOf(moduleRes.getString(R.string.app_name)),
-                        arrayOf(CharSequence::class.java)
-                    )
-                    it.invokeMethod(
-                        "setRightText",
-                        arrayOf(org.kitsunepie.qassistant.BuildConfig.VERSION_NAME),
-                        arrayOf(CharSequence::class.java)
-                    )
-                }
-                /*
-                entry.setOnClickListener {
-                    val intent = Intent(param.thisObject as Activity, ModuleActivity::class.java)
-                    (param.thisObject as Activity).startActivity(intent)
-                }*/
-                //添加入口
-                vg.addView(entry, (vg.childCount / 2) - 4)
+        getMethodByDesc("Lcom/tencent/mobileqq/activity/QQSettingSettingActivity;->doOnCreate(Landroid/os/Bundle;)Z").hookAfter { param ->
+            val cFormSimpleItem = try {
+                loadClass("com.tencent.mobileqq.widget.FormSimpleItem")
+            } catch (e: Exception) {
+                loadClass("com.tencent.mobileqq.widget.FormCommonSingleLineItem")
             }
+            //获取ViewGroup
+            val vg: ViewGroup = try {
+                param.thisObject.getObjectAs("a", cFormSimpleItem)
+            } catch (e: Exception) {
+                param.thisObject.getObjectOrNullByType(cFormSimpleItem) as View
+            }.parent as ViewGroup
+            //创建入口
+            val entry = cFormSimpleItem.newInstanceAs<View>(
+                arrayOf(param.thisObject),
+                arrayOf(Context::class.java)
+            )!!.also {
+                it.invokeMethod(
+                    "setLeftText",
+                    arrayOf(moduleRes.getString(R.string.app_name)),
+                    arrayOf(CharSequence::class.java)
+                )
+                it.invokeMethod(
+                    "setRightText",
+                    arrayOf(org.kitsunepie.qassistant.BuildConfig.VERSION_NAME),
+                    arrayOf(CharSequence::class.java)
+                )
+            }
+            /*
+            entry.setOnClickListener {
+                val intent = Intent(param.thisObject as Activity, ModuleActivity::class.java)
+                (param.thisObject as Activity).startActivity(intent)
+            }*/
+            //添加入口
+            vg.addView(entry, (vg.childCount / 2) - 4)
         }
     }
 }

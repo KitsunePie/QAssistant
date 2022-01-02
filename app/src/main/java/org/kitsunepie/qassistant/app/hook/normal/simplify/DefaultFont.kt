@@ -31,24 +31,20 @@ import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
 import org.kitsunepie.qassistant.app.util.ClassPointer
-import org.kitsunepie.qassistant.app.util.clazz
 
 @NormalHookEntry
 object DefaultFont : BaseHook() {
     override fun init() {
-        ClassPointer.TextItemBuilder.clazz?.let {
+        ClassPointer.TextItemBuilder.clz?.let {
             findMethod(it) {
-                name == "a" && !isStatic &&
-                    returnType == Void.TYPE &&
+                name == "a" && !isStatic && returnType == Void.TYPE &&
                     parameterTypes.contentDeepEquals(
                         arrayOf(
                             View::class.java,
                             loadClass("com.tencent.mobileqq.data.ChatMessage")
                         )
                     )
-            }.also { m ->
-                m.hookReplace { null }
-            }
+            }.hookReplace { null }
         }
     }
 

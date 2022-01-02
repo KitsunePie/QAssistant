@@ -37,3 +37,11 @@ object Utils {
         startActivity(intent)
     }
 }
+
+fun <R> tryOrNull(block: () -> R): R? {
+    return try {
+        block()
+    } catch (e: Throwable) {
+        null
+    }
+}
