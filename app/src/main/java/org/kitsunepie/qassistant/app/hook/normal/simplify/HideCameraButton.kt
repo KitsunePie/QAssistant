@@ -29,14 +29,13 @@ import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
 import org.kitsunepie.qassistant.app.util.ClassPointer
-import org.kitsunepie.qassistant.app.util.clazz
 
 @NormalHookEntry
 object HideCameraButton : BaseHook() {
     override val needReboot: Boolean = true
 
     override fun init() {
-        findMethod(ClassPointer.ConversationTitleBtnCtrl.clazz!!) {
+        findMethod(ClassPointer.ConversationTitleBtnCtrl.clz!!) {
             name == "a" && returnType == Void.TYPE && emptyParam
         }.hookBefore { param ->
             param.result = null

@@ -30,12 +30,11 @@ import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
 import org.kitsunepie.qassistant.app.util.ClassPointer
-import org.kitsunepie.qassistant.app.util.clazz
 
 @NormalHookEntry
 object PreventQBossAdLoad : BaseHook() {
     override fun init() {
-        findMethod(ClassPointer.QbossADImmersionBannerManager.clazz!!) {
+        findMethod(ClassPointer.QbossADImmersionBannerManager.clz!!) {
             returnType == View::class.java && emptyParam
         }.hookBefore { param ->
             param.result = null

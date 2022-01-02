@@ -28,14 +28,13 @@ import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.annotations.NormalHookEntry
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
 import org.kitsunepie.qassistant.app.util.ClassPointer
-import org.kitsunepie.qassistant.app.util.clazz
 
 @NormalHookEntry
 object PreventUpdate : BaseHook() {
     override val needReboot: Boolean = true
 
     override fun init() {
-        val clz = ClassPointer.UpgradeController1.clazz ?: ClassPointer.UpgradeController2.clazz!!
+        val clz = ClassPointer.UpgradeController1.clz ?: ClassPointer.UpgradeController2.clz!!
         findMethod(clz) {
             name == "a" && returnType.name.contains("UpgradeDetailWrapper") && parameterTypes.isEmpty()
         }.hookBefore { param ->
