@@ -57,5 +57,5 @@ enum class ClassPointer(private val clzName: String, private val indexes: Array<
         return null
     }
 
-    val clz: Class<*>? = tryLoadOrNull()
+    val clz: Class<*>? by lazy { tryLoadOrNull() }
 }
