@@ -33,16 +33,13 @@ import org.kitsunepie.qassistant.core.config.Config
  */
 abstract class BaseHook : IHookInfo {
     //进程控制
-    val targetProc: Array<Process>
-        get() = arrayOf(Process.PROC_MAIN)
+    val targetProc: Array<Process> = arrayOf(Process.PROC_MAIN)
 
     //是否已加载
     var isInited: Boolean = false
 
     //是否重启生效
-    open val needReboot: Boolean
-        get() = false
-
+    open val needReboot: Boolean = false
 
     //Hook执行过程
     abstract fun init()
