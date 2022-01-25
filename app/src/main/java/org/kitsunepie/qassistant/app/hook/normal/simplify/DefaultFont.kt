@@ -48,9 +48,7 @@ object DefaultFont : BaseHook() {
         }
     }
 
-    override val titleRes: Int
-        get() = R.string.module_function_setting_purify_chat_default_font
+    override val titleRes: Int = R.string.module_function_setting_purify_chat_default_font
 
-    override val descRes: Int
-        get() = R.string.module_function_setting_purify_chat_default_font_desc
+    override val descRes: Int = R.string.module_function_setting_purify_chat_default_font_desc
 }

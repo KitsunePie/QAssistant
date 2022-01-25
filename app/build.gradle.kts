@@ -83,7 +83,7 @@ dependencies {
 
     compileOnly("de.robv.android.xposed:api:82")
     implementation("com.tencent:mmkv-static:1.2.11")
-    implementation("com.github.kyuubiran:EzXHelper:0.5.0")
+    implementation("com.github.kyuubiran:EzXHelper:0.5.8")
 
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")

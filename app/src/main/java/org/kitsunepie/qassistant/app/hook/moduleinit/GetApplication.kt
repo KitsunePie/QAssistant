@@ -30,16 +30,16 @@ import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.callbacks.XCallback
 import org.kitsunepie.qassistant.BuildConfig
 import org.kitsunepie.qassistant.R
-import org.kitsunepie.qassistant.app.HookLoader
+import org.kitsunepie.qassistant.app.HookInit
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
 import org.kitsunepie.qassistant.app.hook.base.HookInitializer
 import org.kitsunepie.qassistant.core.config.Config
 import org.kitsunepie.qassistant.core.config.ModuleConfig
 
 object GetApplication : BaseHook() {
-    override fun isActivated(): Boolean {
-        return true
-    }
+    override var isActivated: Boolean
+        get() = true
+        set(_) {}
 
     override val titleRes: Int
         get() = R.string.empty
@@ -60,7 +60,7 @@ object GetApplication : BaseHook() {
             EzXHelperInit.initActivityProxyManager(
                 BuildConfig.APPLICATION_ID,
                 "com.tencent.mobileqq.activity.photo.CameraPreviewActivity",
-                HookLoader::class.java.classLoader!!
+                HookInit::class.java.classLoader!!
             )
             EzXHelperInit.initSubActivity()
             if (!Config.sModulePref.getBoolean(ModuleConfig.M_STARTUP_TOAST, false)) {

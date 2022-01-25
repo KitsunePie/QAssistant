@@ -26,13 +26,20 @@ import com.github.kyuubiran.ezxhelper.init.EzXHelperInit
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.IXposedHookZygoteInit
 import de.robv.android.xposed.callbacks.XC_LoadPackage
+import org.kitsunepie.qassistant.app.hook.base.HookInitializer
 
 class HookInit : IXposedHookLoadPackage, IXposedHookZygoteInit {
+
     companion object {
         lateinit var processName: String
             private set
         lateinit var packageName: String
             private set
+
+        @JvmStatic
+        private val initModuleHooks by lazy {
+            HookInitializer.initModuleHooks()
+        }
     }
 
     override fun initZygote(startupParam: IXposedHookZygoteInit.StartupParam) {
@@ -46,7 +53,7 @@ class HookInit : IXposedHookLoadPackage, IXposedHookZygoteInit {
             EzXHelperInit.setToastTag("QAssistant")
             packageName = lpparam.packageName
             processName = lpparam.processName
-            HookLoader.init
+            initModuleHooks
         }
     }
 }

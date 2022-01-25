@@ -29,9 +29,7 @@ object RemoveGroupApp : BaseHook() {
     override fun init() {
     }
 
-    override val titleRes: Int
-        get() = R.string.module_function_setting_purify_group_remove_group_app
+    override val titleRes: Int = R.string.module_function_setting_purify_group_remove_group_app
 
-    override val descRes: Int
-        get() = R.string.module_function_setting_purify_group_remove_group_app_desc
+    override val descRes: Int = R.string.module_function_setting_purify_group_remove_group_app_desc
 }

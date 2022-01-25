@@ -46,7 +46,7 @@ object HookInitializer {
                 h.isInited = true
                 Log.i("Inited module hook: ${h.javaClass.name}")
             } catch (thr: Throwable) {
-                Log.e(thr, "Init failed module hook: ${h.javaClass.name}")
+                Log.e(thr, "Failed to init module hook: ${h.javaClass.name}")
                 throw thr
             }
         }
@@ -62,7 +62,7 @@ object HookInitializer {
                     h.isInited = true
                     Log.i("Init normal hook: ${h.javaClass.name}")
                 } catch (thr: Throwable) {
-                    Log.e(thr, "Init failed normal hook: ${h.javaClass.name}")
+                    Log.e(thr, "Failed to init normal hook: ${h.javaClass.name}")
                 }
             }
         }

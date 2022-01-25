@@ -42,9 +42,7 @@ object PreventUpdate : BaseHook() {
         }
     }
 
-    override val titleRes: Int
-        get() = R.string.module_function_setting_other_prevent_update
+    override val titleRes: Int = R.string.module_function_setting_other_prevent_update
 
-    override val descRes: Int
-        get() = R.string.module_function_setting_other_prevent_update_desc
+    override val descRes: Int = R.string.module_function_setting_other_prevent_update_desc
 }
