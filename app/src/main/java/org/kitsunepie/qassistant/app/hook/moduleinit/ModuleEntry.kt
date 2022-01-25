@@ -31,12 +31,11 @@ import org.kitsunepie.qassistant.R
 import org.kitsunepie.qassistant.app.hook.base.BaseHook
 
 object ModuleEntry : BaseHook() {
-    override fun isActivated(): Boolean {
-        return true
-    }
+    override var isActivated: Boolean
+        get() = true
+        set(_) {}
 
-    override val titleRes: Int
-        get() = R.string.empty
+    override val titleRes: Int = R.string.empty
 
     override fun init() {
         getMethodByDesc("Lcom/tencent/mobileqq/activity/QQSettingSettingActivity;->doOnCreate(Landroid/os/Bundle;)Z").hookAfter { param ->

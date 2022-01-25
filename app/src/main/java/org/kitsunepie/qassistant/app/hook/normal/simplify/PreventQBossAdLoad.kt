@@ -41,9 +41,9 @@ object PreventQBossAdLoad : BaseHook() {
         }
     }
 
-    override val titleRes: Int
-        get() = R.string.module_function_setting_purify_extension_prevent_load_qboss_ad
+    override val titleRes: Int =
+        R.string.module_function_setting_purify_extension_prevent_load_qboss_ad
 
-    override val descRes: Int
-        get() = R.string.module_function_setting_purify_extension_prevent_load_qboss_ad_desc
+    override val descRes: Int =
+        R.string.module_function_setting_purify_extension_prevent_load_qboss_ad_desc
 }

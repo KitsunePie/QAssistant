@@ -68,9 +68,8 @@ object HideRedDot : BaseHook() {
         }
     }
 
-    override val titleRes: Int
-        get() = R.string.module_function_setting_purify_group_other_hide_red_dot
+    override val titleRes: Int = R.string.module_function_setting_purify_group_other_hide_red_dot
 
-    override val descRes: Int
-        get() = R.string.module_function_setting_purify_group_other_hide_red_dot_desc
+    override val descRes: Int =
+        R.string.module_function_setting_purify_group_other_hide_red_dot_desc
 }

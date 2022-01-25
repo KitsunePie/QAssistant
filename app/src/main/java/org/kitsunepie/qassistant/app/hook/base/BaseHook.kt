@@ -47,12 +47,12 @@ abstract class BaseHook : IHookInfo {
     //Hook执行过程
     abstract fun init()
 
-    open fun isActivated(): Boolean = Config.sHookPref.getBoolean(javaClass.simpleName, false)
-
-    open fun setActivated(value: Boolean) {
-        runCatching {
-            if (needReboot && (isActivated() != value)) Log.toast(moduleRes.getString(R.string.reboot_to_effect))
-            Config.sHookPref.putBoolean(javaClass.simpleName, value)
+    open var isActivated: Boolean
+        get() = Config.sHookPref.getBoolean(javaClass.simpleName, false)
+        set(value) {
+            runCatching {
+                if (needReboot && (isActivated != value)) Log.toast(moduleRes.getString(R.string.reboot_to_effect))
+                Config.sHookPref.putBoolean(javaClass.simpleName, value)
+            }
         }
-    }
 }

@@ -27,9 +27,9 @@ import androidx.activity.ComponentActivity
 import org.kitsunepie.qassistant.R
 
 open class BaseActivity : ComponentActivity() {
-    private val mLoder by lazy { BaseActivity::class.java.classLoader }
+    private val mLoader by lazy { BaseActivity::class.java.classLoader }
 
-    override fun getClassLoader(): ClassLoader = mLoder
+    override fun getClassLoader(): ClassLoader = mLoader
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -39,7 +39,7 @@ open class BaseActivity : ComponentActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         val windowState = savedInstanceState.getBundle("android:viewHierarchyState")
         if (windowState != null) {
-            windowState.classLoader = mLoder
+            windowState.classLoader = mLoader
         }
         super.onRestoreInstanceState(savedInstanceState)
     }

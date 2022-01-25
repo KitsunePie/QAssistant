@@ -29,9 +29,9 @@ object PreventMessageRevoke : BaseHook() {
     override fun init() {
     }
 
-    override val titleRes: Int
-        get() = R.string.module_function_setting_enhancement_chat_prevent_message_revoke
+    override val titleRes: Int =
+        R.string.module_function_setting_enhancement_chat_prevent_message_revoke
 
-    override val descRes: Int
-        get() = R.string.module_function_setting_enhancement_chat_prevent_message_revoke_desc
+    override val descRes: Int =
+        R.string.module_function_setting_enhancement_chat_prevent_message_revoke_desc
 }

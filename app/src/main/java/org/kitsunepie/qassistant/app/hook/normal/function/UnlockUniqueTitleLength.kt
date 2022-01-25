@@ -45,9 +45,9 @@ object UnlockUniqueTitleLength : BaseHook() {
             }
     }
 
-    override val titleRes: Int
-        get() = R.string.module_function_setting_assistant_group_unlock_unique_title_length
+    override val titleRes: Int =
+        R.string.module_function_setting_assistant_group_unlock_unique_title_length
 
-    override val descRes: Int
-        get() = R.string.module_function_setting_assistant_group_unlock_unique_title_length_desc
+    override val descRes: Int =
+        R.string.module_function_setting_assistant_group_unlock_unique_title_length_desc
 }

@@ -32,14 +32,11 @@ import org.kitsunepie.qassistant.app.hook.base.BaseHook
 object PreventDiyCardLoad : BaseHook() {
     override fun init() {
         getMethodByDesc("Lcom/tencent/mobileqq/profilecard/vas/VasProfileTemplateController;->a(Lcom/tencent/mobileqq/data/Card;I)V")
-            .hookBefore { param ->
-                param.result = null
-            }
+            .hookBefore { param -> param.result = null }
     }
 
-    override val titleRes: Int
-        get() = R.string.module_function_setting_purify_extension_prevent_load_diy
+    override val titleRes: Int = R.string.module_function_setting_purify_extension_prevent_load_diy
 
-    override val descRes: Int
-        get() = R.string.module_function_setting_purify_extension_prevent_load_diy_desc
+    override val descRes: Int =
+        R.string.module_function_setting_purify_extension_prevent_load_diy_desc
 }
